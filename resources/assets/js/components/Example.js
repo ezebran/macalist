@@ -16,6 +16,21 @@ export default class Example extends Component {
         }
     }
 
+    async componentDidMount(){
+        try{
+            let res = await fetch('http://127.0.0.1:8000/api/paises/mostrar')
+            let data = await res.json()
+            this.setState({
+                paises: data.paises[0].nombre
+            })
+            // console.log(data.paises[0].nombre)
+        }catch(error){
+            this.setState({
+                error
+            })
+        }
+    }
+
     render() {
         return (
             <div>
