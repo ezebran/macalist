@@ -13,6 +13,6 @@ class paisesController extends Controller
     	->select('*')
     	->get();
 
-    	return response()->json(['paises' => $paises], 201);
+    	return response()->json($paises, 201);
     }
 }

@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/paises/mostrar','paisesController@mostrarPaises');
+
+Route::get('/pais/{id}','provinciasController@mostrarProvincias');

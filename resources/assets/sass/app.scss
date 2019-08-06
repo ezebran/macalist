@@ -1,4 +1,4 @@
-@import "variables";
+@import "./variables";
 
 body{
 	font-family: 'Source Sans Pro', sans-serif;
@@ -12,7 +12,7 @@ body{
 	height: 100vh;
 	position: relative;
 	.white-side{
-		// background: url(./../images/white-side-bg.png);
+		// background: url(../images/white-side-bg.png);
 		position: absolute;
 		width: 50%;
 		height: 100vh;
@@ -92,7 +92,7 @@ header{
     				th{
     					font-weight: 600;
     					color:$black;
-    				    padding: 7px 0 7px 12px;
+    				    padding: 7px 12px;
     				    text-align: left;
     				}
     			}
@@ -104,6 +104,9 @@ header{
     					font-weight: 400;
     					color:$black;
     				    padding: 12px;
+    				    a{
+    				    	margin:0.25em;
+    				    }
     				    .i-delete{
     				    	color: #f44336;
     				    	&:hover{
@@ -118,6 +121,9 @@ header{
     		}
     	}
 	}
+}
+.w-50{
+	width: 50% !important;
 }
 
 .modal{

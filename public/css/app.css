@@ -109,6 +109,14 @@ p {
   text-align: center;
 }
 
+.tx-right {
+  text-align: right !important;
+}
+
+.tx-left {
+  text-align: left;
+}
+
 .auth-input {
   width: 100%;
   margin-bottom: 1.5em;
@@ -335,7 +343,7 @@ header h5 {
 .home main table thead tr th {
   font-weight: 600;
   color: #616161;
-  padding: 7px 0 7px 12px;
+  padding: 7px 12px;
   text-align: left;
 }
 
@@ -349,6 +357,10 @@ header h5 {
   padding: 12px;
 }
 
+.home main table tbody tr td a {
+  margin: 0.25em;
+}
+
 .home main table tbody tr td .i-delete {
   color: #f44336;
 }
@@ -359,6 +371,10 @@ header h5 {
 
 .home main table tbody tr:last-child {
   border-bottom: none;
+}
+
+.w-50 {
+  width: 50% !important;
 }
 
 .modal {

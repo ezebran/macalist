@@ -5,10 +5,8 @@ class Pais extends Component{
 		return(
 			<tr>
 				<td>{this.props.pais}</td>
-				<td>{this.props.provincia}</td>
-				<td>{this.props.localidad}</td>
-				<td>23</td>
-				<td >
+
+				<td className="tx-right ">
 					<a href="#"><span className="icon-edit"></span></a>
 					<a href="#" className="i-delete"><span className="icon-trash-o"></span></a>
 				</td>
