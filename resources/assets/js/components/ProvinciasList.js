@@ -1,34 +1,34 @@
 import React,{ Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
 import Header from './Header';
 import Aside from './Aside';
 
 class ProvinciasList extends Component{
+
+	async componentDidMount(){
+
+		const { history, location, match } = this.props;
+        try{
+            let url_pais = `http://127.0.0.1:8000/api/pais/${match.params.id}`;
+            let res = await fetch(url_pais);
+            let data = await res.json();
+            this.setState({
+            	provincias: data
+            })
+            bind(data)
+        }catch(error){
+            this.setState({
+                error
+            })
+        }
+	}
 	render(){
 		return(
 			<div>
-			<Header />
-			<Aside />
-			<section className="home">
-
-				<main>
-					<h1>Provincias list</h1>
-					<table className="w-50">
-						<thead>
-							<tr>
-								<th>Country</th>
-								<th className="tx-right">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-
-
-						</tbody>
-					</table>
-				</main>
-			</section>
+				<h1>Listado de provincias</h1>
 			</div>
 		)
 	}
 }
 
-export default ProvinciasList;
+export default withRouter(ProvinciasList);

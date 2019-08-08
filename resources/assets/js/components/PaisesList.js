@@ -1,17 +1,17 @@
 import React,{ Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Pais from './Pais';
 import Header from './Header';
 import Aside from './Aside';
 
 class PaisesList extends Component{
+  constructor(props) {
+    super(props);
+    const { history } = props;
+  }
+
+
 	render(){
-	// function selectPais(e) {
-	// 	// e.preventDefault();
-	// 	this.setState({
-	// 		paisId: pais.id
-	// 	})
-	// }
 		return(
 			<div>
 			<Header />
@@ -51,4 +51,4 @@ class PaisesList extends Component{
 	}
 }
 
-export default PaisesList;
+export default withRouter(PaisesList);

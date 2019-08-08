@@ -5,6 +5,7 @@ import Header from './Header';
 import Aside from './Aside';
 import PaisesList from './PaisesList';
 import ProvinciasList from './ProvinciasList';
+import Coso from './Coso';
 
 
 
@@ -19,10 +20,11 @@ export default class Example extends Component {
 
         this.state = {
             paises: [],
-            paisId: 1,
-            provincias: 'Sin provincias',
+            paisId: 0,
+            provincias: [],
             localidades: 'Sin localidades'
         }
+
     }
 
     async componentDidMount(){
@@ -38,20 +40,10 @@ export default class Example extends Component {
             })
         }
 
-        try{
-            let url_pais = `http://127.0.0.1:8000/api/pais/${this.state.paisId}`;
-            let res = await fetch(url_pais)
-            let data = await res.json()
-            this.setState({
-                provincias: data
-            })
-            console.log(data)
-        }catch(error){
-            this.setState({
-                error
-            })
-        }
+        
     }
+
+
 
     render() {
         return (
@@ -59,9 +51,12 @@ export default class Example extends Component {
            
                 <Switch>
                     <Route 
-                        exact path="/" 
-                        component={() => <PaisesList pais = {this.state.paises} />} />
-                    <Route path="/pais/:id" component="ProvinciasList" />
+                    path="/pais/:id"
+                    component={ProvinciasList} />
+                    <Route 
+                        path="/" 
+                        component={() => <PaisesList pais = {this.state.paises}  />} />
+                    
                 </Switch>
             </BrowserRouter>
         );
