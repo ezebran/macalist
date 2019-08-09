@@ -11,20 +11,37 @@ import Coso from './Coso';
 
 export default class Example extends Component {
 
-    
-
     constructor(props){
         super(props)
 
-        const URL = 'http://127.0.0.1:8000'
-
         this.state = {
             paises: [],
-            paisId: 0,
             provincias: [],
             localidades: 'Sin localidades'
         }
+        this.cosoFunshon = this.cosoFunshon.bind(this);
+    }
 
+    async cosoFunshon(idpais){
+ 
+        try{
+            let url_pais = `http://127.0.0.1:8000/api/pais/${idpais}`;
+            var cosas = []
+            await fetch(url_pais)
+                .then(respuesta => {
+                    return respuesta.json()
+                })
+                .then(provincias => {
+                    this.setState({
+                        provincias: provincias
+                    })
+                })
+
+        }catch(error){
+            this.setState({
+                error
+            })
+        }
     }
 
     async componentDidMount(){
@@ -39,20 +56,16 @@ export default class Example extends Component {
                 error
             })
         }
-
-        
     }
-
-
-
     render() {
+
         return (
             <BrowserRouter>
            
                 <Switch>
                     <Route 
                     path="/pais/:id"
-                    component={ProvinciasList} />
+                    render={(props) => <ProvinciasList {...props} funsho = {this.cosoFunshon} provincias = {this.state.provincias} isAuthed={true} />} />
                     <Route 
                         path="/" 
                         component={() => <PaisesList pais = {this.state.paises}  />} />
