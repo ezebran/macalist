@@ -18,7 +18,38 @@ class ProvinciasList extends Component{
 	render(){
 		return(
 			<div>
-				<h1>Listado de provincias</h1>
+				<Header />
+				<Aside />
+				<section className="home">
+
+					<main>
+						<h1>Location list</h1>
+						<table className="w-50">
+							<thead>
+								<tr>
+									<th>Country</th>
+									<th className="tx-right">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							{
+								
+								this.props.provincias.map(provi => (
+									<tr key={provi.id}>
+										<td><Link to={"/pais/provincia/:id" + provi.id} >{provi.nombre}</Link></td>
+
+										<td className="tx-right ">
+											<a href="#"><span className="icon-edit"></span></a>
+											<a href="#" className="i-delete"><span className="icon-trash-o"></span></a>
+										</td>
+									</tr>
+								))
+							}
+
+							</tbody>
+						</table>
+					</main>
+				</section>
 				{
 							
 					this.props.provincias.map(provi => (
