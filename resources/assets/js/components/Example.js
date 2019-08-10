@@ -5,7 +5,8 @@ import Header from './Header';
 import Aside from './Aside';
 import PaisesList from './PaisesList';
 import ProvinciasList from './ProvinciasList';
-import Coso from './Coso';
+import LocalidadesList from './LocalidadesList';
+
 
 
 
@@ -17,16 +18,17 @@ export default class Example extends Component {
         this.state = {
             paises: [],
             provincias: [],
-            localidades: 'Sin localidades'
+            localidades: []
         }
-        this.cosoFunshon = this.cosoFunshon.bind(this);
+        this.traerProvincias = this.traerProvincias.bind(this);
+        this.traerLocalidades = this.traerLocalidades.bind(this);
     }
 
-    async cosoFunshon(idpais){
+    async traerProvincias(idpais){
  
         try{
             let url_pais = `http://127.0.0.1:8000/api/pais/${idpais}`;
-            var cosas = []
+
             await fetch(url_pais)
                 .then(respuesta => {
                     return respuesta.json()
@@ -34,6 +36,28 @@ export default class Example extends Component {
                 .then(provincias => {
                     this.setState({
                         provincias: provincias
+                    })
+                })
+
+        }catch(error){
+            this.setState({
+                error
+            })
+        }
+    }
+
+    async traerLocalidades(idprovincia){
+ 
+        try{
+            let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
+
+            await fetch(url_pais)
+                .then(respuesta => {
+                    return respuesta.json()
+                })
+                .then(localidades => {
+                    this.setState({
+                        localidades: localidades
                     })
                 })
 
@@ -64,11 +88,17 @@ export default class Example extends Component {
            
                 <Switch>
                     <Route 
-                    path="/pais/:id"
-                    render={(props) => <ProvinciasList {...props} funsho = {this.cosoFunshon} provincias = {this.state.provincias} isAuthed={true} />} />
+                    exact path="/pais/provincia/:id"
+                    render={(props) => <LocalidadesList {...props} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} />} />
+                    
                     <Route 
-                        path="/" 
+                    exact path="/pais/:id"
+                    render={(props) => <ProvinciasList {...props} traerProvincias = {this.traerProvincias} provincias = {this.state.provincias} isAuthed={true} />} />
+                    
+                    <Route 
+                        exact path="/" 
                         component={() => <PaisesList pais = {this.state.paises}  />} />
+
                     
                 </Switch>
             </BrowserRouter>

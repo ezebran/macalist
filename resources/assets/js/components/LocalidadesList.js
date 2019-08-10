@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import Header from './Header';
 import Aside from './Aside';
 
-class ProvinciasList extends Component{
+class LocalidadesList extends Component{
 
 	constructor(props){
 		super(props)
@@ -12,7 +12,7 @@ class ProvinciasList extends Component{
 	componentDidMount(){
 		const { history, location, match } = this.props;
 
-		this.props.traerProvincias(match.params.id);
+		this.props.traerLocalidades(match.params.id);
 	}
 
 	render(){
@@ -34,9 +34,9 @@ class ProvinciasList extends Component{
 							<tbody>
 							{
 								
-								this.props.provincias.map(provi => (
-									<tr key={provi.id}>
-										<td><Link to={"/pais/provincia/" + provi.id} >{provi.nombre}</Link></td>
+								this.props.localidades.map(localidad => (
+									<tr key={localidad.id}>
+										<td>{localidad.nombre}</td>
 
 										<td className="tx-right ">
 											<a href="#"><span className="icon-edit"></span></a>
@@ -50,15 +50,9 @@ class ProvinciasList extends Component{
 						</table>
 					</main>
 				</section>
-				{
-							
-					this.props.provincias.map(provi => (
-						<p key={provi.id}>{provi.nombre}</p>
-					))
-				}
 			</div>
 		)
 	}
 }
 
-export default withRouter(ProvinciasList);
+export default withRouter(LocalidadesList);

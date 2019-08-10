@@ -6844,7 +6844,7 @@ function invariant(condition, message) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_logo_png__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -12382,7 +12382,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(96);
-module.exports = __webpack_require__(215);
+module.exports = __webpack_require__(216);
 
 
 /***/ }),
@@ -12421,9 +12421,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Header__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Aside__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__PaisesList__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProvinciasList__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Coso__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__PaisesList__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProvinciasList__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LocalidadesList__ = __webpack_require__(221);
 
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -12458,27 +12458,27 @@ var Example = function (_Component) {
         _this.state = {
             paises: [],
             provincias: [],
-            localidades: 'Sin localidades'
+            localidades: []
         };
-        _this.cosoFunshon = _this.cosoFunshon.bind(_this);
+        _this.traerProvincias = _this.traerProvincias.bind(_this);
+        _this.traerLocalidades = _this.traerLocalidades.bind(_this);
         return _this;
     }
 
     _createClass(Example, [{
-        key: 'cosoFunshon',
+        key: 'traerProvincias',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(idpais) {
                 var _this2 = this;
 
-                var url_pais, cosas;
+                var url_pais;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.prev = 0;
                                 url_pais = 'http://127.0.0.1:8000/api/pais/' + idpais;
-                                cosas = [];
-                                _context.next = 5;
+                                _context.next = 4;
                                 return fetch(url_pais).then(function (respuesta) {
                                     return respuesta.json();
                                 }).then(function (provincias) {
@@ -12487,77 +12487,125 @@ var Example = function (_Component) {
                                     });
                                 });
 
-                            case 5:
-                                _context.next = 10;
+                            case 4:
+                                _context.next = 9;
                                 break;
 
-                            case 7:
-                                _context.prev = 7;
+                            case 6:
+                                _context.prev = 6;
                                 _context.t0 = _context['catch'](0);
 
                                 this.setState({
                                     error: _context.t0
                                 });
 
-                            case 10:
+                            case 9:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 7]]);
+                }, _callee, this, [[0, 6]]);
             }));
 
-            function cosoFunshon(_x) {
+            function traerProvincias(_x) {
                 return _ref.apply(this, arguments);
             }
 
-            return cosoFunshon;
+            return traerProvincias;
         }()
     }, {
-        key: 'componentDidMount',
+        key: 'traerLocalidades',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var res, data;
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(idprovincia) {
+                var _this3 = this;
+
+                var url_pais;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.prev = 0;
-                                _context2.next = 3;
-                                return fetch('http://127.0.0.1:8000/api/paises/mostrar');
-
-                            case 3:
-                                res = _context2.sent;
-                                _context2.next = 6;
-                                return res.json();
-
-                            case 6:
-                                data = _context2.sent;
-
-                                this.setState({
-                                    paises: data
+                                url_pais = 'http://127.0.0.1:8000/api/pais/provincia/' + idprovincia;
+                                _context2.next = 4;
+                                return fetch(url_pais).then(function (respuesta) {
+                                    return respuesta.json();
+                                }).then(function (localidades) {
+                                    _this3.setState({
+                                        localidades: localidades
+                                    });
                                 });
-                                _context2.next = 13;
+
+                            case 4:
+                                _context2.next = 9;
                                 break;
 
-                            case 10:
-                                _context2.prev = 10;
+                            case 6:
+                                _context2.prev = 6;
                                 _context2.t0 = _context2['catch'](0);
 
                                 this.setState({
                                     error: _context2.t0
                                 });
 
-                            case 13:
+                            case 9:
                             case 'end':
                                 return _context2.stop();
                         }
                     }
-                }, _callee2, this, [[0, 10]]);
+                }, _callee2, this, [[0, 6]]);
+            }));
+
+            function traerLocalidades(_x2) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return traerLocalidades;
+        }()
+    }, {
+        key: 'componentDidMount',
+        value: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var res, data;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.prev = 0;
+                                _context3.next = 3;
+                                return fetch('http://127.0.0.1:8000/api/paises/mostrar');
+
+                            case 3:
+                                res = _context3.sent;
+                                _context3.next = 6;
+                                return res.json();
+
+                            case 6:
+                                data = _context3.sent;
+
+                                this.setState({
+                                    paises: data
+                                });
+                                _context3.next = 13;
+                                break;
+
+                            case 10:
+                                _context3.prev = 10;
+                                _context3.t0 = _context3['catch'](0);
+
+                                this.setState({
+                                    error: _context3.t0
+                                });
+
+                            case 13:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this, [[0, 10]]);
             }));
 
             function componentDidMount() {
-                return _ref2.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return componentDidMount;
@@ -12565,7 +12613,7 @@ var Example = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* BrowserRouter */],
@@ -12574,14 +12622,19 @@ var Example = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Switch */],
                     null,
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
-                        path: '/pais/:id',
+                        exact: true, path: '/pais/provincia/:id',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { funsho: _this3.cosoFunshon, provincias: _this3.state.provincias, isAuthed: true }));
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this4.traerLocalidades, localidades: _this4.state.localidades, isAuthed: true }));
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
-                        path: '/',
+                        exact: true, path: '/pais/:id',
+                        render: function render(props) {
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this4.traerProvincias, provincias: _this4.state.provincias, isAuthed: true }));
+                        } }),
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
+                        exact: true, path: '/',
                         component: function component() {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this3.state.paises });
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this4.state.paises });
                         } })
                 )
             );
@@ -26509,13 +26562,19 @@ module.exports = hoistNonReactStatics;
 
 /***/ }),
 /* 211 */
+/***/ (function(module, exports) {
+
+module.exports = "/images/logo.png?c3c38d8fa6fcb3059bc8c156449f60f5";
+
+/***/ }),
+/* 212 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Pais__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Pais__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Header__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Aside__ = __webpack_require__(57);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -26630,7 +26689,7 @@ var PaisesList = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* withRouter */])(PaisesList));
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26690,7 +26749,7 @@ var Pais = function (_Component) {
 /* unused harmony default export */ var _unused_webpack_default_export = (Pais);
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26730,7 +26789,7 @@ var ProvinciasList = function (_Component) {
 			    match = _props.match;
 
 
-			this.props.funsho(match.params.id);
+			this.props.traerProvincias(match.params.id);
 		}
 	}, {
 		key: 'render',
@@ -26784,7 +26843,7 @@ var ProvinciasList = function (_Component) {
 											null,
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
-												{ to: "/pais/provincia/:id" + provi.id },
+												{ to: "/pais/provincia/" + provi.id },
 												provi.nombre
 											)
 										),
@@ -26825,12 +26884,26 @@ var ProvinciasList = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* withRouter */])(ProvinciasList));
 
 /***/ }),
-/* 214 */
+/* 215 */,
+/* 216 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Aside__ = __webpack_require__(57);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26841,46 +26914,109 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var Coso = function (_Component) {
-	_inherits(Coso, _Component);
 
-	function Coso() {
-		_classCallCheck(this, Coso);
 
-		return _possibleConstructorReturn(this, (Coso.__proto__ || Object.getPrototypeOf(Coso)).apply(this, arguments));
+
+var LocalidadesList = function (_Component) {
+	_inherits(LocalidadesList, _Component);
+
+	function LocalidadesList(props) {
+		_classCallCheck(this, LocalidadesList);
+
+		return _possibleConstructorReturn(this, (LocalidadesList.__proto__ || Object.getPrototypeOf(LocalidadesList)).call(this, props));
 	}
 
-	_createClass(Coso, [{
+	_createClass(LocalidadesList, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _props = this.props,
+			    history = _props.history,
+			    location = _props.location,
+			    match = _props.match;
+
+
+			this.props.traerLocalidades(match.params.id);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'h1',
+				'div',
 				null,
-				'Holis desde coso'
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'section',
+					{ className: 'home' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'main',
+						null,
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'h1',
+							null,
+							'Location list'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'table',
+							{ className: 'w-50' },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'thead',
+								null,
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'tr',
+									null,
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'th',
+										null,
+										'Country'
+									),
+									__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'th',
+										{ className: 'tx-right' },
+										'Action'
+									)
+								)
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'tbody',
+								null,
+								this.props.localidades.map(function (localidad) {
+									return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'tr',
+										{ key: localidad.id },
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+											'td',
+											null,
+											localidad.nombre
+										),
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+											'td',
+											{ className: 'tx-right ' },
+											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'a',
+												{ href: '#' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-edit' })
+											),
+											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												'a',
+												{ href: '#', className: 'i-delete' },
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-trash-o' })
+											)
+										)
+									);
+								})
+							)
+						)
+					)
+				)
 			);
 		}
 	}]);
 
-	return Coso;
+	return LocalidadesList;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Coso);
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/logo.png?c3c38d8fa6fcb3059bc8c156449f60f5";
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /* withRouter */])(LocalidadesList));
 
 /***/ })
 /******/ ]);
