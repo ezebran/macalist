@@ -6,6 +6,8 @@ import Aside from './Aside';
 import PaisesList from './PaisesList';
 import ProvinciasList from './ProvinciasList';
 import LocalidadesList from './LocalidadesList';
+import Login from './log/Login';
+import axios from 'axios';
 
 
 
@@ -18,10 +20,13 @@ export default class Example extends Component {
         this.state = {
             paises: [],
             provincias: [],
-            localidades: []
+            localidades: [],
+            isLoggedIn: false,
+            user: {}
         }
         this.traerProvincias = this.traerProvincias.bind(this);
         this.traerLocalidades = this.traerLocalidades.bind(this);
+        this._loginUser = this._loginUser.bind(this);
     }
 
     async traerProvincias(idpais){
@@ -68,6 +73,46 @@ export default class Example extends Component {
         }
     }
 
+    _loginUser(email, password){
+
+    var formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    axios
+      .post("http://localhost:8000/api/user/login/", formData)
+      .then(response => {
+        console.log(response);
+        return response;
+      })
+      .then(json => {
+        if (json.data.success) {
+          alert("Login Successful!");
+
+          let userData = {
+            name: json.data.data.name,
+            id: json.data.data.id,
+            email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
+            timestamp: new Date().toString()
+          };
+          let appState = {
+            isLoggedIn: true,
+            user: userData
+          };
+          // save app state with user date in local storage
+          localStorage["appState"] = JSON.stringify(appState);
+          this.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+        } else alert("Login Failed!");
+      })
+      .catch(error => {
+        alert(`An Error Occured! ${error}`);
+      });
+  };
+
     async componentDidMount(){
         try{
             let res = await fetch('http://127.0.0.1:8000/api/paises/mostrar')
@@ -96,9 +141,13 @@ export default class Example extends Component {
                     render={(props) => <ProvinciasList {...props} traerProvincias = {this.traerProvincias} provincias = {this.state.provincias} isAuthed={true} />} />
                     
                     <Route 
-                        exact path="/" 
+                        exact path="/paises" 
                         component={() => <PaisesList pais = {this.state.paises}  />} />
 
+                    <Route 
+                        exact path="/"
+                        render={(props) => <Login {...props} _loginUser = { this._loginUser } />} />
+                    />
                     
                 </Switch>
             </BrowserRouter>
