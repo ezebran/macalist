@@ -13103,8 +13103,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProvinciasList__ = __webpack_require__(221);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LocalidadesList__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__log_Login__ = __webpack_require__(247);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__log_Register__ = __webpack_require__(248);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_axios__);
 
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -13130,6 +13131,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var Example = function (_Component) {
     _inherits(Example, _Component);
 
@@ -13143,11 +13145,16 @@ var Example = function (_Component) {
             provincias: [],
             localidades: [],
             isLoggedIn: false,
-            user: {}
+            user: {},
+            // token: JSON.parse(localStorage["appState"]).user.auth_token,
+            users: []
         };
         _this.traerProvincias = _this.traerProvincias.bind(_this);
         _this.traerLocalidades = _this.traerLocalidades.bind(_this);
         _this._loginUser = _this._loginUser.bind(_this);
+        _this._registerUser = _this._registerUser.bind(_this);
+        _this._logoutUser = _this._logoutUser.bind(_this);
+        _this.traerUsuarios = _this.traerUsuarios.bind(_this);
         return _this;
     }
 
@@ -13248,15 +13255,32 @@ var Example = function (_Component) {
             return traerLocalidades;
         }()
     }, {
+        key: 'traerUsuarios',
+        value: function traerUsuarios() {
+            var _this4 = this;
+
+            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.get('http://localhost:8000/api/users/list?token=' + this.state.token).then(function (response) {
+                console.log(response);
+                return response;
+            }).then(function (json) {
+                if (json.data.success) {
+                    _this4.setState({ users: json.data.data });
+                    //alert("Login Successful!");
+                } else alert("Login Failed!");
+            }).catch(function (error) {
+                alert('An Error Occured! ' + error);
+            });
+        }
+    }, {
         key: '_loginUser',
         value: function _loginUser(email, password) {
-            var _this4 = this;
+            var _this5 = this;
 
             var formData = new FormData();
             formData.append("email", email);
             formData.append("password", password);
 
-            __WEBPACK_IMPORTED_MODULE_10_axios___default.a.post("http://localhost:8000/api/user/login/", formData).then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://localhost:8000/api/user/login/", formData).then(function (response) {
                 console.log(response);
                 return response;
             }).then(function (json) {
@@ -13276,7 +13300,7 @@ var Example = function (_Component) {
                     };
                     // save app state with user date in local storage
                     localStorage["appState"] = JSON.stringify(appState);
-                    _this4.setState({
+                    _this5.setState({
                         isLoggedIn: appState.isLoggedIn,
                         user: appState.user
                     });
@@ -13286,10 +13310,65 @@ var Example = function (_Component) {
             });
         }
     }, {
+        key: '_registerUser',
+        value: function _registerUser(name, email, password) {
+            var _this6 = this;
+
+            var formData = new FormData();
+            formData.append("password", password);
+            formData.append("email", email);
+            formData.append("name", name);
+
+            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://localhost:8000/api/user/register", formData).then(function (response) {
+                console.log(response);
+                return response;
+            }).then(function (json) {
+                if (json.data.success) {
+                    alert('Registration Successful!');
+
+                    var userData = {
+                        name: json.data.data.name,
+                        id: json.data.data.id,
+                        email: json.data.data.email,
+                        auth_token: json.data.data.auth_token,
+                        timestamp: new Date().toString()
+                    };
+                    var appState = {
+                        isLoggedIn: true,
+                        user: userData
+                    };
+                    // save app state with user date in local storage
+                    localStorage["appState"] = JSON.stringify(appState);
+                    _this6.setState({
+                        isLoggedIn: appState.isLoggedIn,
+                        user: appState.user
+                    });
+                } else {
+                    alert('Registration Failed!');
+                    $("#email-login-btn").removeAttr("disabled").html("Register");
+                }
+            }).catch(function (error) {
+                alert("An Error Occured!" + error);
+                console.log(formData + ' ' + error);
+                $("#email-login-btn").removeAttr("disabled").html("Register");
+            });
+        }
+    }, {
+        key: '_logoutUser',
+        value: function _logoutUser() {
+            var appState = {
+                isLoggedIn: false,
+                user: {}
+            };
+            // save app state with user date in local storage
+            localStorage["appState"] = JSON.stringify(appState);
+            this.setState(appState);
+        }
+    }, {
         key: 'componentDidMount',
         value: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                var res, data;
+                var res, data, state, AppState;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
@@ -13321,6 +13400,16 @@ var Example = function (_Component) {
                                 });
 
                             case 13:
+                                state = localStorage["appState"];
+
+                                if (state) {
+                                    AppState = JSON.parse(state);
+
+                                    console.log(AppState);
+                                    this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState });
+                                }
+
+                            case 15:
                             case 'end':
                                 return _context3.stop();
                         }
@@ -13337,7 +13426,7 @@ var Example = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this5 = this;
+            var _this7 = this;
 
             return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* BrowserRouter */],
@@ -13348,22 +13437,28 @@ var Example = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
                         exact: true, path: '/pais/provincia/:id',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this5.traerLocalidades, localidades: _this5.state.localidades, isAuthed: true }));
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this7.traerLocalidades, localidades: _this7.state.localidades, isAuthed: true }));
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
                         exact: true, path: '/pais/:id',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this5.traerProvincias, provincias: _this5.state.provincias, isAuthed: true }));
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this7.traerProvincias, provincias: _this7.state.provincias, isAuthed: true }));
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
                         exact: true, path: '/paises',
                         component: function component() {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this5.state.paises });
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this7.state.paises, traerUsuarios: _this7.traerUsuarios });
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
                         exact: true, path: '/',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this5._loginUser }));
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this7._loginUser }));
+                        } }),
+                    '/>',
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], {
+                        exact: true, path: '/register',
+                        render: function render(props) {
+                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this7._registerUser }));
                         } }),
                     '/>'
                 )
@@ -28662,30 +28757,58 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Login = function (_Component) {
 	_inherits(Login, _Component);
 
-	function Login() {
+	function Login(props) {
 		_classCallCheck(this, Login);
 
-		return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+		_this.handleLogin = _this.handleLogin.bind(_this);
+		return _this;
 	}
 
 	_createClass(Login, [{
+		key: 'handleLogin',
+		value: function handleLogin(e) {
+			e.preventDefault();
+
+			var email = this._email.value;
+			var pass = this._password.value;
+			this.props._loginUser(email, pass);
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _props = this.props,
+			    history = _props.history,
+			    location = _props.location,
+			    match = _props.match;
+
+			// this.props._loginUser(match.params.id);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'section',
 				{ className: 'auth' },
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'white-side' }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'form',
-					{ className: 'auth-form login' },
+					{ className: 'auth-form login', id: 'login-form', action: '', onSubmit: this.handleLogin, method: 'post' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default.a }),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'h3',
 						null,
 						'Log in'
 					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'auth-input', placeholder: 'Enter your email..' }),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', className: 'auth-input', placeholder: 'Enter your password..' }),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+							return _this2._email = input;
+						}, className: 'auth-input', placeholder: 'Enter your email..' }),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'password', ref: function ref(input) {
+							return _this2._password = input;
+						}, className: 'auth-input', placeholder: 'Enter your password..' }),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 						'div',
 						{ className: 'auth-foot' },
@@ -28714,9 +28837,139 @@ var Login = function (_Component) {
 							'Enter'
 						),
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'a',
-							{ href: 'register.html', className: 'btn' },
+							__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+							{ to: "/register" },
 							'Or register'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Login;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Login);
+
+/***/ }),
+/* 248 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_logo_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(35);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+var Login = function (_Component) {
+	_inherits(Login, _Component);
+
+	function Login(props) {
+		_classCallCheck(this, Login);
+
+		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+		_this.handleRegister = _this.handleRegister.bind(_this);
+		return _this;
+	}
+
+	_createClass(Login, [{
+		key: 'handleRegister',
+		value: function handleRegister(e) {
+			e.preventDefault();
+
+			var name = this._name.value;
+			var email = this._email.value;
+			var pass = this._password.value;
+			this.props._registerUser(name, email, pass);
+		}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _props = this.props,
+			    history = _props.history,
+			    location = _props.location,
+			    match = _props.match;
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'section',
+				{ className: 'auth' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'white-side' }),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'form',
+					{ className: 'auth-form login', id: 'login-form', action: '', onSubmit: this.handleRegister, method: 'post' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default.a }),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h3',
+						null,
+						'Log in'
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+							return _this2._name = input;
+						}, className: 'auth-input', placeholder: 'Enter your name..' }),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+							return _this2._email = input;
+						}, className: 'auth-input', placeholder: 'Enter your email..' }),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+							return _this2._password = input;
+						}, className: 'auth-input', placeholder: 'Enter a password..' }),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'select',
+						{ name: '', className: 'auth-input' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'option',
+							{ value: 'p1' },
+							'Select a country'
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'select',
+						{ name: '', className: 'auth-input' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'option',
+							{ value: 'p1' },
+							'Select a province'
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'select',
+						{ name: '', className: 'auth-input' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'option',
+							{ value: 'p1' },
+							'Select a location'
+						)
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'auth-foot' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'button',
+							{ type: 'submit', className: 'btn btn-active' },
+							'Register'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+							{ to: "/" },
+							'Or log in'
 						)
 					)
 				)

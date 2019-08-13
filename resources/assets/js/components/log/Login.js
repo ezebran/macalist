@@ -3,17 +3,35 @@ import Logo from './../static/logo.png';
 import { Link, withRouter } from "react-router-dom";
 
 class Login extends Component{
+	constructor(props){
+		super(props)
+		this.handleLogin = this.handleLogin.bind(this)
+	}
+	handleLogin(e){
+		e.preventDefault();
+
+		let email = this._email.value;
+		let pass = this._password.value;
+		this.props._loginUser(email,pass);
+	}
+	componentDidMount(){
+		const { history, location, match } = this.props;
+
+		
+
+		// this.props._loginUser(match.params.id);
+	}
 	render(){
 		return(
 			<section className="auth">
 				<div className="white-side"></div>
-				<form className="auth-form login">
+				<form className="auth-form login" id="login-form" action="" onSubmit={this.handleLogin} method="post" >
 					<img src={Logo} />
 
 					<h3>Log in</h3>
 
-					<input type="text" className="auth-input" placeholder="Enter your email.." />
-					<input type="text" className="auth-input" placeholder="Enter your password.." />
+					<input type="text" ref={input => (this._email = input)} className="auth-input" placeholder="Enter your email.." />
+					<input type="password" ref={input => (this._password = input)} className="auth-input" placeholder="Enter your password.." />
 
 					<div className="auth-foot">
 						<div className="remember">
@@ -27,7 +45,7 @@ class Login extends Component{
 						<button type="submit" className="btn btn-active">
 			                Enter
 			            </button>
-			            <a href="register.html" className="btn">Or register</a>
+			            <Link to={"/register"} >Or register</Link>
 					</div>
 				</form>
 			</section>
