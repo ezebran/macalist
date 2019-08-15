@@ -49,6 +49,10 @@ body{
 	}
 }
 
+.hide-modal{
+	display: none !important;
+}
+
 header{
 	@include row-bt;
     position: fixed;

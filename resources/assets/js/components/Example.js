@@ -24,7 +24,7 @@ export default class Example extends Component {
             localidades: [],
             isLoggedIn: false,
             user: {},
-            // token: JSON.parse(localStorage["appState"]).user.auth_token,
+            token:{},
             users: []
         }
         this.traerProvincias = this.traerProvincias.bind(this);
@@ -57,27 +57,7 @@ export default class Example extends Component {
         }
     }
 
-    async traerLocalidades(idprovincia){
- 
-        try{
-            let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
 
-            await fetch(url_pais)
-                .then(respuesta => {
-                    return respuesta.json()
-                })
-                .then(localidades => {
-                    this.setState({
-                        localidades: localidades
-                    })
-                })
-
-        }catch(error){
-            this.setState({
-                error
-            })
-        }
-    }
 
     traerUsuarios(){
         axios
@@ -137,55 +117,97 @@ export default class Example extends Component {
       });
   };
 
-    _registerUser(name, email, password){
+    async _registerUser(name, email, password){
 
-    var formData = new FormData(); 
-    formData.append("password", password);
-    formData.append("email", email);
-    formData.append("name", name);
 
-    axios
-      .post("http://localhost:8000/api/user/register", formData)
-      .then(response => {
-        console.log(response);
-        return response;
-      })
-      .then(json => {
-        if (json.data.success) {
-          alert(`Registration Successful!`);
+        try{
 
-          let userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          let appState = {
-            isLoggedIn: true,
-            user: userData
-          };
-          // save app state with user date in local storage
-          localStorage["appState"] = JSON.stringify(appState);
-          this.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
-        } else {
-          alert(`Registration Failed!`);
-          $("#email-login-btn")
-            .removeAttr("disabled")
-            .html("Register");
+            var formData = new FormData(); 
+            formData.append("password", password);
+            formData.append("email", email);
+            formData.append("name", name);
+
+            let config = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            }
+
+            await fetch('http://localhost:8000/api/user/register', config)
+                .then(response => {
+                    console.log(response);
+                    return response;
+                })
+                .catch(error => {
+                    alert("Hubo un error al registar: " + error);
+                    console.log(`${formData} ${error}`)
+                })
+        }catch(error){
+            console.log(error)
         }
-      })
-      .catch(error => {
-        alert("An Error Occured!" + error);
-        console.log(`${formData} ${error}`);
-        $("#email-login-btn")
-          .removeAttr("disabled")
-          .html("Register");
-      });
+    }
+
+    async traerLocalidades(idprovincia){
+ 
+        try{
+            let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
+
+            await fetch(url_pais)
+                .then(respuesta => {
+                    return respuesta.json()
+                })
+                .then(localidades => {
+                    this.setState({
+                        localidades: localidades
+                    })
+                })
+
+        }catch(error){
+            this.setState({
+                error
+            })
+        }
     };
+
+
+
+
+    
+    // fetch("http://localhost:8000/api/user/register", formData)
+    // .then(response => {
+    //     console.log(response);
+    //     return response;
+    // })
+    // .then(json => {
+    //     if (json.data.success) {
+    //       alert(`Registration Successful!`);
+
+    //     let userData = {
+    //         name: json.data.data.name,
+    //         id: json.data.data.id,
+    //         email: json.data.data.email,
+    //         auth_token: json.data.data.auth_token,
+    //         timestamp: new Date().toString()
+    //     };
+    //     let appState = {
+    //         isLoggedIn: true,
+    //         user: userData
+    //     };
+    //       // save app state with user date in local storage
+    //         localStorage["appState"] = JSON.stringify(appState);
+    //             this.setState({
+    //             isLoggedIn: appState.isLoggedIn,
+    //             user: appState.user
+    //         });
+    //     } else {
+    //         alert(`Registration Failed!`);
+    //     }
+    //   })
+
+
 
     _logoutUser(){
         let appState = {

@@ -25,11 +25,11 @@ class Login extends Component{
 				<form className="auth-form login" id="login-form" action="" onSubmit={this.handleRegister} method="post">
 					<img src={Logo} />
 
-					<h3>Log in</h3>
+					<h3>Register</h3>
 
 					<input type="text" ref={input => (this._name = input)} className="auth-input" placeholder="Enter your name.." />
 					<input type="text" ref={input => (this._email = input)} className="auth-input" placeholder="Enter your email.." />
-					<input type="text" ref={input => (this._password = input)} className="auth-input" placeholder="Enter a password.." />
+					<input type="password" ref={input => (this._password = input)} className="auth-input" placeholder="Enter a password.." />
 					<select name="" className="auth-input">
 						<option value="p1">Select a country</option>
 					</select>

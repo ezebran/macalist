@@ -3,17 +3,26 @@ import { Link, withRouter } from "react-router-dom";
 import Pais from './Pais';
 import Header from './Header';
 import Aside from './Aside';
+import DeleteCountry from './modals/DeleteCountry';
+import $ from "jquery";
 
 class PaisesList extends Component{
   constructor(props) {
     super(props);
     const { history } = props;
+
+    this.showModal = this.showModal.bind(this);
   }
 
+  showModal(id_pais, e){
+  	e.preventDefault();
+  	console.log(id_pais);
+  }
 
 	render(){
 		return(
 			<div>
+			<DeleteCountry />
 			<Header />
 			<Aside />
 			<section className="home">
@@ -35,7 +44,7 @@ class PaisesList extends Component{
 									<td><Link to={"/pais/" + pais.id} >{pais.nombre}</Link></td>
 
 									<td className="tx-right ">
-										<a href="#"><span className="icon-edit"></span></a>
+										<a href="#" onClick={this.showModal.bind(null, pais.id)} id={pais.id} ><span className="icon-edit"></span></a>
 										<a href="#" className="i-delete"><span className="icon-trash-o"></span></a>
 									</td>
 								</tr>

@@ -248,6 +248,10 @@ body {
   font-weight: 400;
 }
 
+.hide-modal {
+  display: none !important;
+}
+
 header {
   display: -webkit-box;
   display: -ms-flexbox;
