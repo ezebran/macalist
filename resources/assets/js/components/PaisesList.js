@@ -12,6 +12,8 @@ class PaisesList extends Component{
     const { history } = props;
 
     this.showModal = this.showModal.bind(this);
+
+
   }
 
   showModal(id_pais, e){
@@ -23,7 +25,7 @@ class PaisesList extends Component{
 		return(
 			<div>
 			<DeleteCountry />
-			<Header />
+			<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 			<Aside />
 			<section className="home">
 

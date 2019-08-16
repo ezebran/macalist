@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import Header from './Header';
 import Aside from './Aside';
 import PaisesList from './PaisesList';
@@ -61,7 +61,7 @@ export default class Example extends Component {
 
     traerUsuarios(){
         axios
-          .get(`http://localhost:8000/api/users/list?token=${this.state.token}`)
+          .get(`http://127.0.0.1:8000/api/users/list?token=${this.state.token}`)
           .then(response => {
             console.log(response);
             return response;
@@ -84,7 +84,7 @@ export default class Example extends Component {
     formData.append("password", password);
 
     axios
-      .post("http://localhost:8000/api/user/login/", formData)
+      .post("http://127.0.0.1:8000/api/user/login/", formData)
       .then(response => {
         console.log(response);
         return response;
@@ -118,36 +118,49 @@ export default class Example extends Component {
   };
 
     async _registerUser(name, email, password){
+    var formData = new FormData(); 
+    formData.append("password", password);
+    formData.append("email", email);
+    formData.append("name", name);
 
+    axios
+      .post("http://127.0.0.1:8000/api/user/register", formData)
+      .then(response => {
+        console.log(response);
+        return response;
+      })
+      .then(json => {
+        if (json.data.success) {
+          alert(`Registration Successful!`);
 
-        try{
-
-            var formData = new FormData(); 
-            formData.append("password", password);
-            formData.append("email", email);
-            formData.append("name", name);
-
-            let config = {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            }
-
-            await fetch('http://localhost:8000/api/user/register', config)
-                .then(response => {
-                    console.log(response);
-                    return response;
-                })
-                .catch(error => {
-                    alert("Hubo un error al registar: " + error);
-                    console.log(`${formData} ${error}`)
-                })
-        }catch(error){
-            console.log(error)
+          let userData = {
+            name: json.data.data.name,
+            id: json.data.data.id,
+            email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
+            timestamp: new Date().toString()
+          };
+          let appState = {
+            isLoggedIn: true,
+            user: userData
+          };
+          // save app state with user date in local storage
+          localStorage["appState"] = JSON.stringify(appState);
+          this.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+        } else {
+          alert(`Registration Failed!`);
+          $("#email-login-btn")
+            .removeAttr("disabled")
+            .html("Register");
         }
+      })
+      .catch(error => {
+        alert("An Error Occured!" + error);
+        console.log(`${formData} ${error}`);
+      });
     }
 
     async traerLocalidades(idprovincia){
@@ -172,40 +185,6 @@ export default class Example extends Component {
         }
     };
 
-
-
-
-    
-    // fetch("http://localhost:8000/api/user/register", formData)
-    // .then(response => {
-    //     console.log(response);
-    //     return response;
-    // })
-    // .then(json => {
-    //     if (json.data.success) {
-    //       alert(`Registration Successful!`);
-
-    //     let userData = {
-    //         name: json.data.data.name,
-    //         id: json.data.data.id,
-    //         email: json.data.data.email,
-    //         auth_token: json.data.data.auth_token,
-    //         timestamp: new Date().toString()
-    //     };
-    //     let appState = {
-    //         isLoggedIn: true,
-    //         user: userData
-    //     };
-    //       // save app state with user date in local storage
-    //         localStorage["appState"] = JSON.stringify(appState);
-    //             this.setState({
-    //             isLoggedIn: appState.isLoggedIn,
-    //             user: appState.user
-    //         });
-    //     } else {
-    //         alert(`Registration Failed!`);
-    //     }
-    //   })
 
 
 
@@ -239,11 +218,16 @@ export default class Example extends Component {
         }
     }
     render() {
-
+        const { isLoggedIn } = this.state;
         return (
             <BrowserRouter>
            
                 <Switch>
+
+                    <Route 
+                        exact path="/"
+                        render={(props) => isLoggedIn ? (<Redirect to="/paises" />) : <Login {...props} _loginUser = { this._loginUser } /> } />
+                    />
                     <Route 
                         exact path="/pais/provincia/:id"
                         render={(props) => <LocalidadesList {...props} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} />} />
@@ -254,12 +238,7 @@ export default class Example extends Component {
                     
                     <Route 
                         exact path="/paises" 
-                        component={() => <PaisesList pais = {this.state.paises} traerUsuarios = { this.traerUsuarios } />} />
-
-                    <Route 
-                        exact path="/"
-                        render={(props) => <Login {...props} _loginUser = { this._loginUser } />} />
-                    />
+                        component={() => <PaisesList pais = {this.state.paises} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />} />
 
                     <Route 
                         exact path="/register"
