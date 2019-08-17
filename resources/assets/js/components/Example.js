@@ -117,7 +117,7 @@ export default class Example extends Component {
       });
   };
 
-    async _registerUser(name, email, password){
+     _registerUser(name, email, password){
     var formData = new FormData(); 
     formData.append("password", password);
     formData.append("email", email);
@@ -196,6 +196,7 @@ export default class Example extends Component {
         // save app state with user date in local storage
         localStorage["appState"] = JSON.stringify(appState);
         this.setState(appState);
+        console.log("Ejecuta desloguear desde el example")
     };
 
     async componentDidMount(){
@@ -218,33 +219,42 @@ export default class Example extends Component {
         }
     }
     render() {
-        const { isLoggedIn } = this.state;
+        const isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
+
         return (
             <BrowserRouter>
            
                 <Switch>
 
                     <Route 
+                        exact path="/register"
+                        render={(props) => isLoggedIn ? 
+                            (<Redirect to="/paises" />)
+                            : <Register {...props} _registerUser = { this._registerUser } /> } />
+
+                    <Route 
                         exact path="/"
-                        render={(props) => isLoggedIn ? (<Redirect to="/paises" />) : <Login {...props} _loginUser = { this._loginUser } /> } />
-                    />
+                        render={(props) => isLoggedIn ? 
+                            (<Redirect to="/paises" />) :
+                            <Login {...props} _loginUser = { this._loginUser } /> } />
+
                     <Route 
                         exact path="/pais/provincia/:id"
-                        render={(props) => <LocalidadesList {...props} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} />} />
+                        render={(props) => isLoggedIn ? 
+                            <LocalidadesList {...props} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
+                            : (<Redirect to="/" />) } />
                     
                     <Route 
                         exact path="/pais/:id"
-                        render={(props) => <ProvinciasList {...props} traerProvincias = {this.traerProvincias} provincias = {this.state.provincias} isAuthed={true} />} />
+                        render={(props) => isLoggedIn ?
+                            <ProvinciasList {...props} traerProvincias = {this.traerProvincias} provincias = {this.state.provincias} isAuthed={true} logOut = { this._logoutUser } />
+                            : (<Redirect to="/" />) } />
                     
                     <Route 
-                        exact path="/paises" 
-                        component={() => <PaisesList pais = {this.state.paises} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />} />
-
-                    <Route 
-                        exact path="/register"
-                        render={(props) => <Register {...props} _registerUser = { this._registerUser } />} />
-                    />
-                    
+                        exact path="/paises"
+                        render={(props) => isLoggedIn ? 
+                            <PaisesList pais = {this.state.paises} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            : (<Redirect to="/" />) } />
                 </Switch>
             </BrowserRouter>
         );

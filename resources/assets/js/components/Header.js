@@ -10,13 +10,15 @@ class Header extends Component{
 	logOutUser(e){
 		e.preventDefault();
 
+		this.props.logOut()
+
 	}
 
 	render(){
 		return(
 			<header>
 				<img src={Logo} />
-				<h5>Welcome <b> {this.props.userData ? this.props.userData.name : ""} !! <i><a href="#" onClick={this.logOutUser}>Salir</a></i></b></h5>
+				<h5>Welcome <b> {JSON.parse(localStorage["appState"]).user.name} !! <i><a href="#" onClick={this.logOutUser}>Salir</a></i></b></h5>
 			</header>
 		)
 	}

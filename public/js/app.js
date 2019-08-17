@@ -5271,6 +5271,8 @@ var Header = function (_Component) {
 		key: 'logOutUser',
 		value: function logOutUser(e) {
 			e.preventDefault();
+
+			this.props.logOut();
 		}
 	}, {
 		key: 'render',
@@ -5287,7 +5289,7 @@ var Header = function (_Component) {
 						'b',
 						null,
 						' ',
-						this.props.userData ? this.props.userData.name : "",
+						JSON.parse(localStorage["appState"]).user.name,
 						' !! ',
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 							'i',
@@ -13289,82 +13291,61 @@ var Example = function (_Component) {
         }
     }, {
         key: '_registerUser',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(name, email, password) {
-                var _this5 = this;
+        value: function _registerUser(name, email, password) {
+            var _this5 = this;
 
-                var formData;
+            var formData = new FormData();
+            formData.append("password", password);
+            formData.append("email", email);
+            formData.append("name", name);
+
+            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/user/register", formData).then(function (response) {
+                console.log(response);
+                return response;
+            }).then(function (json) {
+                if (json.data.success) {
+                    alert('Registration Successful!');
+
+                    var userData = {
+                        name: json.data.data.name,
+                        id: json.data.data.id,
+                        email: json.data.data.email,
+                        auth_token: json.data.data.auth_token,
+                        timestamp: new Date().toString()
+                    };
+                    var appState = {
+                        isLoggedIn: true,
+                        user: userData
+                    };
+                    // save app state with user date in local storage
+                    localStorage["appState"] = JSON.stringify(appState);
+                    _this5.setState({
+                        isLoggedIn: appState.isLoggedIn,
+                        user: appState.user
+                    });
+                } else {
+                    alert('Registration Failed!');
+                    $("#email-login-btn").removeAttr("disabled").html("Register");
+                }
+            }).catch(function (error) {
+                alert("An Error Occured!" + error);
+                console.log(formData + ' ' + error);
+            });
+        }
+    }, {
+        key: 'traerLocalidades',
+        value: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(idprovincia) {
+                var _this6 = this;
+
+                var url_pais;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                formData = new FormData();
-
-                                formData.append("password", password);
-                                formData.append("email", email);
-                                formData.append("name", name);
-
-                                __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/user/register", formData).then(function (response) {
-                                    console.log(response);
-                                    return response;
-                                }).then(function (json) {
-                                    if (json.data.success) {
-                                        alert('Registration Successful!');
-
-                                        var userData = {
-                                            name: json.data.data.name,
-                                            id: json.data.data.id,
-                                            email: json.data.data.email,
-                                            auth_token: json.data.data.auth_token,
-                                            timestamp: new Date().toString()
-                                        };
-                                        var appState = {
-                                            isLoggedIn: true,
-                                            user: userData
-                                        };
-                                        // save app state with user date in local storage
-                                        localStorage["appState"] = JSON.stringify(appState);
-                                        _this5.setState({
-                                            isLoggedIn: appState.isLoggedIn,
-                                            user: appState.user
-                                        });
-                                    } else {
-                                        alert('Registration Failed!');
-                                        $("#email-login-btn").removeAttr("disabled").html("Register");
-                                    }
-                                }).catch(function (error) {
-                                    alert("An Error Occured!" + error);
-                                    console.log(formData + ' ' + error);
-                                });
-
-                            case 5:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function _registerUser(_x2, _x3, _x4) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return _registerUser;
-        }()
-    }, {
-        key: 'traerLocalidades',
-        value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(idprovincia) {
-                var _this6 = this;
-
-                var url_pais;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                _context3.prev = 0;
+                                _context2.prev = 0;
                                 url_pais = 'http://127.0.0.1:8000/api/pais/provincia/' + idprovincia;
-                                _context3.next = 4;
+                                _context2.next = 4;
                                 return fetch(url_pais).then(function (respuesta) {
                                     return respuesta.json();
                                 }).then(function (localidades) {
@@ -13374,27 +13355,27 @@ var Example = function (_Component) {
                                 });
 
                             case 4:
-                                _context3.next = 9;
+                                _context2.next = 9;
                                 break;
 
                             case 6:
-                                _context3.prev = 6;
-                                _context3.t0 = _context3['catch'](0);
+                                _context2.prev = 6;
+                                _context2.t0 = _context2['catch'](0);
 
                                 this.setState({
-                                    error: _context3.t0
+                                    error: _context2.t0
                                 });
 
                             case 9:
                             case 'end':
-                                return _context3.stop();
+                                return _context2.stop();
                         }
                     }
-                }, _callee3, this, [[0, 6]]);
+                }, _callee2, this, [[0, 6]]);
             }));
 
-            function traerLocalidades(_x5) {
-                return _ref3.apply(this, arguments);
+            function traerLocalidades(_x2) {
+                return _ref2.apply(this, arguments);
             }
 
             return traerLocalidades;
@@ -13409,40 +13390,41 @@ var Example = function (_Component) {
             // save app state with user date in local storage
             localStorage["appState"] = JSON.stringify(appState);
             this.setState(appState);
+            console.log("Ejecuta desloguear desde el example");
         }
     }, {
         key: 'componentDidMount',
         value: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
                 var res, data, state, AppState;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
-                        switch (_context4.prev = _context4.next) {
+                        switch (_context3.prev = _context3.next) {
                             case 0:
-                                _context4.prev = 0;
-                                _context4.next = 3;
+                                _context3.prev = 0;
+                                _context3.next = 3;
                                 return fetch('http://127.0.0.1:8000/api/paises/mostrar');
 
                             case 3:
-                                res = _context4.sent;
-                                _context4.next = 6;
+                                res = _context3.sent;
+                                _context3.next = 6;
                                 return res.json();
 
                             case 6:
-                                data = _context4.sent;
+                                data = _context3.sent;
 
                                 this.setState({
                                     paises: data
                                 });
-                                _context4.next = 13;
+                                _context3.next = 13;
                                 break;
 
                             case 10:
-                                _context4.prev = 10;
-                                _context4.t0 = _context4['catch'](0);
+                                _context3.prev = 10;
+                                _context3.t0 = _context3['catch'](0);
 
                                 this.setState({
-                                    error: _context4.t0
+                                    error: _context3.t0
                                 });
 
                             case 13:
@@ -13457,14 +13439,14 @@ var Example = function (_Component) {
 
                             case 15:
                             case 'end':
-                                return _context4.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee4, this, [[0, 10]]);
+                }, _callee3, this, [[0, 10]]);
             }));
 
             function componentDidMount() {
-                return _ref4.apply(this, arguments);
+                return _ref3.apply(this, arguments);
             }
 
             return componentDidMount;
@@ -13474,7 +13456,7 @@ var Example = function (_Component) {
         value: function render() {
             var _this7 = this;
 
-            var isLoggedIn = this.state.isLoggedIn;
+            var isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
 
             return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* BrowserRouter */],
@@ -13483,32 +13465,30 @@ var Example = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["e" /* Switch */],
                     null,
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
+                        exact: true, path: '/register',
+                        render: function render(props) {
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this7._registerUser }));
+                        } }),
+                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/',
                         render: function render(props) {
                             return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this7._loginUser }));
                         } }),
-                    '/>',
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/pais/provincia/:id',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this7.traerLocalidades, localidades: _this7.state.localidades, isAuthed: true }));
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this7.traerLocalidades, localidades: _this7.state.localidades, isAuthed: true, logOut: _this7._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/pais/:id',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this7.traerProvincias, provincias: _this7.state.provincias, isAuthed: true }));
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this7.traerProvincias, provincias: _this7.state.provincias, isAuthed: true, logOut: _this7._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/paises',
-                        component: function component() {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this7.state.paises, traerUsuarios: _this7.traerUsuarios, userData: _this7.state.user.user, logOut: _this7._logoutUser });
-                        } }),
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
-                        exact: true, path: '/register',
                         render: function render(props) {
-                            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this7._registerUser }));
-                        } }),
-                    '/>'
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this7.state.paises, traerUsuarios: _this7.traerUsuarios, userData: _this7.state.user.user, logOut: _this7._logoutUser }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+                        } })
                 )
             );
         }
@@ -38355,7 +38335,7 @@ var ProvinciasList = function (_Component) {
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], { userData: this.props.userData, logOut: this.props.logOut }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'section',
@@ -38490,7 +38470,7 @@ var LocalidadesList = function (_Component) {
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], null),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], { userData: this.props.userData, logOut: this.props.logOut }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'section',

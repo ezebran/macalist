@@ -18,7 +18,7 @@ class LocalidadesList extends Component{
 	render(){
 		return(
 			<div>
-				<Header />
+				<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 				<Aside />
 				<section className="home">
 
