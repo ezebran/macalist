@@ -1,6 +1,5 @@
 import React,{ Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
-import Pais from './Pais';
 import Header from './Header';
 import Aside from './Aside';
 import DeleteCountry from './modals/DeleteCountry';

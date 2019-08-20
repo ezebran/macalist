@@ -5,7 +5,9 @@ import { Link, withRouter } from "react-router-dom";
 class Login extends Component{
 	constructor(props){
 		super(props)
-		this.handleRegister = this.handleRegister.bind(this)
+		this.handleRegister = this.handleRegister.bind(this);
+		this.handlePaisChange = this.handlePaisChange.bind(this);
+		this.handleProvinciaChange = this.handleProvinciaChange.bind(this);
 	}
 	handleRegister(e){
 		e.preventDefault();
@@ -13,8 +15,18 @@ class Login extends Component{
 		let name = this._name.value;
 		let email = this._email.value;
 		let pass = this._password.value;
-		this.props._registerUser(name,email,pass);
+		let localidad = this._localidad;
+		this.props._registerUser(name,email,pass,1,localidad);		
 	}
+
+	handlePaisChange(e){
+		this.props.traerProvincias(e.target.value)
+	}
+
+	handleProvinciaChange(e){
+		this.props.traerLocalidades(e.target.value)
+	}
+
 	componentDidMount(){
 		const { history, location, match } = this.props;
 	}
@@ -30,14 +42,33 @@ class Login extends Component{
 					<input type="text" ref={input => (this._name = input)} className="auth-input" placeholder="Enter your name.." />
 					<input type="text" ref={input => (this._email = input)} className="auth-input" placeholder="Enter your email.." />
 					<input type="password" ref={input => (this._password = input)} className="auth-input" placeholder="Enter a password.." />
-					<select name="" className="auth-input">
-						<option value="p1">Select a country</option>
+					<select name="" className="auth-input" onChange={this.handlePaisChange}>
+						<option value="p1">Selecciona un pais</option>
+						{
+							this.props.pais.map(pais => (
+								<option key={pais.id} value={pais.id} >{pais.nombre}</option>
+								)
+							)
+						}
 					</select>
-					<select name="" className="auth-input">
-						<option value="p1">Select a province</option>
+					<select name="" className="auth-input" onChange={this.handleProvinciaChange}>
+						<option value="p1">Selecciona un provincia</option>
+						{
+							this.props.provincias.map(provin => (
+								<option key={provin.id} value={provin.id} >{provin.nombre}</option>
+								)
+							)
+						}
+						
 					</select>
-					<select name="" className="auth-input">
-						<option value="p1">Select a location</option>
+					<select name="" className="auth-input" ref={input => (this._localidad = input)}>
+						<option value="p1">Selecciona una localidad</option>
+						{
+							this.props.localidades.map(local => (
+								<option key={local.id} value={local.id} >{local.nombre}</option>
+								)
+							)
+						}
 					</select>
 
 					<div className="auth-foot">

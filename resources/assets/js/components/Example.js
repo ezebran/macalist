@@ -117,16 +117,17 @@ export default class Example extends Component {
       });
   };
 
-     _registerUser(name, email, password){
+     _registerUser(name, email, password, rol_id, localidad_id){
     var formData = new FormData(); 
     formData.append("password", password);
     formData.append("email", email);
     formData.append("name", name);
+    formData.append("rol_id", rol_id);
+    formData.append("localidad_id", localidad_id);
 
     axios
       .post("http://127.0.0.1:8000/api/user/register", formData)
       .then(response => {
-        console.log(response);
         return response;
       })
       .then(json => {
@@ -138,6 +139,8 @@ export default class Example extends Component {
             id: json.data.data.id,
             email: json.data.data.email,
             auth_token: json.data.data.auth_token,
+            rol_id: json.data.data.rol_id,
+            localidad_id: json.data.data.localidad_id,
             timestamp: new Date().toString()
           };
           let appState = {
@@ -186,8 +189,6 @@ export default class Example extends Component {
     };
 
 
-
-
     _logoutUser(){
         let appState = {
           isLoggedIn: false,
@@ -214,7 +215,7 @@ export default class Example extends Component {
         let state = localStorage["appState"];
         if (state) {
           let AppState = JSON.parse(state);
-          console.log(AppState);
+
           this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState });
         }
     }
@@ -230,7 +231,7 @@ export default class Example extends Component {
                         exact path="/register"
                         render={(props) => isLoggedIn ? 
                             (<Redirect to="/paises" />)
-                            : <Register {...props} _registerUser = { this._registerUser } /> } />
+                            : <Register {...props} _registerUser = { this._registerUser } pais = {this.state.paises} localidades = {this.state.localidades} provincias = {this.state.provincias} traerProvincias = { this.traerProvincias } traerLocalidades = {this.traerLocalidades} /> } />
 
                     <Route 
                         exact path="/"

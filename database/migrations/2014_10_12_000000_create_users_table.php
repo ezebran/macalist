@@ -18,9 +18,21 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+
+            $table->integer('rol_id')->nullable();
+
+
+            $table->integer('localidad_id')->nullable();
+
+
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Schema::table('users', function (Blueprint $table) {
+        //     // $table->foreign('rol_id')->references('id')->on('roles');
+        //     $table->foreign('localidad_id')->references('id')->on('localidades');
+        // });
     }
 
     /**
