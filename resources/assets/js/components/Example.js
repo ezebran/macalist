@@ -25,7 +25,8 @@ export default class Example extends Component {
             isLoggedIn: false,
             user: {},
             token:{},
-            users: []
+            users: [],
+            pais_selected:''
         }
         this.traerProvincias = this.traerProvincias.bind(this);
         this.traerLocalidades = this.traerLocalidades.bind(this);
@@ -33,6 +34,14 @@ export default class Example extends Component {
         this._registerUser = this._registerUser.bind(this);
         this._logoutUser = this._logoutUser.bind(this);
         this.traerUsuarios = this.traerUsuarios.bind(this);
+        this.selectPais = this.selectPais.bind(this);
+        this.deletePais = this.deletePais.bind(this);
+    }
+
+    selectPais(id_pais){
+      this.setState({
+        pais_selected: id_pais
+      });
     }
 
     async traerProvincias(idpais){
@@ -75,6 +84,28 @@ export default class Example extends Component {
           .catch(error => {
             alert(`An Error Occured! ${error}`);
           });
+    }
+
+    deletePais(){
+      var formData = new FormData();
+      formData.append("id_pais", this.state.pais_selected);
+
+      //Eliminamos el pais del state
+      let sinElPais = []
+      this.state.paises.map(pais => {
+        if(pais.id != this.state.pais_selected){
+          sinElPais.push(pais)
+        }
+      })
+      this.setState({
+        paises: sinElPais
+      });
+      
+      axios
+        .post("http://127.0.0.1:8000/api/pais/eliminar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se puso eliminarel pais! ${error}`);
+        });
     }
 
     _loginUser(email, password){
@@ -167,7 +198,7 @@ export default class Example extends Component {
     }
 
     async traerLocalidades(idprovincia){
- 
+
         try{
             let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
 
@@ -180,7 +211,6 @@ export default class Example extends Component {
                         localidades: localidades
                     })
                 })
-
         }catch(error){
             this.setState({
                 error
@@ -254,7 +284,7 @@ export default class Example extends Component {
                     <Route 
                         exact path="/paises"
                         render={(props) => isLoggedIn ? 
-                            <PaisesList pais = {this.state.paises} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            <PaisesList pais = {this.state.paises} deletePais = {this.deletePais} pais_selected = {this.selectPais} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                 </Switch>
             </BrowserRouter>

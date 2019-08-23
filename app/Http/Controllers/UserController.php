@@ -70,7 +70,7 @@ class UserController extends Controller
             
             $user->save();
             
-            $response = ['success'=>true, 'data'=>['name'=>$user->name,'id'=>$user->id,'email'=>$request->email,'auth_token'=>$token,'rol_id'=>$request->rol_id,'localidad_id'=>$request->localidad_id]];        
+            $response = ['success'=>true, 'data'=>['name'=>$user->name,'id'=>$user->id,'email'=>$request->email,'auth_token'=>$token,'rol_id'=>$request->rol_id,'localidad_id'=>$request->localidad_id]];
         }
         else
             $response = ['success'=>false, 'data'=>'Couldnt register user'];

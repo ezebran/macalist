@@ -13175,7 +13175,8 @@ var Example = function (_Component) {
             isLoggedIn: false,
             user: {},
             token: {},
-            users: []
+            users: [],
+            pais_selected: ''
         };
         _this.traerProvincias = _this.traerProvincias.bind(_this);
         _this.traerLocalidades = _this.traerLocalidades.bind(_this);
@@ -13183,10 +13184,19 @@ var Example = function (_Component) {
         _this._registerUser = _this._registerUser.bind(_this);
         _this._logoutUser = _this._logoutUser.bind(_this);
         _this.traerUsuarios = _this.traerUsuarios.bind(_this);
+        _this.selectPais = _this.selectPais.bind(_this);
+        _this.deletePais = _this.deletePais.bind(_this);
         return _this;
     }
 
     _createClass(Example, [{
+        key: 'selectPais',
+        value: function selectPais(id_pais) {
+            this.setState({
+                pais_selected: id_pais
+            });
+        }
+    }, {
         key: 'traerProvincias',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(idpais) {
@@ -13252,9 +13262,32 @@ var Example = function (_Component) {
             });
         }
     }, {
+        key: 'deletePais',
+        value: function deletePais() {
+            var _this4 = this;
+
+            var formData = new FormData();
+            formData.append("id_pais", this.state.pais_selected);
+
+            //Eliminamos el pais del state
+            var sinElPais = [];
+            this.state.paises.map(function (pais) {
+                if (pais.id != _this4.state.pais_selected) {
+                    sinElPais.push(pais);
+                }
+            });
+            this.setState({
+                paises: sinElPais
+            });
+
+            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/pais/eliminar/", formData).catch(function (error) {
+                alert('Un error ocurrio, no se puso eliminarel pais! ' + error);
+            });
+        }
+    }, {
         key: '_loginUser',
         value: function _loginUser(email, password) {
-            var _this4 = this;
+            var _this5 = this;
 
             var formData = new FormData();
             formData.append("email", email);
@@ -13280,7 +13313,7 @@ var Example = function (_Component) {
                     };
                     // save app state with user date in local storage
                     localStorage["appState"] = JSON.stringify(appState);
-                    _this4.setState({
+                    _this5.setState({
                         isLoggedIn: appState.isLoggedIn,
                         user: appState.user
                     });
@@ -13292,7 +13325,7 @@ var Example = function (_Component) {
     }, {
         key: '_registerUser',
         value: function _registerUser(name, email, password, rol_id, localidad_id) {
-            var _this5 = this;
+            var _this6 = this;
 
             var formData = new FormData();
             formData.append("password", password);
@@ -13322,7 +13355,7 @@ var Example = function (_Component) {
                     };
                     // save app state with user date in local storage
                     localStorage["appState"] = JSON.stringify(appState);
-                    _this5.setState({
+                    _this6.setState({
                         isLoggedIn: appState.isLoggedIn,
                         user: appState.user
                     });
@@ -13339,7 +13372,7 @@ var Example = function (_Component) {
         key: 'traerLocalidades',
         value: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(idprovincia) {
-                var _this6 = this;
+                var _this7 = this;
 
                 var url_pais;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
@@ -13352,7 +13385,7 @@ var Example = function (_Component) {
                                 return fetch(url_pais).then(function (respuesta) {
                                     return respuesta.json();
                                 }).then(function (localidades) {
-                                    _this6.setState({
+                                    _this7.setState({
                                         localidades: localidades
                                     });
                                 });
@@ -13457,7 +13490,7 @@ var Example = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this7 = this;
+            var _this8 = this;
 
             var isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
 
@@ -13470,27 +13503,27 @@ var Example = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/register',
                         render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this7._registerUser, pais: _this7.state.paises, localidades: _this7.state.localidades, provincias: _this7.state.provincias, traerProvincias: _this7.traerProvincias, traerLocalidades: _this7.traerLocalidades }));
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this8._registerUser, pais: _this8.state.paises, localidades: _this8.state.localidades, provincias: _this8.state.provincias, traerProvincias: _this8.traerProvincias, traerLocalidades: _this8.traerLocalidades }));
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/',
                         render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this7._loginUser }));
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this8._loginUser }));
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/pais/provincia/:id',
                         render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this7.traerLocalidades, localidades: _this7.state.localidades, isAuthed: true, logOut: _this7._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this8.traerLocalidades, localidades: _this8.state.localidades, isAuthed: true, logOut: _this8._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/pais/:id',
                         render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this7.traerProvincias, provincias: _this7.state.provincias, isAuthed: true, logOut: _this7._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this8.traerProvincias, provincias: _this8.state.provincias, isAuthed: true, logOut: _this8._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
                         } }),
                     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
                         exact: true, path: '/paises',
                         render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this7.state.paises, traerUsuarios: _this7.traerUsuarios, userData: _this7.state.user.user, logOut: _this7._logoutUser }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this8.state.paises, deletePais: _this8.deletePais, pais_selected: _this8.selectPais, traerUsuarios: _this8.traerUsuarios, userData: _this8.state.user.user, logOut: _this8._logoutUser }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
                         } })
                 )
             );
@@ -27456,15 +27489,22 @@ var PaisesList = function (_Component) {
 
 
 		_this.showModal = _this.showModal.bind(_this);
-
 		return _this;
 	}
 
 	_createClass(PaisesList, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var id_paisDelete;
+		}
+	}, {
 		key: 'showModal',
 		value: function showModal(id_pais, e) {
 			e.preventDefault();
-			console.log(id_pais);
+			this.props.pais_selected(id_pais);
+
+			var carrito = document.getElementById('m-delete-country');
+			carrito.classList.toggle("hide-modal");
 		}
 	}, {
 		key: 'render',
@@ -27474,7 +27514,7 @@ var PaisesList = function (_Component) {
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__modals_DeleteCountry__["a" /* default */], null),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__modals_DeleteCountry__["a" /* default */], { delete_pais: this.props.deletePais }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], { userData: this.props.userData, logOut: this.props.logOut }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -27530,12 +27570,12 @@ var PaisesList = function (_Component) {
 											{ className: 'tx-right ' },
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												'a',
-												{ href: '#', onClick: _this2.showModal.bind(null, pais.id), id: pais.id },
+												{ href: '#' },
 												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-edit' })
 											),
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												'a',
-												{ href: '#', className: 'i-delete' },
+												{ href: '#', className: 'i-delete', onClick: _this2.showModal.bind(null, pais.id), id: pais.id },
 												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-trash-o' })
 											)
 										)
@@ -27574,42 +27614,57 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DeleteCountry = function (_Component) {
 	_inherits(DeleteCountry, _Component);
 
-	function DeleteCountry() {
+	function DeleteCountry(props) {
 		_classCallCheck(this, DeleteCountry);
 
-		return _possibleConstructorReturn(this, (DeleteCountry.__proto__ || Object.getPrototypeOf(DeleteCountry)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (DeleteCountry.__proto__ || Object.getPrototypeOf(DeleteCountry)).call(this, props));
+
+		_this.hideModal = _this.hideModal.bind(_this);
+		_this.deletePais = _this.deletePais.bind(_this);
+		return _this;
 	}
 
 	_createClass(DeleteCountry, [{
-		key: "render",
+		key: 'deletePais',
+		value: function deletePais(e) {
+			e.preventDefault();
+			this.props.delete_pais();
+			var carrito = document.getElementById('m-delete-country');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'hideModal',
+		value: function hideModal(e) {
+			e.preventDefault();
+			var carrito = document.getElementById('m-delete-country');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'render',
 		value: function render() {
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				"div",
-				{ className: "modal hide-modal", id: "m-delete-country" },
+				'div',
+				{ className: 'modal hide-modal', id: 'm-delete-country' },
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					"div",
-					{ className: "content-modal" },
+					'div',
+					{ className: 'content-modal' },
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						"h3",
+						'h3',
 						null,
-						"Delete this country?"
+						'Delete this country?'
 					),
 					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						"div",
-						{ className: "btn-foot" },
+						'div',
+						{ className: 'btn-foot' },
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							"form",
-							{ action: "" },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								"button",
-								{ className: "btn btn-active" },
-								"Yes"
-							)
+							'a',
+							{ href: '#', className: 'btn btn-active', onClick: this.deletePais },
+							'Yes'
 						),
 						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							"a",
-							{ href: "#", className: "btn" },
-							"No"
+							'a',
+							{ href: '#', className: 'btn', onClick: this.hideModal },
+							'No'
 						)
 					)
 				)
@@ -38650,7 +38705,7 @@ var Login = function (_Component) {
 			var name = this._name.value;
 			var email = this._email.value;
 			var pass = this._password.value;
-			var localidad = this._localidad;
+			var localidad = parseInt(this._localidad.value);
 			this.props._registerUser(name, email, pass, 1, localidad);
 		}
 	}, {

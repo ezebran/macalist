@@ -44,6 +44,8 @@ Route::group(['middleware' => 'api-header'], function () {
 
 Route::get('/paises/mostrar','paisesController@mostrarPaises');
 
+Route::post('/pais/eliminar','paisesController@eliminarPais');
+
 Route::get('/pais/{id}','provinciasController@mostrarProvincias');
 
 Route::get('/pais/provincia/{id}','localidadesController@mostrarLocalidades');

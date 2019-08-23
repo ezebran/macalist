@@ -11,19 +11,24 @@ class PaisesList extends Component{
     const { history } = props;
 
     this.showModal = this.showModal.bind(this);
-
-
   }
 
-  showModal(id_pais, e){
-  	e.preventDefault();
-  	console.log(id_pais);
-  }
+  	componentDidMount(){
+  		var id_paisDelete;
+  	}
+
+	showModal(id_pais, e){
+		e.preventDefault();
+		this.props.pais_selected(id_pais)
+
+		let carrito = document.getElementById('m-delete-country');
+		carrito.classList.toggle("hide-modal");
+	}
 
 	render(){
 		return(
 			<div>
-			<DeleteCountry />
+			<DeleteCountry delete_pais = {this.props.deletePais} />
 			<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 			<Aside />
 			<section className="home">
@@ -45,8 +50,8 @@ class PaisesList extends Component{
 									<td><Link to={"/pais/" + pais.id} >{pais.nombre}</Link></td>
 
 									<td className="tx-right ">
-										<a href="#" onClick={this.showModal.bind(null, pais.id)} id={pais.id} ><span className="icon-edit"></span></a>
-										<a href="#" className="i-delete"><span className="icon-trash-o"></span></a>
+										<a href="#"  ><span className="icon-edit"></span></a>
+										<a href="#" className="i-delete" onClick={this.showModal.bind(null, pais.id)} id={pais.id}><span className="icon-trash-o"></span></a>
 									</td>
 								</tr>
 							))

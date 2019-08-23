@@ -15,4 +15,11 @@ class paisesController extends Controller
 
     	return response()->json($paises, 201);
     }
+
+    public function eliminarPais(Request $request){
+
+    	DB::table('paises')
+    	->where('id', '=', $request->id_pais)
+    	->delete();
+    }
 }

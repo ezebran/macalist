@@ -15,7 +15,7 @@ class Login extends Component{
 		let name = this._name.value;
 		let email = this._email.value;
 		let pass = this._password.value;
-		let localidad = this._localidad;
+		let localidad = parseInt(this._localidad.value);
 		this.props._registerUser(name,email,pass,1,localidad);		
 	}
 
