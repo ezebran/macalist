@@ -571,6 +571,16 @@ module.exports = ExecutionEnvironment;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+module.exports = __webpack_require__(17);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /**
  * Copyright (c) 2016-present, Facebook, Inc.
  *
@@ -949,16 +959,6 @@ var ReactComponentTreeHook = {
 module.exports = ReactComponentTreeHook;
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(17);
-
-
-/***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -993,7 +993,7 @@ module.exports = { debugTool: debugTool };
 
 
 var bind = __webpack_require__(98);
-var isBuffer = __webpack_require__(228);
+var isBuffer = __webpack_require__(229);
 
 /*global toString:true*/
 
@@ -3045,7 +3045,7 @@ module.exports = DOMLazyTree;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Link; });
 /* unused harmony export NavLink */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router__ = __webpack_require__(95);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2_react_router__["a"]; });
@@ -5240,7 +5240,7 @@ function warning(condition, message) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_logo_png__);
@@ -5316,7 +5316,7 @@ var Header = function (_Component) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -7303,7 +7303,7 @@ module.exports = "/images/logo.png?c3c38d8fa6fcb3059bc8c156449f60f5";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(9);
-var normalizeHeaderName = __webpack_require__(230);
+var normalizeHeaderName = __webpack_require__(231);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -7729,7 +7729,7 @@ module.exports = getIteratorFn;
 
 
 var ReactCurrentOwner = __webpack_require__(11);
-var ReactComponentTreeHook = __webpack_require__(6);
+var ReactComponentTreeHook = __webpack_require__(7);
 var ReactElement = __webpack_require__(15);
 
 var checkReactTypeSpec = __webpack_require__(114);
@@ -11128,7 +11128,7 @@ function _inheritsLoose(subClass, superClass) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return context; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mini_create_react_context__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_esm_inheritsLoose__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
@@ -12841,12 +12841,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(9);
-var settle = __webpack_require__(231);
-var buildURL = __webpack_require__(233);
-var parseHeaders = __webpack_require__(234);
-var isURLSameOrigin = __webpack_require__(235);
+var settle = __webpack_require__(232);
+var buildURL = __webpack_require__(234);
+var parseHeaders = __webpack_require__(235);
+var isURLSameOrigin = __webpack_require__(236);
 var createError = __webpack_require__(100);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(236);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(237);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -12943,7 +12943,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(237);
+      var cookies = __webpack_require__(238);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13027,7 +13027,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(232);
+var enhanceError = __webpack_require__(233);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13088,7 +13088,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(104);
-module.exports = __webpack_require__(245);
+module.exports = __webpack_require__(246);
 
 
 /***/ }),
@@ -13120,7 +13120,7 @@ __webpack_require__(105);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__(124);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
@@ -13128,11 +13128,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Header__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Aside__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__PaisesList__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProvinciasList__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LocalidadesList__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__log_Login__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__log_Register__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProvinciasList__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LocalidadesList__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__log_Login__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__log_Register__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(227);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_axios__);
 
 
@@ -13161,383 +13161,454 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var Example = function (_Component) {
-    _inherits(Example, _Component);
+  _inherits(Example, _Component);
 
-    function Example(props) {
-        _classCallCheck(this, Example);
+  function Example(props) {
+    _classCallCheck(this, Example);
 
-        var _this = _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).call(this, props));
 
-        _this.state = {
-            paises: [],
-            provincias: [],
-            localidades: [],
-            isLoggedIn: false,
-            user: {},
-            token: {},
-            users: [],
-            pais_selected: ''
-        };
-        _this.traerProvincias = _this.traerProvincias.bind(_this);
-        _this.traerLocalidades = _this.traerLocalidades.bind(_this);
-        _this._loginUser = _this._loginUser.bind(_this);
-        _this._registerUser = _this._registerUser.bind(_this);
-        _this._logoutUser = _this._logoutUser.bind(_this);
-        _this.traerUsuarios = _this.traerUsuarios.bind(_this);
-        _this.selectPais = _this.selectPais.bind(_this);
-        _this.deletePais = _this.deletePais.bind(_this);
-        return _this;
+    _this.state = {
+      paises: [],
+      provincias: [],
+      localidades: [],
+      isLoggedIn: false,
+      user: {},
+      token: {},
+      users: [],
+      pais_selected: '',
+      provincia_selected: '',
+      localidad_selected: ''
+    };
+    _this.traerProvincias = _this.traerProvincias.bind(_this);
+    _this.traerLocalidades = _this.traerLocalidades.bind(_this);
+    _this._loginUser = _this._loginUser.bind(_this);
+    _this._registerUser = _this._registerUser.bind(_this);
+    _this._logoutUser = _this._logoutUser.bind(_this);
+    _this.traerUsuarios = _this.traerUsuarios.bind(_this);
+    _this.selectPais = _this.selectPais.bind(_this);
+    _this.deletePais = _this.deletePais.bind(_this);
+    _this.editarPais = _this.editarPais.bind(_this);
+    _this.eliminarProvincia = _this.eliminarProvincia.bind(_this);
+    _this.selectProvincia = _this.selectProvincia.bind(_this);
+    _this.editarProvincia = _this.editarProvincia.bind(_this);
+    return _this;
+  }
+
+  _createClass(Example, [{
+    key: '_loginUser',
+    value: function _loginUser(email, password) {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+
+      __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/user/login/", formData).then(function (response) {
+        console.log(response);
+        return response;
+      }).then(function (json) {
+        if (json.data.success) {
+          alert("Login Successful!");
+
+          var userData = {
+            name: json.data.data.name,
+            id: json.data.data.id,
+            email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
+            timestamp: new Date().toString()
+          };
+          var appState = {
+            isLoggedIn: true,
+            user: userData
+          };
+          // save app state with user date in local storage
+          localStorage["appState"] = JSON.stringify(appState);
+          _this2.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+        } else alert("Login Failed!");
+      }).catch(function (error) {
+        alert('An Error Occured! ' + error);
+      });
     }
+  }, {
+    key: '_registerUser',
+    value: function _registerUser(name, email, password, rol_id, localidad_id) {
+      var _this3 = this;
 
-    _createClass(Example, [{
-        key: 'selectPais',
-        value: function selectPais(id_pais) {
-            this.setState({
-                pais_selected: id_pais
-            });
+      var formData = new FormData();
+      formData.append("password", password);
+      formData.append("email", email);
+      formData.append("name", name);
+      formData.append("rol_id", rol_id);
+      formData.append("localidad_id", localidad_id);
+
+      __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/user/register", formData).then(function (response) {
+        return response;
+      }).then(function (json) {
+        if (json.data.success) {
+          alert('Registration Successful!');
+
+          var userData = {
+            name: json.data.data.name,
+            id: json.data.data.id,
+            email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
+            rol_id: json.data.data.rol_id,
+            localidad_id: json.data.data.localidad_id,
+            timestamp: new Date().toString()
+          };
+          var appState = {
+            isLoggedIn: true,
+            user: userData
+          };
+          // save app state with user date in local storage
+          localStorage["appState"] = JSON.stringify(appState);
+          _this3.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+        } else {
+          alert('Registration Failed!');
+          $("#email-login-btn").removeAttr("disabled").html("Register");
         }
-    }, {
-        key: 'traerProvincias',
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(idpais) {
-                var _this2 = this;
+      }).catch(function (error) {
+        alert("An Error Occured!" + error);
+        console.log(formData + ' ' + error);
+      });
+    }
+  }, {
+    key: '_logoutUser',
+    value: function _logoutUser() {
+      var appState = {
+        isLoggedIn: false,
+        user: {}
+      };
+      // save app state with user date in local storage
+      localStorage["appState"] = JSON.stringify(appState);
+      this.setState(appState);
+      console.log("Ejecuta desloguear desde el example");
+    }
+  }, {
+    key: 'traerUsuarios',
+    value: function traerUsuarios() {
+      var _this4 = this;
 
-                var url_pais;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _context.prev = 0;
-                                url_pais = 'http://127.0.0.1:8000/api/pais/' + idpais;
-                                _context.next = 4;
-                                return fetch(url_pais).then(function (respuesta) {
-                                    return respuesta.json();
-                                }).then(function (provincias) {
-                                    _this2.setState({
-                                        provincias: provincias
-                                    });
-                                });
+      __WEBPACK_IMPORTED_MODULE_11_axios___default.a.get('http://127.0.0.1:8000/api/users/list?token=' + this.state.token).then(function (response) {
+        console.log(response);
+        return response;
+      }).then(function (json) {
+        if (json.data.success) {
+          _this4.setState({ users: json.data.data });
+          //alert("Login Successful!");
+        } else alert("Login Failed!");
+      }).catch(function (error) {
+        alert('An Error Occured! ' + error);
+      });
+    }
+  }, {
+    key: 'selectPais',
+    value: function selectPais(id_pais) {
+      this.setState({
+        pais_selected: id_pais
+      });
+    }
+  }, {
+    key: 'selectProvincia',
+    value: function selectProvincia(id_provincia) {
+      this.setState({
+        provincia_selected: id_provincia
+      });
+    }
+  }, {
+    key: 'traerProvincias',
+    value: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(idpais) {
+        var _this5 = this;
 
-                            case 4:
-                                _context.next = 9;
-                                break;
+        var url_pais;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                url_pais = 'http://127.0.0.1:8000/api/pais/' + idpais;
+                _context.next = 4;
+                return fetch(url_pais).then(function (respuesta) {
+                  return respuesta.json();
+                }).then(function (provincias) {
+                  _this5.setState({
+                    provincias: provincias
+                  });
+                });
 
-                            case 6:
-                                _context.prev = 6;
-                                _context.t0 = _context['catch'](0);
+              case 4:
+                _context.next = 9;
+                break;
 
-                                this.setState({
-                                    error: _context.t0
-                                });
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context['catch'](0);
 
-                            case 9:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[0, 6]]);
-            }));
+                this.setState({
+                  error: _context.t0
+                });
 
-            function traerProvincias(_x) {
-                return _ref.apply(this, arguments);
+              case 9:
+              case 'end':
+                return _context.stop();
             }
+          }
+        }, _callee, this, [[0, 6]]);
+      }));
 
-            return traerProvincias;
-        }()
-    }, {
-        key: 'traerUsuarios',
-        value: function traerUsuarios() {
-            var _this3 = this;
+      function traerProvincias(_x) {
+        return _ref.apply(this, arguments);
+      }
 
-            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.get('http://127.0.0.1:8000/api/users/list?token=' + this.state.token).then(function (response) {
-                console.log(response);
-                return response;
-            }).then(function (json) {
-                if (json.data.success) {
-                    _this3.setState({ users: json.data.data });
-                    //alert("Login Successful!");
-                } else alert("Login Failed!");
-            }).catch(function (error) {
-                alert('An Error Occured! ' + error);
-            });
+      return traerProvincias;
+    }()
+  }, {
+    key: 'eliminarProvincia',
+    value: function eliminarProvincia() {
+      var _this6 = this;
+
+      var formData = new FormData();
+      formData.append("id_provincia", this.state.provincia_selected);
+
+      //Eliminamos el pais del state
+      var sinLaProvi = [];
+      this.state.provincias.map(function (provi) {
+        if (provi.id != _this6.state.provincia_selected) {
+          sinLaProvi.push(provi);
         }
-    }, {
-        key: 'deletePais',
-        value: function deletePais() {
-            var _this4 = this;
+      });
+      this.setState({
+        provincias: sinLaProvi
+      });
 
-            var formData = new FormData();
-            formData.append("id_pais", this.state.pais_selected);
+      __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/provincia/eliminar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo eliminar la provincia! ' + error);
+      });
+    }
+  }, {
+    key: 'editarProvincia',
+    value: function editarProvincia(pais_id, nombre) {
+      var formData = new FormData();
+      formData.append("id_provincia", this.state.provincia_selected);
+      formData.append("pais_id", pais_id);
+      formData.append("nombre", nombre);
 
-            //Eliminamos el pais del state
-            var sinElPais = [];
-            this.state.paises.map(function (pais) {
-                if (pais.id != _this4.state.pais_selected) {
-                    sinElPais.push(pais);
+      console.log("Valores que se ejecutan desde example", pais_id, nombre);
+    }
+  }, {
+    key: 'editarPais',
+    value: function editarPais(nombre) {
+      var _this7 = this;
+
+      var formData = new FormData();
+      formData.append("id_pais", this.state.pais_selected);
+      formData.append("nombre", nombre);
+
+      //Editamos el pais en el state
+      var paisesTemp = this.state.paises;
+      paisesTemp.map(function (pais) {
+        if (pais.id == _this7.state.pais_selected) {
+          pais.nombre = nombre;
+        }
+      });
+      this.setState({
+        paises: paisesTemp
+      });
+
+      //Enviamos los datos por post
+      __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/pais/editar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo editar el pais! ' + error);
+      });
+    }
+  }, {
+    key: 'deletePais',
+    value: function deletePais() {
+      var _this8 = this;
+
+      var formData = new FormData();
+      formData.append("id_pais", this.state.pais_selected);
+
+      //Eliminamos el pais del state
+      var sinElPais = [];
+      this.state.paises.map(function (pais) {
+        if (pais.id != _this8.state.pais_selected) {
+          sinElPais.push(pais);
+        }
+      });
+      this.setState({
+        paises: sinElPais
+      });
+
+      __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/pais/eliminar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo eliminar el pais! ' + error);
+      });
+    }
+  }, {
+    key: 'traerLocalidades',
+    value: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(idprovincia) {
+        var _this9 = this;
+
+        var url_pais;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                url_pais = 'http://127.0.0.1:8000/api/pais/provincia/' + idprovincia;
+                _context2.next = 4;
+                return fetch(url_pais).then(function (respuesta) {
+                  return respuesta.json();
+                }).then(function (localidades) {
+                  _this9.setState({
+                    localidades: localidades
+                  });
+                });
+
+              case 4:
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2['catch'](0);
+
+                this.setState({
+                  error: _context2.t0
+                });
+
+              case 9:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 6]]);
+      }));
+
+      function traerLocalidades(_x2) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return traerLocalidades;
+    }()
+  }, {
+    key: 'componentDidMount',
+    value: function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+        var res, data, state, AppState;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return fetch('http://127.0.0.1:8000/api/paises/mostrar');
+
+              case 3:
+                res = _context3.sent;
+                _context3.next = 6;
+                return res.json();
+
+              case 6:
+                data = _context3.sent;
+
+                this.setState({
+                  paises: data
+                });
+                _context3.next = 13;
+                break;
+
+              case 10:
+                _context3.prev = 10;
+                _context3.t0 = _context3['catch'](0);
+
+                this.setState({
+                  error: _context3.t0
+                });
+
+              case 13:
+                state = localStorage["appState"];
+
+                if (state) {
+                  AppState = JSON.parse(state);
+
+
+                  this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState });
                 }
-            });
-            this.setState({
-                paises: sinElPais
-            });
 
-            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/pais/eliminar/", formData).catch(function (error) {
-                alert('Un error ocurrio, no se puso eliminarel pais! ' + error);
-            });
-        }
-    }, {
-        key: '_loginUser',
-        value: function _loginUser(email, password) {
-            var _this5 = this;
-
-            var formData = new FormData();
-            formData.append("email", email);
-            formData.append("password", password);
-
-            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/user/login/", formData).then(function (response) {
-                console.log(response);
-                return response;
-            }).then(function (json) {
-                if (json.data.success) {
-                    alert("Login Successful!");
-
-                    var userData = {
-                        name: json.data.data.name,
-                        id: json.data.data.id,
-                        email: json.data.data.email,
-                        auth_token: json.data.data.auth_token,
-                        timestamp: new Date().toString()
-                    };
-                    var appState = {
-                        isLoggedIn: true,
-                        user: userData
-                    };
-                    // save app state with user date in local storage
-                    localStorage["appState"] = JSON.stringify(appState);
-                    _this5.setState({
-                        isLoggedIn: appState.isLoggedIn,
-                        user: appState.user
-                    });
-                } else alert("Login Failed!");
-            }).catch(function (error) {
-                alert('An Error Occured! ' + error);
-            });
-        }
-    }, {
-        key: '_registerUser',
-        value: function _registerUser(name, email, password, rol_id, localidad_id) {
-            var _this6 = this;
-
-            var formData = new FormData();
-            formData.append("password", password);
-            formData.append("email", email);
-            formData.append("name", name);
-            formData.append("rol_id", rol_id);
-            formData.append("localidad_id", localidad_id);
-
-            __WEBPACK_IMPORTED_MODULE_11_axios___default.a.post("http://127.0.0.1:8000/api/user/register", formData).then(function (response) {
-                return response;
-            }).then(function (json) {
-                if (json.data.success) {
-                    alert('Registration Successful!');
-
-                    var userData = {
-                        name: json.data.data.name,
-                        id: json.data.data.id,
-                        email: json.data.data.email,
-                        auth_token: json.data.data.auth_token,
-                        rol_id: json.data.data.rol_id,
-                        localidad_id: json.data.data.localidad_id,
-                        timestamp: new Date().toString()
-                    };
-                    var appState = {
-                        isLoggedIn: true,
-                        user: userData
-                    };
-                    // save app state with user date in local storage
-                    localStorage["appState"] = JSON.stringify(appState);
-                    _this6.setState({
-                        isLoggedIn: appState.isLoggedIn,
-                        user: appState.user
-                    });
-                } else {
-                    alert('Registration Failed!');
-                    $("#email-login-btn").removeAttr("disabled").html("Register");
-                }
-            }).catch(function (error) {
-                alert("An Error Occured!" + error);
-                console.log(formData + ' ' + error);
-            });
-        }
-    }, {
-        key: 'traerLocalidades',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(idprovincia) {
-                var _this7 = this;
-
-                var url_pais;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                _context2.prev = 0;
-                                url_pais = 'http://127.0.0.1:8000/api/pais/provincia/' + idprovincia;
-                                _context2.next = 4;
-                                return fetch(url_pais).then(function (respuesta) {
-                                    return respuesta.json();
-                                }).then(function (localidades) {
-                                    _this7.setState({
-                                        localidades: localidades
-                                    });
-                                });
-
-                            case 4:
-                                _context2.next = 9;
-                                break;
-
-                            case 6:
-                                _context2.prev = 6;
-                                _context2.t0 = _context2['catch'](0);
-
-                                this.setState({
-                                    error: _context2.t0
-                                });
-
-                            case 9:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[0, 6]]);
-            }));
-
-            function traerLocalidades(_x2) {
-                return _ref2.apply(this, arguments);
+              case 15:
+              case 'end':
+                return _context3.stop();
             }
+          }
+        }, _callee3, this, [[0, 10]]);
+      }));
 
-            return traerLocalidades;
-        }()
-    }, {
-        key: '_logoutUser',
-        value: function _logoutUser() {
-            var appState = {
-                isLoggedIn: false,
-                user: {}
-            };
-            // save app state with user date in local storage
-            localStorage["appState"] = JSON.stringify(appState);
-            this.setState(appState);
-            console.log("Ejecuta desloguear desde el example");
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                var res, data, state, AppState;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                _context3.prev = 0;
-                                _context3.next = 3;
-                                return fetch('http://127.0.0.1:8000/api/paises/mostrar');
+      function componentDidMount() {
+        return _ref3.apply(this, arguments);
+      }
 
-                            case 3:
-                                res = _context3.sent;
-                                _context3.next = 6;
-                                return res.json();
+      return componentDidMount;
+    }()
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this10 = this;
 
-                            case 6:
-                                data = _context3.sent;
+      var isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
 
-                                this.setState({
-                                    paises: data
-                                });
-                                _context3.next = 13;
-                                break;
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* BrowserRouter */],
+        null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["e" /* Switch */],
+          null,
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
+            exact: true, path: '/register',
+            render: function render(props) {
+              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this10._registerUser, pais: _this10.state.paises, localidades: _this10.state.localidades, provincias: _this10.state.provincias, traerProvincias: _this10.traerProvincias, traerLocalidades: _this10.traerLocalidades }));
+            } }),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
+            exact: true, path: '/',
+            render: function render(props) {
+              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this10._loginUser }));
+            } }),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
+            exact: true, path: '/pais/provincia/:id',
+            render: function render(props) {
+              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this10.traerLocalidades, localidades: _this10.state.localidades, isAuthed: true, logOut: _this10._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+            } }),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
+            exact: true, path: '/pais/:id',
+            render: function render(props) {
+              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this10.traerProvincias, selectProvincia: _this10.selectProvincia, eliminarProvincia: _this10.eliminarProvincia, provincias: _this10.state.provincias, isAuthed: true, logOut: _this10._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+            } }),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
+            exact: true, path: '/paises',
+            render: function render(props) {
+              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this10.state.paises, edit_pais: _this10.editarPais, deletePais: _this10.deletePais, pais_selected: _this10.selectPais, traerUsuarios: _this10.traerUsuarios, userData: _this10.state.user.user, logOut: _this10._logoutUser }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+            } })
+        )
+      );
+    }
+  }]);
 
-                            case 10:
-                                _context3.prev = 10;
-                                _context3.t0 = _context3['catch'](0);
-
-                                this.setState({
-                                    error: _context3.t0
-                                });
-
-                            case 13:
-                                state = localStorage["appState"];
-
-                                if (state) {
-                                    AppState = JSON.parse(state);
-
-
-                                    this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState });
-                                }
-
-                            case 15:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this, [[0, 10]]);
-            }));
-
-            function componentDidMount() {
-                return _ref3.apply(this, arguments);
-            }
-
-            return componentDidMount;
-        }()
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this8 = this;
-
-            var isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
-
-            return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* BrowserRouter */],
-                null,
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["e" /* Switch */],
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
-                        exact: true, path: '/register',
-                        render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__log_Register__["a" /* default */], _extends({}, props, { _registerUser: _this8._registerUser, pais: _this8.state.paises, localidades: _this8.state.localidades, provincias: _this8.state.provincias, traerProvincias: _this8.traerProvincias, traerLocalidades: _this8.traerLocalidades }));
-                        } }),
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
-                        exact: true, path: '/',
-                        render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/paises' }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__log_Login__["a" /* default */], _extends({}, props, { _loginUser: _this8._loginUser }));
-                        } }),
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
-                        exact: true, path: '/pais/provincia/:id',
-                        render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LocalidadesList__["a" /* default */], _extends({}, props, { traerLocalidades: _this8.traerLocalidades, localidades: _this8.state.localidades, isAuthed: true, logOut: _this8._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
-                        } }),
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
-                        exact: true, path: '/pais/:id',
-                        render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this8.traerProvincias, provincias: _this8.state.provincias, isAuthed: true, logOut: _this8._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
-                        } }),
-                    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
-                        exact: true, path: '/paises',
-                        render: function render(props) {
-                            return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__PaisesList__["a" /* default */], { pais: _this8.state.paises, deletePais: _this8.deletePais, pais_selected: _this8.selectPais, traerUsuarios: _this8.traerUsuarios, userData: _this8.state.user.user, logOut: _this8._logoutUser }) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
-                        } })
-                )
-            );
-        }
-    }]);
-
-    return Example;
+  return Example;
 }(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Example);
 
 
 if (document.getElementById('example')) {
-    __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Example, null), document.getElementById('example'));
+  __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Example, null), document.getElementById('example'));
 }
 
 /***/ }),
@@ -15074,7 +15145,7 @@ if (typeof process !== 'undefined' && Object({"NODE_ENV":"development"}) && "dev
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(6);
+  ReactComponentTreeHook = __webpack_require__(7);
 }
 
 var loggedTypeFailures = {};
@@ -15116,7 +15187,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (true) {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(6);
+            ReactComponentTreeHook = __webpack_require__(7);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -17939,7 +18010,7 @@ module.exports = ReactOwner;
 
 var ReactInvalidSetStateWarningHook = __webpack_require__(136);
 var ReactHostOperationHistoryHook = __webpack_require__(137);
-var ReactComponentTreeHook = __webpack_require__(6);
+var ReactComponentTreeHook = __webpack_require__(7);
 var ExecutionEnvironment = __webpack_require__(5);
 
 var performanceNow = __webpack_require__(138);
@@ -21985,7 +22056,7 @@ if (typeof process !== 'undefined' && Object({"NODE_ENV":"development"}) && "dev
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(6);
+  ReactComponentTreeHook = __webpack_require__(7);
 }
 
 function instantiateChild(childInstances, child, name, selfDebugID) {
@@ -21993,7 +22064,7 @@ function instantiateChild(childInstances, child, name, selfDebugID) {
   var keyUnique = childInstances[name] === undefined;
   if (true) {
     if (!ReactComponentTreeHook) {
-      ReactComponentTreeHook = __webpack_require__(6);
+      ReactComponentTreeHook = __webpack_require__(7);
     }
     if (!keyUnique) {
        true ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -23045,7 +23116,7 @@ if (typeof process !== 'undefined' && Object({"NODE_ENV":"development"}) && "dev
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(6);
+  ReactComponentTreeHook = __webpack_require__(7);
 }
 
 var loggedTypeFailures = {};
@@ -23087,7 +23158,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
         if (true) {
           if (!ReactComponentTreeHook) {
-            ReactComponentTreeHook = __webpack_require__(6);
+            ReactComponentTreeHook = __webpack_require__(7);
           }
           if (debugID !== null) {
             componentStackInfo = ReactComponentTreeHook.getStackAddendumByID(debugID);
@@ -23252,7 +23323,7 @@ if (typeof process !== 'undefined' && Object({"NODE_ENV":"development"}) && "dev
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(6);
+  ReactComponentTreeHook = __webpack_require__(7);
 }
 
 /**
@@ -23268,7 +23339,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (true) {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(6);
+        ReactComponentTreeHook = __webpack_require__(7);
       }
       if (!keyUnique) {
          true ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
@@ -26292,7 +26363,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
 
 var DOMProperty = __webpack_require__(14);
 var EventPluginRegistry = __webpack_require__(30);
-var ReactComponentTreeHook = __webpack_require__(6);
+var ReactComponentTreeHook = __webpack_require__(7);
 
 var warning = __webpack_require__(1);
 
@@ -26405,7 +26476,7 @@ module.exports = ReactDOMUnknownPropertyHook;
 
 
 
-var ReactComponentTreeHook = __webpack_require__(6);
+var ReactComponentTreeHook = __webpack_require__(7);
 
 var warning = __webpack_require__(1);
 
@@ -26452,7 +26523,7 @@ module.exports = ReactDOMNullInputValuePropHook;
 
 
 var DOMProperty = __webpack_require__(14);
-var ReactComponentTreeHook = __webpack_require__(6);
+var ReactComponentTreeHook = __webpack_require__(7);
 
 var warning = __webpack_require__(1);
 
@@ -26537,7 +26608,7 @@ module.exports = ReactDOMInvalidARIAHook;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_inheritsLoose__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_inheritsLoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__babel_runtime_helpers_inheritsLoose__);
@@ -27454,14 +27525,15 @@ module.exports = hoistNonReactStatics;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Aside__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modals_DeleteCountry__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jquery__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modals_EditCountry__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_jquery__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27469,6 +27541,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -27489,15 +27562,11 @@ var PaisesList = function (_Component) {
 
 
 		_this.showModal = _this.showModal.bind(_this);
+		_this.showModalEdit = _this.showModalEdit.bind(_this);
 		return _this;
 	}
 
 	_createClass(PaisesList, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var id_paisDelete;
-		}
-	}, {
 		key: 'showModal',
 		value: function showModal(id_pais, e) {
 			e.preventDefault();
@@ -27505,6 +27574,15 @@ var PaisesList = function (_Component) {
 
 			var carrito = document.getElementById('m-delete-country');
 			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'showModalEdit',
+		value: function showModalEdit(id_pais, e) {
+			e.preventDefault();
+			this.props.pais_selected(id_pais);
+
+			var editar = document.getElementById('m-editar-country');
+			editar.classList.toggle("hide-modal");
 		}
 	}, {
 		key: 'render',
@@ -27515,6 +27593,7 @@ var PaisesList = function (_Component) {
 				'div',
 				null,
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__modals_DeleteCountry__["a" /* default */], { delete_pais: this.props.deletePais }),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__modals_EditCountry__["a" /* default */], { edit_pais: this.props.edit_pais }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], { userData: this.props.userData, logOut: this.props.logOut }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -27570,7 +27649,7 @@ var PaisesList = function (_Component) {
 											{ className: 'tx-right ' },
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												'a',
-												{ href: '#' },
+												{ href: '#', className: 'edit-country-class', onClick: _this2.showModalEdit.bind(null, pais.id) },
 												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-edit' })
 											),
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -27599,7 +27678,7 @@ var PaisesList = function (_Component) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -27679,6 +27758,103 @@ var DeleteCountry = function (_Component) {
 
 /***/ }),
 /* 221 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var EditCountry = function (_Component) {
+	_inherits(EditCountry, _Component);
+
+	function EditCountry(props) {
+		_classCallCheck(this, EditCountry);
+
+		var _this = _possibleConstructorReturn(this, (EditCountry.__proto__ || Object.getPrototypeOf(EditCountry)).call(this, props));
+
+		_this.hideModal = _this.hideModal.bind(_this);
+		_this.editPais = _this.editPais.bind(_this);
+		return _this;
+	}
+
+	_createClass(EditCountry, [{
+		key: 'editPais',
+		value: function editPais(e) {
+			e.preventDefault();
+			var nombre = this._nombrePais.value;
+			this.props.edit_pais(nombre);
+			var carrito = document.getElementById('m-editar-country');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'hideModal',
+		value: function hideModal(e) {
+			e.preventDefault();
+			var carrito = document.getElementById('m-editar-country');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'modal hide-modal', id: 'm-editar-country' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'content-modal' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h3',
+						null,
+						'Editar datos del pais'
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'btn-foot' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'form',
+							{ action: '', onSubmit: this.editPais },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+									return _this2._nombrePais = input;
+								}, placeholder: 'nombre del pais', className: 'auth-input' }),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								{ className: 'auth-foot' },
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'button',
+									{ type: 'submit', className: 'btn btn-active' },
+									'Guardar'
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'a',
+									{ href: '#', className: 'btn', onClick: this.hideModal },
+									'Cancelar'
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return EditCountry;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (EditCountry);
+
+/***/ }),
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -38283,15 +38459,17 @@ return jQuery;
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Aside__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modals_DeleteProvince__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modals_EditProvince__ = __webpack_require__(252);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38305,16 +38483,39 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
+
 var ProvinciasList = function (_Component) {
 	_inherits(ProvinciasList, _Component);
 
 	function ProvinciasList(props) {
 		_classCallCheck(this, ProvinciasList);
 
-		return _possibleConstructorReturn(this, (ProvinciasList.__proto__ || Object.getPrototypeOf(ProvinciasList)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ProvinciasList.__proto__ || Object.getPrototypeOf(ProvinciasList)).call(this, props));
+
+		_this.showModal = _this.showModal.bind(_this);
+		_this.showModalEdit = _this.showModalEdit.bind(_this);
+		return _this;
 	}
 
 	_createClass(ProvinciasList, [{
+		key: 'showModal',
+		value: function showModal(id_provincia, e) {
+			e.preventDefault();
+			this.props.selectProvincia(id_provincia);
+
+			var carrito = document.getElementById('m-delete-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'showModalEdit',
+		value: function showModalEdit(id_provincia, pais_id, e) {
+			e.preventDefault();
+			console.log("desde el showModaledit", pais_id, id_provincia);
+			var carrito = document.getElementById('m-edit-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			var _props = this.props,
@@ -38328,9 +38529,13 @@ var ProvinciasList = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__modals_DeleteProvince__["a" /* default */], { eliminarProvincia: this.props.eliminarProvincia }),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__modals_EditProvince__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], { userData: this.props.userData, logOut: this.props.logOut }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38386,12 +38591,12 @@ var ProvinciasList = function (_Component) {
 											{ className: 'tx-right ' },
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												'a',
-												{ href: '#' },
+												{ href: '#', onClick: _this2.showModalEdit.bind(null, provi.id, provi.pais_id) },
 												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-edit' })
 											),
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												'a',
-												{ href: '#', className: 'i-delete' },
+												{ href: '#', className: 'i-delete', onClick: _this2.showModal.bind(null, provi.id) },
 												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-trash-o' })
 											)
 										)
@@ -38418,11 +38623,11 @@ var ProvinciasList = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["f" /* withRouter */])(ProvinciasList));
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(37);
@@ -38542,11 +38747,11 @@ var LocalidadesList = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["f" /* withRouter */])(LocalidadesList));
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_logo_png__);
@@ -38662,11 +38867,11 @@ var Login = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Login);
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__static_logo_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__static_logo_png__);
@@ -38828,13 +39033,13 @@ var Login = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Login);
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(227);
+module.exports = __webpack_require__(228);
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38842,7 +39047,7 @@ module.exports = __webpack_require__(227);
 
 var utils = __webpack_require__(9);
 var bind = __webpack_require__(98);
-var Axios = __webpack_require__(229);
+var Axios = __webpack_require__(230);
 var defaults = __webpack_require__(60);
 
 /**
@@ -38877,14 +39082,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(102);
-axios.CancelToken = __webpack_require__(243);
+axios.CancelToken = __webpack_require__(244);
 axios.isCancel = __webpack_require__(101);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(244);
+axios.spread = __webpack_require__(245);
 
 module.exports = axios;
 
@@ -38893,7 +39098,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports) {
 
 /*!
@@ -38920,7 +39125,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38928,8 +39133,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(60);
 var utils = __webpack_require__(9);
-var InterceptorManager = __webpack_require__(238);
-var dispatchRequest = __webpack_require__(239);
+var InterceptorManager = __webpack_require__(239);
+var dispatchRequest = __webpack_require__(240);
 
 /**
  * Create a new instance of Axios
@@ -39006,7 +39211,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 230 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39025,7 +39230,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39058,7 +39263,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39086,7 +39291,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39161,7 +39366,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39221,7 +39426,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 235 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39296,7 +39501,7 @@ module.exports = (
 
 
 /***/ }),
-/* 236 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39339,7 +39544,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39399,7 +39604,7 @@ module.exports = (
 
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39458,18 +39663,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(9);
-var transformData = __webpack_require__(240);
+var transformData = __webpack_require__(241);
 var isCancel = __webpack_require__(101);
 var defaults = __webpack_require__(60);
-var isAbsoluteURL = __webpack_require__(241);
-var combineURLs = __webpack_require__(242);
+var isAbsoluteURL = __webpack_require__(242);
+var combineURLs = __webpack_require__(243);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -39551,7 +39756,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39578,7 +39783,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39599,7 +39804,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39620,7 +39825,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39684,7 +39889,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39718,10 +39923,194 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var DeleteProvince = function (_Component) {
+	_inherits(DeleteProvince, _Component);
+
+	function DeleteProvince(props) {
+		_classCallCheck(this, DeleteProvince);
+
+		var _this = _possibleConstructorReturn(this, (DeleteProvince.__proto__ || Object.getPrototypeOf(DeleteProvince)).call(this, props));
+
+		_this.hideModal = _this.hideModal.bind(_this);
+		_this.deleteProvincia = _this.deleteProvincia.bind(_this);
+		return _this;
+	}
+
+	_createClass(DeleteProvince, [{
+		key: 'deleteProvincia',
+		value: function deleteProvincia(e) {
+			e.preventDefault();
+			this.props.eliminarProvincia();
+			var carrito = document.getElementById('m-delete-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'hideModal',
+		value: function hideModal(e) {
+			e.preventDefault();
+			var carrito = document.getElementById('m-delete-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'modal hide-modal', id: 'm-delete-province' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'content-modal' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h3',
+						null,
+						'\xBF Deseas eliminar esta provincia?'
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'btn-foot' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'a',
+							{ href: '#', className: 'btn btn-active', onClick: this.deleteProvincia },
+							'Si'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'a',
+							{ href: '#', className: 'btn', onClick: this.hideModal },
+							'No'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return DeleteProvince;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (DeleteProvince);
+
+/***/ }),
+/* 252 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var EditProvince = function (_Component) {
+	_inherits(EditProvince, _Component);
+
+	function EditProvince(props) {
+		_classCallCheck(this, EditProvince);
+
+		var _this = _possibleConstructorReturn(this, (EditProvince.__proto__ || Object.getPrototypeOf(EditProvince)).call(this, props));
+
+		_this.hideModal = _this.hideModal.bind(_this);
+		_this.editProvince = _this.editProvince.bind(_this);
+		return _this;
+	}
+
+	_createClass(EditProvince, [{
+		key: 'editProvince',
+		value: function editProvince(e) {
+			e.preventDefault();
+			var nombre = this._nombreProvincia.value;
+			this.props.edit_provincia(nombre);
+			var carrito = document.getElementById('m-edit-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'hideModal',
+		value: function hideModal(e) {
+			e.preventDefault();
+			var carrito = document.getElementById('m-edit-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'modal hide-modal', id: 'm-edit-province' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'content-modal' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h3',
+						null,
+						'Editar datos de la provincia'
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'btn-foot' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'form',
+							{ action: '', onSubmit: this.editProvince },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+									return _this2._nombreProvincia = input;
+								}, placeholder: 'nombre de la provincia', className: 'auth-input' }),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								{ className: 'auth-foot' },
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'button',
+									{ type: 'submit', className: 'btn btn-active' },
+									'Guardar'
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'a',
+									{ href: '#', className: 'btn', onClick: this.hideModal },
+									'Cancelar'
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return EditProvince;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (EditProvince);
 
 /***/ })
 /******/ ]);

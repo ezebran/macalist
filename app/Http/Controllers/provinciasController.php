@@ -16,4 +16,20 @@ class provinciasController extends Controller
 
     	return response()->json($provincias, 201);
     }
+
+    public function eliminarProvincia(Request $request){
+
+    	DB::table('provincias')
+    	->where('id', '=', $request->id_provincia)
+    	->delete();
+    }
+
+    public function editarProvincia(Request $request){
+    	DB::table('provincias')
+    	->where('id', '=', $request->id_provincia)
+    	->update([
+    		'nombre' => $request->nombre,
+    		'pais_id' => $request->pais_id,
+    	]);
+    }
 }

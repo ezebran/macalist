@@ -22,4 +22,11 @@ class paisesController extends Controller
     	->where('id', '=', $request->id_pais)
     	->delete();
     }
+
+    public function editarPais(Request $request){
+
+    	DB::table('paises')
+    	->where('id', '=', $request->id_pais)
+    	->update(['nombre' => $request->nombre]);
+    }
 }

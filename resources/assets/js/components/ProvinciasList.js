@@ -2,11 +2,31 @@ import React,{ Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import Header from './Header';
 import Aside from './Aside';
+import DeleteProvince from './modals/DeleteProvince';
+import EditProvince from './modals/EditProvince';
+
 
 class ProvinciasList extends Component{
 
 	constructor(props){
 		super(props)
+		this.showModal = this.showModal.bind(this);
+		this.showModalEdit = this.showModalEdit.bind(this);
+	}
+
+	showModal(id_provincia, e){
+		e.preventDefault();
+		this.props.selectProvincia(id_provincia)
+
+		let carrito = document.getElementById('m-delete-province');
+		carrito.classList.toggle("hide-modal");
+	}
+
+	showModalEdit( id_provincia , pais_id , e){
+		e.preventDefault();
+		console.log("desde el showModaledit", pais_id ,id_provincia)
+		let carrito = document.getElementById('m-edit-province');
+		carrito.classList.toggle("hide-modal");
 	}
 
 	componentDidMount(){
@@ -18,6 +38,8 @@ class ProvinciasList extends Component{
 	render(){
 		return(
 			<div>
+				<DeleteProvince eliminarProvincia = {this.props.eliminarProvincia} />
+				<EditProvince />
 				<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 				<Aside />
 				<section className="home">
@@ -39,8 +61,8 @@ class ProvinciasList extends Component{
 										<td><Link to={"/pais/provincia/" + provi.id} >{provi.nombre}</Link></td>
 
 										<td className="tx-right ">
-											<a href="#"><span className="icon-edit"></span></a>
-											<a href="#" className="i-delete"><span className="icon-trash-o"></span></a>
+											<a href="#" onClick={this.showModalEdit.bind(null, provi.id, provi.pais_id)}><span className="icon-edit"></span></a>
+											<a href="#" className="i-delete" onClick={this.showModal.bind(null, provi.id)}><span className="icon-trash-o"></span></a>
 										</td>
 									</tr>
 								))

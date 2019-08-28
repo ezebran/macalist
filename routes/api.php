@@ -46,6 +46,12 @@ Route::get('/paises/mostrar','paisesController@mostrarPaises');
 
 Route::post('/pais/eliminar','paisesController@eliminarPais');
 
+Route::post('/provincia/eliminar','provinciasController@eliminarProvincia');
+
+Route::post('/provincia/editar','provinciasController@editarProvincia');
+
+Route::post('/pais/editar','paisesController@editarPais');
+
 Route::get('/pais/{id}','provinciasController@mostrarProvincias');
 
 Route::get('/pais/provincia/{id}','localidadesController@mostrarLocalidades');

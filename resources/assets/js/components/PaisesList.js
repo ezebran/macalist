@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import Header from './Header';
 import Aside from './Aside';
 import DeleteCountry from './modals/DeleteCountry';
+import EditCountry from './modals/EditCountry';
 import $ from "jquery";
 
 class PaisesList extends Component{
@@ -11,11 +12,9 @@ class PaisesList extends Component{
     const { history } = props;
 
     this.showModal = this.showModal.bind(this);
+    this.showModalEdit = this.showModalEdit.bind(this);
   }
 
-  	componentDidMount(){
-  		var id_paisDelete;
-  	}
 
 	showModal(id_pais, e){
 		e.preventDefault();
@@ -25,10 +24,19 @@ class PaisesList extends Component{
 		carrito.classList.toggle("hide-modal");
 	}
 
+	showModalEdit(id_pais, e){
+		e.preventDefault();
+		this.props.pais_selected(id_pais)
+
+		let editar = document.getElementById('m-editar-country');
+		editar.classList.toggle("hide-modal");
+	}
+
 	render(){
 		return(
 			<div>
 			<DeleteCountry delete_pais = {this.props.deletePais} />
+			<EditCountry edit_pais = {this.props.edit_pais} />
 			<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 			<Aside />
 			<section className="home">
@@ -50,7 +58,7 @@ class PaisesList extends Component{
 									<td><Link to={"/pais/" + pais.id} >{pais.nombre}</Link></td>
 
 									<td className="tx-right ">
-										<a href="#"  ><span className="icon-edit"></span></a>
+										<a href="#" className="edit-country-class" onClick={this.showModalEdit.bind(null, pais.id)} ><span className="icon-edit"></span></a>
 										<a href="#" className="i-delete" onClick={this.showModal.bind(null, pais.id)} id={pais.id}><span className="icon-trash-o"></span></a>
 									</td>
 								</tr>
