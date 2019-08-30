@@ -13,8 +13,13 @@ class PaisesList extends Component{
 
     this.showModal = this.showModal.bind(this);
     this.showModalEdit = this.showModalEdit.bind(this);
+    this.selectPais = this.selectPais.bind(this);
   }
 
+  	selectPais(id_pais, e){
+		// e.preventDefault();
+		this.props.pais_selected(id_pais)
+  	}
 
 	showModal(id_pais, e){
 		e.preventDefault();
@@ -55,7 +60,7 @@ class PaisesList extends Component{
 							
 							this.props.pais.map(pais => (
 								<tr key={pais.id}>
-									<td><Link to={"/pais/" + pais.id} >{pais.nombre}</Link></td>
+									<td><Link to={"/pais/" + pais.id} onClick={this.selectPais.bind(null, pais.id)} >{pais.nombre}</Link></td>
 
 									<td className="tx-right ">
 										<a href="#" className="edit-country-class" onClick={this.showModalEdit.bind(null, pais.id)} ><span className="icon-edit"></span></a>

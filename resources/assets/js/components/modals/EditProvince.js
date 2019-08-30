@@ -5,12 +5,14 @@ class EditProvince extends Component{
 		super(props);
 		this.hideModal = this.hideModal.bind(this);
 		this.editProvince = this.editProvince.bind(this);
+
 	}
 
 	editProvince(e){
 		e.preventDefault();
 		let nombre = this._nombreProvincia.value;
-		this.props.edit_provincia(nombre);
+		let pais = this._pais.value;
+		this.props.editarProvincia(pais, nombre);
 		let carrito = document.getElementById('m-edit-province');
 		carrito.classList.toggle("hide-modal");
 	}
@@ -29,6 +31,17 @@ class EditProvince extends Component{
 					<div className="btn-foot">
 						<form action="" onSubmit={this.editProvince} >
 							<input type="text" ref={input => (this._nombreProvincia = input)} placeholder="nombre de la provincia" className="auth-input" />
+							
+							<select name="" className="auth-input" ref={input => (this._pais = input)}>
+
+								{
+									this.props.paises.map(pais => (
+											<option key={pais.id} value={pais.id} >{pais.nombre}</option>
+										)
+									)
+								}
+							</select>
+
 							<div className="auth-foot">
 								<button type="submit" className="btn btn-active">
 					                Guardar

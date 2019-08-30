@@ -345,7 +345,7 @@ export default class Example extends Component {
                     <Route 
                         exact path="/pais/:id"
                         render={(props) => isLoggedIn ?
-                            <ProvinciasList {...props} traerProvincias = {this.traerProvincias} selectProvincia = {this.selectProvincia} eliminarProvincia = {this.eliminarProvincia} provincias = {this.state.provincias} isAuthed={true} logOut = { this._logoutUser } />
+                            <ProvinciasList {...props} traerProvincias = {this.traerProvincias} editarProvincia = {this.editarProvincia} paises = {this.state.paises} provincia_selected = {this.state.provincia_selected} pais_selected = {this.state.pais_selected} eliminarProvincia = {this.eliminarProvincia} selectProvincia = {this.selectProvincia} provincias = {this.state.provincias} isAuthed={true} logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                     
                     <Route 

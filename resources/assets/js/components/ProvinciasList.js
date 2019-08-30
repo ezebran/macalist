@@ -24,6 +24,7 @@ class ProvinciasList extends Component{
 
 	showModalEdit( id_provincia , pais_id , e){
 		e.preventDefault();
+		this.props.selectProvincia(id_provincia)
 		console.log("desde el showModaledit", pais_id ,id_provincia)
 		let carrito = document.getElementById('m-edit-province');
 		carrito.classList.toggle("hide-modal");
@@ -31,7 +32,6 @@ class ProvinciasList extends Component{
 
 	componentDidMount(){
 		const { history, location, match } = this.props;
-
 		this.props.traerProvincias(match.params.id);
 	}
 
@@ -39,7 +39,7 @@ class ProvinciasList extends Component{
 		return(
 			<div>
 				<DeleteProvince eliminarProvincia = {this.props.eliminarProvincia} />
-				<EditProvince />
+				<EditProvince pais_selected = {this.props.pais_selected} paises = {this.props.paises} editarProvincia = {this.props.editarProvincia}/>
 				<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 				<Aside />
 				<section className="home">

@@ -993,7 +993,7 @@ module.exports = { debugTool: debugTool };
 
 
 var bind = __webpack_require__(98);
-var isBuffer = __webpack_require__(229);
+var isBuffer = __webpack_require__(231);
 
 /*global toString:true*/
 
@@ -7303,7 +7303,7 @@ module.exports = "/images/logo.png?c3c38d8fa6fcb3059bc8c156449f60f5";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(9);
-var normalizeHeaderName = __webpack_require__(231);
+var normalizeHeaderName = __webpack_require__(233);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -12841,12 +12841,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(9);
-var settle = __webpack_require__(232);
-var buildURL = __webpack_require__(234);
-var parseHeaders = __webpack_require__(235);
-var isURLSameOrigin = __webpack_require__(236);
+var settle = __webpack_require__(234);
+var buildURL = __webpack_require__(236);
+var parseHeaders = __webpack_require__(237);
+var isURLSameOrigin = __webpack_require__(238);
 var createError = __webpack_require__(100);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(237);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(239);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -12943,7 +12943,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(238);
+      var cookies = __webpack_require__(240);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13027,7 +13027,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(233);
+var enhanceError = __webpack_require__(235);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13088,7 +13088,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(104);
-module.exports = __webpack_require__(246);
+module.exports = __webpack_require__(248);
 
 
 /***/ }),
@@ -13129,10 +13129,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Aside__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__PaisesList__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ProvinciasList__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LocalidadesList__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__log_Login__ = __webpack_require__(225);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__log_Register__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LocalidadesList__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__log_Login__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__log_Register__ = __webpack_require__(228);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_axios__);
 
 
@@ -13589,7 +13589,7 @@ var Example = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
             exact: true, path: '/pais/:id',
             render: function render(props) {
-              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this10.traerProvincias, selectProvincia: _this10.selectProvincia, eliminarProvincia: _this10.eliminarProvincia, provincias: _this10.state.provincias, isAuthed: true, logOut: _this10._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
+              return isLoggedIn ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__ProvinciasList__["a" /* default */], _extends({}, props, { traerProvincias: _this10.traerProvincias, editarProvincia: _this10.editarProvincia, paises: _this10.state.paises, provincia_selected: _this10.state.provincia_selected, pais_selected: _this10.state.pais_selected, eliminarProvincia: _this10.eliminarProvincia, selectProvincia: _this10.selectProvincia, provincias: _this10.state.provincias, isAuthed: true, logOut: _this10._logoutUser })) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Redirect */], { to: '/' });
             } }),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], {
             exact: true, path: '/paises',
@@ -27563,10 +27563,17 @@ var PaisesList = function (_Component) {
 
 		_this.showModal = _this.showModal.bind(_this);
 		_this.showModalEdit = _this.showModalEdit.bind(_this);
+		_this.selectPais = _this.selectPais.bind(_this);
 		return _this;
 	}
 
 	_createClass(PaisesList, [{
+		key: 'selectPais',
+		value: function selectPais(id_pais, e) {
+			// e.preventDefault();
+			this.props.pais_selected(id_pais);
+		}
+	}, {
 		key: 'showModal',
 		value: function showModal(id_pais, e) {
 			e.preventDefault();
@@ -27640,7 +27647,7 @@ var PaisesList = function (_Component) {
 											null,
 											__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 												__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
-												{ to: "/pais/" + pais.id },
+												{ to: "/pais/" + pais.id, onClick: _this2.selectPais.bind(null, pais.id) },
 												pais.nombre
 											)
 										),
@@ -38468,8 +38475,8 @@ return jQuery;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Aside__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modals_DeleteProvince__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modals_EditProvince__ = __webpack_require__(252);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modals_DeleteProvince__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modals_EditProvince__ = __webpack_require__(225);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38511,6 +38518,7 @@ var ProvinciasList = function (_Component) {
 		key: 'showModalEdit',
 		value: function showModalEdit(id_provincia, pais_id, e) {
 			e.preventDefault();
+			this.props.selectProvincia(id_provincia);
 			console.log("desde el showModaledit", pais_id, id_provincia);
 			var carrito = document.getElementById('m-edit-province');
 			carrito.classList.toggle("hide-modal");
@@ -38523,7 +38531,6 @@ var ProvinciasList = function (_Component) {
 			    location = _props.location,
 			    match = _props.match;
 
-
 			this.props.traerProvincias(match.params.id);
 		}
 	}, {
@@ -38535,7 +38542,7 @@ var ProvinciasList = function (_Component) {
 				'div',
 				null,
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__modals_DeleteProvince__["a" /* default */], { eliminarProvincia: this.props.eliminarProvincia }),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__modals_EditProvince__["a" /* default */], null),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__modals_EditProvince__["a" /* default */], { pais_selected: this.props.pais_selected, paises: this.props.paises, editarProvincia: this.props.editarProvincia }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header__["a" /* default */], { userData: this.props.userData, logOut: this.props.logOut }),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Aside__["a" /* default */], null),
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38624,6 +38631,201 @@ var ProvinciasList = function (_Component) {
 
 /***/ }),
 /* 224 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var DeleteProvince = function (_Component) {
+	_inherits(DeleteProvince, _Component);
+
+	function DeleteProvince(props) {
+		_classCallCheck(this, DeleteProvince);
+
+		var _this = _possibleConstructorReturn(this, (DeleteProvince.__proto__ || Object.getPrototypeOf(DeleteProvince)).call(this, props));
+
+		_this.hideModal = _this.hideModal.bind(_this);
+		_this.deleteProvincia = _this.deleteProvincia.bind(_this);
+		return _this;
+	}
+
+	_createClass(DeleteProvince, [{
+		key: 'deleteProvincia',
+		value: function deleteProvincia(e) {
+			e.preventDefault();
+			this.props.eliminarProvincia();
+			var carrito = document.getElementById('m-delete-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'hideModal',
+		value: function hideModal(e) {
+			e.preventDefault();
+			var carrito = document.getElementById('m-delete-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'modal hide-modal', id: 'm-delete-province' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'content-modal' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h3',
+						null,
+						'\xBF Deseas eliminar esta provincia?'
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'btn-foot' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'a',
+							{ href: '#', className: 'btn btn-active', onClick: this.deleteProvincia },
+							'Si'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'a',
+							{ href: '#', className: 'btn', onClick: this.hideModal },
+							'No'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return DeleteProvince;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (DeleteProvince);
+
+/***/ }),
+/* 225 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var EditProvince = function (_Component) {
+	_inherits(EditProvince, _Component);
+
+	function EditProvince(props) {
+		_classCallCheck(this, EditProvince);
+
+		var _this = _possibleConstructorReturn(this, (EditProvince.__proto__ || Object.getPrototypeOf(EditProvince)).call(this, props));
+
+		_this.hideModal = _this.hideModal.bind(_this);
+		_this.editProvince = _this.editProvince.bind(_this);
+
+		return _this;
+	}
+
+	_createClass(EditProvince, [{
+		key: 'editProvince',
+		value: function editProvince(e) {
+			e.preventDefault();
+			var nombre = this._nombreProvincia.value;
+			var pais = this._pais.value;
+			this.props.editarProvincia(pais, nombre);
+			var carrito = document.getElementById('m-edit-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'hideModal',
+		value: function hideModal(e) {
+			e.preventDefault();
+			var carrito = document.getElementById('m-edit-province');
+			carrito.classList.toggle("hide-modal");
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'div',
+				{ className: 'modal hide-modal', id: 'm-edit-province' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'content-modal' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'h3',
+						null,
+						'Editar datos de la provincia'
+					),
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'div',
+						{ className: 'btn-foot' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'form',
+							{ action: '', onSubmit: this.editProvince },
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
+									return _this2._nombreProvincia = input;
+								}, placeholder: 'nombre de la provincia', className: 'auth-input' }),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'select',
+								{ name: '', className: 'auth-input', ref: function ref(input) {
+										return _this2._pais = input;
+									} },
+								this.props.paises.map(function (pais) {
+									return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										'option',
+										{ key: pais.id, value: pais.id },
+										pais.nombre
+									);
+								})
+							),
+							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								'div',
+								{ className: 'auth-foot' },
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'button',
+									{ type: 'submit', className: 'btn btn-active' },
+									'Guardar'
+								),
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+									'a',
+									{ href: '#', className: 'btn', onClick: this.hideModal },
+									'Cancelar'
+								)
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return EditProvince;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (EditProvince);
+
+/***/ }),
+/* 226 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38747,7 +38949,7 @@ var LocalidadesList = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["f" /* withRouter */])(LocalidadesList));
 
 /***/ }),
-/* 225 */
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38867,7 +39069,7 @@ var Login = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Login);
 
 /***/ }),
-/* 226 */
+/* 228 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39033,13 +39235,13 @@ var Login = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Login);
 
 /***/ }),
-/* 227 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(228);
+module.exports = __webpack_require__(230);
 
 /***/ }),
-/* 228 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39047,7 +39249,7 @@ module.exports = __webpack_require__(228);
 
 var utils = __webpack_require__(9);
 var bind = __webpack_require__(98);
-var Axios = __webpack_require__(230);
+var Axios = __webpack_require__(232);
 var defaults = __webpack_require__(60);
 
 /**
@@ -39082,14 +39284,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(102);
-axios.CancelToken = __webpack_require__(244);
+axios.CancelToken = __webpack_require__(246);
 axios.isCancel = __webpack_require__(101);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(245);
+axios.spread = __webpack_require__(247);
 
 module.exports = axios;
 
@@ -39098,7 +39300,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 229 */
+/* 231 */
 /***/ (function(module, exports) {
 
 /*!
@@ -39125,7 +39327,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 230 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39133,8 +39335,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(60);
 var utils = __webpack_require__(9);
-var InterceptorManager = __webpack_require__(239);
-var dispatchRequest = __webpack_require__(240);
+var InterceptorManager = __webpack_require__(241);
+var dispatchRequest = __webpack_require__(242);
 
 /**
  * Create a new instance of Axios
@@ -39211,7 +39413,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 231 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39230,7 +39432,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 232 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39263,7 +39465,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 233 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39291,7 +39493,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 234 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39366,7 +39568,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 235 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39426,7 +39628,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 236 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39501,7 +39703,7 @@ module.exports = (
 
 
 /***/ }),
-/* 237 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39544,7 +39746,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 238 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39604,7 +39806,7 @@ module.exports = (
 
 
 /***/ }),
-/* 239 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39663,18 +39865,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 240 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(9);
-var transformData = __webpack_require__(241);
+var transformData = __webpack_require__(243);
 var isCancel = __webpack_require__(101);
 var defaults = __webpack_require__(60);
-var isAbsoluteURL = __webpack_require__(242);
-var combineURLs = __webpack_require__(243);
+var isAbsoluteURL = __webpack_require__(244);
+var combineURLs = __webpack_require__(245);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -39756,7 +39958,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 241 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39783,7 +39985,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 242 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39804,7 +40006,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 243 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39825,7 +40027,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 244 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39889,7 +40091,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 245 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39923,194 +40125,10 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 246 */
+/* 248 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var DeleteProvince = function (_Component) {
-	_inherits(DeleteProvince, _Component);
-
-	function DeleteProvince(props) {
-		_classCallCheck(this, DeleteProvince);
-
-		var _this = _possibleConstructorReturn(this, (DeleteProvince.__proto__ || Object.getPrototypeOf(DeleteProvince)).call(this, props));
-
-		_this.hideModal = _this.hideModal.bind(_this);
-		_this.deleteProvincia = _this.deleteProvincia.bind(_this);
-		return _this;
-	}
-
-	_createClass(DeleteProvince, [{
-		key: 'deleteProvincia',
-		value: function deleteProvincia(e) {
-			e.preventDefault();
-			this.props.eliminarProvincia();
-			var carrito = document.getElementById('m-delete-province');
-			carrito.classList.toggle("hide-modal");
-		}
-	}, {
-		key: 'hideModal',
-		value: function hideModal(e) {
-			e.preventDefault();
-			var carrito = document.getElementById('m-delete-province');
-			carrito.classList.toggle("hide-modal");
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				{ className: 'modal hide-modal', id: 'm-delete-province' },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ className: 'content-modal' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'h3',
-						null,
-						'\xBF Deseas eliminar esta provincia?'
-					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'div',
-						{ className: 'btn-foot' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'a',
-							{ href: '#', className: 'btn btn-active', onClick: this.deleteProvincia },
-							'Si'
-						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'a',
-							{ href: '#', className: 'btn', onClick: this.hideModal },
-							'No'
-						)
-					)
-				)
-			);
-		}
-	}]);
-
-	return DeleteProvince;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (DeleteProvince);
-
-/***/ }),
-/* 252 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-var EditProvince = function (_Component) {
-	_inherits(EditProvince, _Component);
-
-	function EditProvince(props) {
-		_classCallCheck(this, EditProvince);
-
-		var _this = _possibleConstructorReturn(this, (EditProvince.__proto__ || Object.getPrototypeOf(EditProvince)).call(this, props));
-
-		_this.hideModal = _this.hideModal.bind(_this);
-		_this.editProvince = _this.editProvince.bind(_this);
-		return _this;
-	}
-
-	_createClass(EditProvince, [{
-		key: 'editProvince',
-		value: function editProvince(e) {
-			e.preventDefault();
-			var nombre = this._nombreProvincia.value;
-			this.props.edit_provincia(nombre);
-			var carrito = document.getElementById('m-edit-province');
-			carrito.classList.toggle("hide-modal");
-		}
-	}, {
-		key: 'hideModal',
-		value: function hideModal(e) {
-			e.preventDefault();
-			var carrito = document.getElementById('m-edit-province');
-			carrito.classList.toggle("hide-modal");
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
-
-			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				{ className: 'modal hide-modal', id: 'm-edit-province' },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ className: 'content-modal' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'h3',
-						null,
-						'Editar datos de la provincia'
-					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'div',
-						{ className: 'btn-foot' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'form',
-							{ action: '', onSubmit: this.editProvince },
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: function ref(input) {
-									return _this2._nombreProvincia = input;
-								}, placeholder: 'nombre de la provincia', className: 'auth-input' }),
-							__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-								'div',
-								{ className: 'auth-foot' },
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'button',
-									{ type: 'submit', className: 'btn btn-active' },
-									'Guardar'
-								),
-								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-									'a',
-									{ href: '#', className: 'btn', onClick: this.hideModal },
-									'Cancelar'
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	}]);
-
-	return EditProvince;
-}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-
-/* harmony default export */ __webpack_exports__["a"] = (EditProvince);
 
 /***/ })
 /******/ ]);
