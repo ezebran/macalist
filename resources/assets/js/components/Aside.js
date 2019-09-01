@@ -1,4 +1,5 @@
 import React,{ Component } from 'react';
+import { Link } from "react-router-dom";
 
 class Aside extends Component{
 	render(){
@@ -8,12 +9,12 @@ class Aside extends Component{
 				<li>
 					<a href="#">
 						<span className="icon-user-o">
-						</span>USERS</a>
+						</span>USUARIOS</a>
 				</li>
 				<li>
-					<a href="#">
+					<Link to={"/paises"}>
 					<span className="icon-map-o">
-					</span>LOCATIONS</a>
+					</span>PAISES</Link>
 				</li>
 			</ul>
 		</aside>

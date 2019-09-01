@@ -45,7 +45,7 @@ class ProvinciasList extends Component{
 				<section className="home">
 
 					<main>
-						<h1>Location list</h1>
+						<h1>Listado de provincias</h1>
 						<table className="w-50">
 							<thead>
 								<tr>

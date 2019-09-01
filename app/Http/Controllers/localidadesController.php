@@ -16,4 +16,19 @@ class localidadesController extends Controller
 
     	return response()->json($localidades, 201);
     }
+
+    public function eliminarLocalidad(Request $request){
+    	DB::table('localidades')
+    	->where('id', '=', $request->id_localidad)
+    	->delete();
+    }
+
+    public function editarLocalidad(Request $request){
+    	DB::table('localidades')
+    	->where('id', '=', $request->id_localidad)
+    	->update([
+    		'nombre' => $request->nombre,
+    		'provincia_id' => $request->provincia_id,
+    	]);
+    }
 }

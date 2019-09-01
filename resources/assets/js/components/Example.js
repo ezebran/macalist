@@ -36,12 +36,36 @@ export default class Example extends Component {
         this._registerUser = this._registerUser.bind(this);
         this._logoutUser = this._logoutUser.bind(this);
         this.traerUsuarios = this.traerUsuarios.bind(this);
+
         this.selectPais = this.selectPais.bind(this);
         this.deletePais = this.deletePais.bind(this);
         this.editarPais = this.editarPais.bind(this);
+
         this.eliminarProvincia = this.eliminarProvincia.bind(this);
         this.selectProvincia = this.selectProvincia.bind(this);
         this.editarProvincia = this.editarProvincia.bind(this);
+
+        this.selectLocalidad = this.selectLocalidad.bind(this);
+        this.eliminarLocalidad = this.eliminarLocalidad.bind(this);
+        this.editarLocalidad = this.editarLocalidad.bind(this);
+    }
+
+    selectLocalidad(id_localidad){
+      this.setState({
+        localidad_selected: id_localidad
+      })
+    }
+
+    selectPais(id_pais){
+      this.setState({
+        pais_selected: id_pais
+      });
+    }
+
+    selectProvincia(id_provincia){
+      this.setState({
+        provincia_selected: id_provincia
+      });
     }
 
     _loginUser(email, password){
@@ -162,17 +186,6 @@ export default class Example extends Component {
           });
     }
     
-    selectPais(id_pais){
-      this.setState({
-        pais_selected: id_pais
-      });
-    }
-
-    selectProvincia(id_provincia){
-      this.setState({
-        provincia_selected: id_provincia
-      });
-    }
 
     async traerProvincias(idpais){
  
@@ -218,6 +231,10 @@ export default class Example extends Component {
         });
     }
 
+    editarLocalidad(){
+      console.log("editar localidad desde el example")
+    }
+
     editarProvincia(pais_id , nombre){
       var formData = new FormData();
       formData.append("id_provincia", this.state.provincia_selected);
@@ -225,27 +242,23 @@ export default class Example extends Component {
       formData.append("nombre", nombre);
 
       console.log("Valores que se ejecutan desde example" ,pais_id , nombre)
-    }
 
-    editarPais(nombre){
-      var formData = new FormData();
-      formData.append("id_pais", this.state.pais_selected);
-      formData.append("nombre", nombre);
-
-      //Editamos el pais en el state
-      let paisesTemp = this.state.paises;
-      paisesTemp.map(pais => {
-        if(pais.id == this.state.pais_selected){
-          pais.nombre = nombre;
+      //Editamos la provincia en el state
+      let provinciaTemp = this.state.provincias;
+      provinciaTemp.map(provi => {
+        if(provi.id == this.state.provincia_selected){
+          provi.nombre = nombre;
+          provi.pais_id = pais_id;
         }
       })
+
       this.setState({
-        paises: paisesTemp
+        provincias: provinciaTemp
       })
-      
+
       //Enviamos los datos por post
       axios
-        .post("http://127.0.0.1:8000/api/pais/editar/",formData)
+        .post("http://127.0.0.1:8000/api/provincia/editar/",formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo editar el pais! ${error}`);
         });
@@ -272,6 +285,54 @@ export default class Example extends Component {
           alert(`Un error ocurrio, no se pudo eliminar el pais! ${error}`);
         });
     }
+
+    editarPais(nombre){
+      var formData = new FormData();
+      formData.append("id_pais", this.state.pais_selected);
+      formData.append("nombre", nombre);
+
+      //Editamos el pais en el state
+      let paisesTemp = this.state.paises;
+      paisesTemp.map(pais => {
+        if(pais.id == this.state.pais_selected){
+          pais.nombre = nombre;
+        }
+      })
+      this.setState({
+        paises: paisesTemp
+      })
+      
+      //Enviamos los datos por post
+      axios
+        .post("http://127.0.0.1:8000/api/pais/editar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo editar el pais! ${error}`);
+        });
+    }
+
+    eliminarLocalidad(){
+      var formData = new FormData();
+      formData.append("id_pais", this.state.localidad_selected);
+
+      //Eliminamos la localidad del state
+      let sinLaLocalidad = []
+      this.state.localidades.map(localidad => {
+        if(localidad.id != this.state.localidad_selected){
+          sinLaLocalidad.push(localidad)
+        }
+      })
+      this.setState({
+        localidades : sinLaLocalidad
+      })
+
+      axios
+        .post("http://127.0.0.1:8000/api/localidad/eliminar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo eliminar la localidad! ${error}`);
+        });
+    }
+
+
 
     async traerLocalidades(idprovincia){
 
@@ -339,7 +400,7 @@ export default class Example extends Component {
                     <Route 
                         exact path="/pais/provincia/:id"
                         render={(props) => isLoggedIn ? 
-                            <LocalidadesList {...props} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
+                            <LocalidadesList {...props} selectLocalidad = {this.selectLocalidad} eliminarLocalidad = {this.eliminarLocalidad} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                     
                     <Route 
