@@ -4,6 +4,7 @@ import Header from './Header';
 import Aside from './Aside';
 import DeleteCountry from './modals/DeleteCountry';
 import EditCountry from './modals/EditCountry';
+import AddCountry from './modals/AddCountry';
 import $ from "jquery";
 
 class PaisesList extends Component{
@@ -14,6 +15,7 @@ class PaisesList extends Component{
     this.showModal = this.showModal.bind(this);
     this.showModalEdit = this.showModalEdit.bind(this);
     this.selectPais = this.selectPais.bind(this);
+    this.showModalAdd = this.showModalAdd.bind(this);
   }
 
   	selectPais(id_pais, e){
@@ -37,9 +39,17 @@ class PaisesList extends Component{
 		editar.classList.toggle("hide-modal");
 	}
 
+	showModalAdd(e){
+		e.preventDefault();
+
+		let carrito = document.getElementById('m-add-country');
+		carrito.classList.toggle("hide-modal");
+	}
+
 	render(){
 		return(
 			<div>
+			<AddCountry add_pais = {this.props.add_pais} />
 			<DeleteCountry delete_pais = {this.props.deletePais} />
 			<EditCountry edit_pais = {this.props.edit_pais} />
 			<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
@@ -48,6 +58,7 @@ class PaisesList extends Component{
 
 				<main>
 					<h1>Listado de paises</h1>
+					<a className="btn btn-active mb-btn" href="#" onClick={this.showModalAdd}>Agregar un pais</a>
 					<table className="w-50">
 						<thead>
 							<tr>

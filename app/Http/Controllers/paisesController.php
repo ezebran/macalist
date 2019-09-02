@@ -29,4 +29,14 @@ class paisesController extends Controller
     	->where('id', '=', $request->id_pais)
     	->update(['nombre' => $request->nombre]);
     }
+
+    public function agregarPais(Request $request){
+        DB::table('paises')
+        ->insert([
+            'id' => null,
+            'nombre' => $request->nombre,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+    }
 }

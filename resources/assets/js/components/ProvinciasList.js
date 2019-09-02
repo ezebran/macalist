@@ -46,6 +46,7 @@ class ProvinciasList extends Component{
 
 					<main>
 						<h1>Listado de provincias</h1>
+						<a className="btn btn-active mb-btn" href="#">Agregar una provincia</a>
 						<table className="w-50">
 							<thead>
 								<tr>

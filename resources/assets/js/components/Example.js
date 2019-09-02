@@ -40,6 +40,7 @@ export default class Example extends Component {
         this.selectPais = this.selectPais.bind(this);
         this.deletePais = this.deletePais.bind(this);
         this.editarPais = this.editarPais.bind(this);
+        this.addPais = this.addPais.bind(this);
 
         this.eliminarProvincia = this.eliminarProvincia.bind(this);
         this.selectProvincia = this.selectProvincia.bind(this);
@@ -231,8 +232,18 @@ export default class Example extends Component {
         });
     }
 
-    editarLocalidad(){
-      console.log("editar localidad desde el example")
+    editarLocalidad(provincia_id, nombre){
+      var formData = new FormData();
+      formData.append("id_localidad", this.state.localidad_selected);
+      formData.append("provincia_id", provincia_id);
+      formData.append("nombre", nombre);
+
+      //Enviamos los datos por post
+      axios
+        .post("http://127.0.0.1:8000/api/localidad/editar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo editar la localidad! ${error}`);
+        });
     }
 
     editarProvincia(pais_id , nombre){
@@ -260,7 +271,7 @@ export default class Example extends Component {
       axios
         .post("http://127.0.0.1:8000/api/provincia/editar/",formData)
         .catch(error => {
-          alert(`Un error ocurrio, no se pudo editar el pais! ${error}`);
+          alert(`Un error ocurrio, no se pudo editar la provincia! ${error}`);
         });
     }
 
@@ -307,6 +318,17 @@ export default class Example extends Component {
         .post("http://127.0.0.1:8000/api/pais/editar/",formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo editar el pais! ${error}`);
+        });
+    }
+
+    addPais(nombre){
+      var formData = new FormData();
+      formData.append("nombre", nombre);
+
+      axios
+        .post("http://127.0.0.1:8000/api/pais/agregar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo eliminar la localidad! ${error}`);
         });
     }
 
@@ -400,7 +422,7 @@ export default class Example extends Component {
                     <Route 
                         exact path="/pais/provincia/:id"
                         render={(props) => isLoggedIn ? 
-                            <LocalidadesList {...props} selectLocalidad = {this.selectLocalidad} eliminarLocalidad = {this.eliminarLocalidad} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
+                            <LocalidadesList {...props} editarLocalidad = {this.editarLocalidad} provincias = {this.state.provincias} selectLocalidad = {this.selectLocalidad} eliminarLocalidad = {this.eliminarLocalidad} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                     
                     <Route 
@@ -412,7 +434,7 @@ export default class Example extends Component {
                     <Route 
                         exact path="/paises"
                         render={(props) => isLoggedIn ? 
-                            <PaisesList pais = {this.state.paises} edit_pais = {this.editarPais} deletePais = {this.deletePais} pais_selected = {this.selectPais} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            <PaisesList pais = {this.state.paises} add_pais = {this.addPais} edit_pais = {this.editarPais} deletePais = {this.deletePais} pais_selected = {this.selectPais} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                 </Switch>
             </BrowserRouter>

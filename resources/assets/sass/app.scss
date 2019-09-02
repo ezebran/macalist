@@ -49,6 +49,30 @@ body{
 	}
 }
 
+.edit-form{
+	width: 100%;
+    .auth-foot{
+    	@include row-bt;
+    	width: 100%;
+    	margin-bottom: 1.5em;
+    	.remember{
+    		@include row-ct;
+    		h6{
+    		    color: #555;
+				margin-left: 0.5em;
+				font-weight: 400;
+    		}
+    	}
+    }
+    input[type="text"], select{
+    	background: #eef2f3;
+    }
+}
+
+.mb-btn{
+	margin-bottom: 3em;
+}
+
 .hide-modal{
 	display: none !important;
 }
@@ -131,7 +155,7 @@ header{
 }
 
 .modal{
-	position: absolute;
+	position: fixed;
     z-index: 99999999;
     width: 100%;
     height: 100vh;

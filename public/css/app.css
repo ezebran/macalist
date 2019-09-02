@@ -248,6 +248,63 @@ body {
   font-weight: 400;
 }
 
+.edit-form {
+  width: 100%;
+}
+
+.edit-form .auth-foot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: wrap row;
+          flex-flow: wrap row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+.edit-form .auth-foot .remember {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: wrap row;
+          flex-flow: wrap row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.edit-form .auth-foot .remember h6 {
+  color: #555;
+  margin-left: 0.5em;
+  font-weight: 400;
+}
+
+.edit-form input[type="text"],
+.edit-form select {
+  background: #eef2f3;
+}
+
+.mb-btn {
+  margin-bottom: 3em;
+}
+
 .hide-modal {
   display: none !important;
 }
@@ -382,7 +439,7 @@ header h5 {
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   z-index: 99999999;
   width: 100%;
   height: 100vh;

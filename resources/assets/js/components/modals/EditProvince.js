@@ -29,7 +29,7 @@ class EditProvince extends Component{
 				<div className="content-modal">
 					<h3>Editar datos de la provincia</h3>
 					<div className="btn-foot">
-						<form action="" onSubmit={this.editProvince} >
+						<form action="" onSubmit={this.editProvince} className="edit-form">
 							<input type="text" ref={input => (this._nombreProvincia = input)} placeholder="nombre de la provincia" className="auth-input" />
 							
 							<select name="" className="auth-input" ref={input => (this._pais = input)}>
