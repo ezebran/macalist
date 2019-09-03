@@ -57,9 +57,14 @@ Route::post('/provincia/editar','provinciasController@editarProvincia');
 
 Route::get('/pais/{id}','provinciasController@mostrarProvincias');
 
-Route::get('/pais/provincia/{id}','localidadesController@mostrarLocalidades');
 
+Route::post('/provincia/agregar','provinciasController@agregarProvincia');
+
+
+Route::get('/pais/provincia/{id}','localidadesController@mostrarLocalidades');
 
 Route::post('/localidad/eliminar','localidadesController@eliminarLocalidad');
 
 Route::post('/localidad/editar','localidadesController@editarLocalidad');
+
+Route::post('/localidad/agregar','localidadesController@agregarLocalidad');

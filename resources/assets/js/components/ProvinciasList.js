@@ -4,6 +4,7 @@ import Header from './Header';
 import Aside from './Aside';
 import DeleteProvince from './modals/DeleteProvince';
 import EditProvince from './modals/EditProvince';
+import AddProvince from './modals/AddProvince';
 
 
 class ProvinciasList extends Component{
@@ -12,6 +13,7 @@ class ProvinciasList extends Component{
 		super(props)
 		this.showModal = this.showModal.bind(this);
 		this.showModalEdit = this.showModalEdit.bind(this);
+		this.showModalAdd = this.showModalAdd.bind(this);
 	}
 
 	showModal(id_provincia, e){
@@ -30,6 +32,13 @@ class ProvinciasList extends Component{
 		carrito.classList.toggle("hide-modal");
 	}
 
+	showModalAdd(e){
+		e.preventDefault();
+
+		let carrito = document.getElementById('m-add-province');
+		carrito.classList.toggle("hide-modal");
+	}
+
 	componentDidMount(){
 		const { history, location, match } = this.props;
 		this.props.traerProvincias(match.params.id);
@@ -38,6 +47,7 @@ class ProvinciasList extends Component{
 	render(){
 		return(
 			<div>
+				<AddProvince addProvincia = {this.props.addProvincia} paises = {this.props.paises} />
 				<DeleteProvince eliminarProvincia = {this.props.eliminarProvincia} />
 				<EditProvince pais_selected = {this.props.pais_selected} paises = {this.props.paises} editarProvincia = {this.props.editarProvincia}/>
 				<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
@@ -46,7 +56,7 @@ class ProvinciasList extends Component{
 
 					<main>
 						<h1>Listado de provincias</h1>
-						<a className="btn btn-active mb-btn" href="#">Agregar una provincia</a>
+						<a className="btn btn-active mb-btn" href="#" onClick={this.showModalAdd} >Agregar una provincia</a>
 						<table className="w-50">
 							<thead>
 								<tr>

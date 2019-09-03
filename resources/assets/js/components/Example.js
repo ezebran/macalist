@@ -45,10 +45,12 @@ export default class Example extends Component {
         this.eliminarProvincia = this.eliminarProvincia.bind(this);
         this.selectProvincia = this.selectProvincia.bind(this);
         this.editarProvincia = this.editarProvincia.bind(this);
+        this.addProvincia = this.addProvincia.bind(this);
 
         this.selectLocalidad = this.selectLocalidad.bind(this);
         this.eliminarLocalidad = this.eliminarLocalidad.bind(this);
         this.editarLocalidad = this.editarLocalidad.bind(this);
+        this.addLocalidad = this.addLocalidad.bind(this);
     }
 
     selectLocalidad(id_localidad){
@@ -328,7 +330,31 @@ export default class Example extends Component {
       axios
         .post("http://127.0.0.1:8000/api/pais/agregar/",formData)
         .catch(error => {
-          alert(`Un error ocurrio, no se pudo eliminar la localidad! ${error}`);
+          alert(`Un error ocurrio, no se pudo agregar el pais ${error}`);
+        });
+    }
+
+    addProvincia(nombre, pais_id){
+      var formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("pais_id", pais_id);
+
+      axios
+        .post("http://127.0.0.1:8000/api/provincia/agregar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo agregar la provincia! ${error}`);
+        });
+    }
+
+    addLocalidad(nombre, provincia_id){
+      var formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("provincia_id", provincia_id);
+
+      axios
+        .post("http://127.0.0.1:8000/api/localidad/agregar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo agregar la localidad! ${error}`);
         });
     }
 
@@ -422,13 +448,13 @@ export default class Example extends Component {
                     <Route 
                         exact path="/pais/provincia/:id"
                         render={(props) => isLoggedIn ? 
-                            <LocalidadesList {...props} editarLocalidad = {this.editarLocalidad} provincias = {this.state.provincias} selectLocalidad = {this.selectLocalidad} eliminarLocalidad = {this.eliminarLocalidad} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
+                            <LocalidadesList {...props} addLocalidad = {this.addLocalidad} editarLocalidad = {this.editarLocalidad} provincias = {this.state.provincias} selectLocalidad = {this.selectLocalidad} eliminarLocalidad = {this.eliminarLocalidad} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                     
                     <Route 
                         exact path="/pais/:id"
                         render={(props) => isLoggedIn ?
-                            <ProvinciasList {...props} traerProvincias = {this.traerProvincias} editarProvincia = {this.editarProvincia} paises = {this.state.paises} provincia_selected = {this.state.provincia_selected} pais_selected = {this.state.pais_selected} eliminarProvincia = {this.eliminarProvincia} selectProvincia = {this.selectProvincia} provincias = {this.state.provincias} isAuthed={true} logOut = { this._logoutUser } />
+                            <ProvinciasList {...props} addProvincia = {this.addProvincia} traerProvincias = {this.traerProvincias} editarProvincia = {this.editarProvincia} paises = {this.state.paises} provincia_selected = {this.state.provincia_selected} pais_selected = {this.state.pais_selected} eliminarProvincia = {this.eliminarProvincia} selectProvincia = {this.selectProvincia} provincias = {this.state.provincias} isAuthed={true} logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                     
                     <Route 

@@ -32,4 +32,15 @@ class provinciasController extends Controller
     		'pais_id' => $request->pais_id,
     	]);
     }
+
+    public function agregarProvincia(Request $request){
+        DB::table('provincias')
+        ->insert([
+            'id' => null,
+            'nombre' => $request->nombre,
+            'pais_id' => $request->pais_id,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+    }
 }

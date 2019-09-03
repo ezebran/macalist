@@ -4,6 +4,7 @@ import Header from './Header';
 import Aside from './Aside';
 import DeleteLocalidad from './modals/DeleteLocalidad';
 import EditLocalidad from './modals/EditLocalidad';
+import AddLocalidad from './modals/AddLocalidad';
 
 class LocalidadesList extends Component{
 
@@ -11,6 +12,7 @@ class LocalidadesList extends Component{
 		super(props)
 		this.showModal = this.showModal.bind(this)
 		this.showModalEdit = this.showModalEdit.bind(this)
+		this.showModalAdd = this.showModalAdd.bind(this)
 	}
 
 	showModal(id_localidad, e){
@@ -29,6 +31,13 @@ class LocalidadesList extends Component{
 		carrito.classList.toggle("hide-modal");
 	}
 
+	showModalAdd(e){
+		e.preventDefault();
+
+		let carrito = document.getElementById('m-add-localidad');
+		carrito.classList.toggle("hide-modal");
+	}
+
 	componentDidMount(){
 		const { history, location, match } = this.props;
 
@@ -38,6 +47,7 @@ class LocalidadesList extends Component{
 	render(){
 		return(
 			<div>
+				<AddLocalidad addLocalidad = {this.props.addLocalidad} provincias = {this.props.provincias} />
 				<EditLocalidad editarLocalidad = {this.props.editarLocalidad} provincias = {this.props.provincias} />
 				<DeleteLocalidad eliminarLocalidad = {this.props.eliminarLocalidad} />
 				<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
@@ -46,7 +56,7 @@ class LocalidadesList extends Component{
 
 					<main>
 						<h1>Listado de localidades</h1>
-						<a className="btn btn-active mb-btn" href="#">Agregar una localidad</a>
+						<a className="btn btn-active mb-btn" href="#" onClick={this.showModalAdd}>Agregar una localidad</a>
 						<table className="w-50">
 							<thead>
 								<tr>

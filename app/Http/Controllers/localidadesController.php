@@ -31,4 +31,15 @@ class localidadesController extends Controller
     		'provincia_id' => $request->provincia_id,
     	]);
     }
+
+    public function agregarLocalidad(Request $request){
+        DB::table('localidades')
+        ->insert([
+            'id' => null,
+            'nombre' => $request->nombre,
+            'provincia_id' => $request->provincia_id,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+    }
 }
