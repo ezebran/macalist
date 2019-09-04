@@ -71,7 +71,7 @@ class PaisesList extends Component{
 							
 							this.props.pais.map(pais => (
 								<tr key={pais.id}>
-									<td><Link to={"/pais/" + pais.id} onClick={this.selectPais.bind(null, pais.id)} >{pais.nombre}</Link></td>
+									<td><Link to={"/pais/" + pais.id} onClick={this.selectPais.bind(null, pais.id)} >{pais.nombre_p}</Link></td>
 
 									<td className="tx-right ">
 										<a href="#" className="edit-country-class" onClick={this.showModalEdit.bind(null, pais.id)} ><span className="icon-edit"></span></a>

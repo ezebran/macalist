@@ -41,6 +41,8 @@ Route::group(['middleware' => 'api-header'], function () {
 });
 
 
+Route::get('/usuarios/mostrar','usersController@mostrarUsuarios');
+
 
 Route::get('/paises/mostrar','paisesController@mostrarPaises');
 

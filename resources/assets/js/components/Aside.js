@@ -7,9 +7,9 @@ class Aside extends Component{
 		<aside>
 			<ul>
 				<li>
-					<a href="#">
+					<Link to={"/usuarios"}>
 						<span className="icon-user-o">
-						</span>USUARIOS</a>
+						</span>USUARIOS</Link>
 				</li>
 				<li>
 					<Link to={"/paises"}>

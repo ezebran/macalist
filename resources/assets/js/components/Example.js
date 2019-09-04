@@ -6,6 +6,7 @@ import Aside from './Aside';
 import PaisesList from './PaisesList';
 import ProvinciasList from './ProvinciasList';
 import LocalidadesList from './LocalidadesList';
+import UsuariosList from './UsuariosList';
 import Login from './log/Login';
 import Register from './log/Register';
 import axios from 'axios';
@@ -155,7 +156,7 @@ export default class Example extends Component {
         }
       })
       .catch(error => {
-        alert("An Error Occured!" + error);
+        alert("An Error Occured! registerFunct" + error);
         console.log(`${formData} ${error}`);
       });
     }
@@ -173,20 +174,20 @@ export default class Example extends Component {
 
     traerUsuarios(){
         axios
-          .get(`http://127.0.0.1:8000/api/users/list?token=${this.state.token}`)
+          .get("http://127.0.0.1:8000/api/usuarios/mostrar")
           .then(response => {
-            console.log(response);
+            console.log(response.data, "desde el example");
+            let respuesta = response.data;
+            this.setState({
+              users: respuesta
+            })
             return response;
           })
-          .then(json => {
-            if (json.data.success) {
-              this.setState({ users: json.data.data });
-              //alert("Login Successful!");
-            } else alert("Login Failed!");
-          })
           .catch(error => {
-            alert(`An Error Occured! ${error}`);
+            alert("An Error Occured! desde el traerUsuarios" + error);
+            console.log(error)
           });
+        
     }
     
 
@@ -461,6 +462,12 @@ export default class Example extends Component {
                         exact path="/paises"
                         render={(props) => isLoggedIn ? 
                             <PaisesList pais = {this.state.paises} add_pais = {this.addPais} edit_pais = {this.editarPais} deletePais = {this.deletePais} pais_selected = {this.selectPais} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            : (<Redirect to="/" />) } />
+
+                    <Route 
+                        exact path="/usuarios"
+                        render={(props) => isLoggedIn ? 
+                            <UsuariosList pais = {this.state.paises} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} provincias = {this.state.provincias} users = {this.state.users} traerUsuarios = {this.traerUsuarios} userData = { this.state.user.user } logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                 </Switch>
             </BrowserRouter>

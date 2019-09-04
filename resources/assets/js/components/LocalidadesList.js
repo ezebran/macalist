@@ -69,7 +69,7 @@ class LocalidadesList extends Component{
 								
 								this.props.localidades.map(localidad => (
 									<tr key={localidad.id}>
-										<td>{localidad.nombre}</td>
+										<td>{localidad.nombre_l}</td>
 
 										<td className="tx-right ">
 											<a href="#" onClick={this.showModalEdit.bind(null, localidad.id, localidad.provincia_id)} ><span className="icon-edit"></span></a>

@@ -69,7 +69,7 @@ class ProvinciasList extends Component{
 								
 								this.props.provincias.map(provi => (
 									<tr key={provi.id}>
-										<td><Link to={"/pais/provincia/" + provi.id} >{provi.nombre}</Link></td>
+										<td><Link to={"/pais/provincia/" + provi.id} >{provi.nombre_pr}</Link></td>
 
 										<td className="tx-right ">
 											<a href="#" onClick={this.showModalEdit.bind(null, provi.id, provi.pais_id)}><span className="icon-edit"></span></a>
