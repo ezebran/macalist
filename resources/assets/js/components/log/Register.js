@@ -46,7 +46,7 @@ class Login extends Component{
 						<option value="p1">Selecciona un pais</option>
 						{
 							this.props.pais.map(pais => (
-								<option key={pais.id} value={pais.id} >{pais.nombre}</option>
+								<option key={pais.id} value={pais.id} >{pais.nombre_p}</option>
 								)
 							)
 						}
@@ -55,7 +55,7 @@ class Login extends Component{
 						<option value="p1">Selecciona un provincia</option>
 						{
 							this.props.provincias.map(provin => (
-								<option key={provin.id} value={provin.id} >{provin.nombre}</option>
+								<option key={provin.id} value={provin.id} >{provin.nombre_pr}</option>
 								)
 							)
 						}
@@ -65,7 +65,8 @@ class Login extends Component{
 						<option value="p1">Selecciona una localidad</option>
 						{
 							this.props.localidades.map(local => (
-								<option key={local.id} value={local.id} >{local.nombre}</option>
+								<option key={local.id} value={local.id} >{local.nombre_l
+								}</option>
 								)
 							)
 						}

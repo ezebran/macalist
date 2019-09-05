@@ -29,29 +29,40 @@ export default class Example extends Component {
             users: [],
             pais_selected:'',
             provincia_selected:'',
-            localidad_selected:''
+            localidad_selected:'',
+            user_selected:''
         }
-        this.traerProvincias = this.traerProvincias.bind(this);
-        this.traerLocalidades = this.traerLocalidades.bind(this);
         this._loginUser = this._loginUser.bind(this);
         this._registerUser = this._registerUser.bind(this);
         this._logoutUser = this._logoutUser.bind(this);
         this.traerUsuarios = this.traerUsuarios.bind(this);
+        this.selectUser = this.selectUser.bind(this);
+        this.eliminarUser = this.eliminarUser.bind(this);
+        this.editarUser = this.editarUser.bind(this);
 
         this.selectPais = this.selectPais.bind(this);
         this.deletePais = this.deletePais.bind(this);
         this.editarPais = this.editarPais.bind(this);
         this.addPais = this.addPais.bind(this);
 
+        this.traerProvincias = this.traerProvincias.bind(this);
         this.eliminarProvincia = this.eliminarProvincia.bind(this);
         this.selectProvincia = this.selectProvincia.bind(this);
         this.editarProvincia = this.editarProvincia.bind(this);
         this.addProvincia = this.addProvincia.bind(this);
 
+        this.traerLocalidades = this.traerLocalidades.bind(this);
         this.selectLocalidad = this.selectLocalidad.bind(this);
         this.eliminarLocalidad = this.eliminarLocalidad.bind(this);
         this.editarLocalidad = this.editarLocalidad.bind(this);
         this.addLocalidad = this.addLocalidad.bind(this);
+
+    }
+
+    selectUser(id_user){
+      this.setState({
+        user_selected: id_user
+      })
     }
 
     selectLocalidad(id_localidad){
@@ -176,7 +187,6 @@ export default class Example extends Component {
         axios
           .get("http://127.0.0.1:8000/api/usuarios/mostrar")
           .then(response => {
-            console.log(response.data, "desde el example");
             let respuesta = response.data;
             this.setState({
               users: respuesta
@@ -298,6 +308,63 @@ export default class Example extends Component {
         .catch(error => {
           alert(`Un error ocurrio, no se pudo eliminar el pais! ${error}`);
         });
+    }
+
+    eliminarUser(){
+      var formData = new FormData();
+      formData.append("id_user", this.state.user_selected);
+
+      //Eliminamos el pais del state
+      let sinElUser = []
+      this.state.users.map(user => {
+        if(user.id != this.state.user_selected){
+          sinElUser.push(user)
+        }
+      })
+      this.setState({
+        users: sinElUser
+      });
+
+      axios
+        .post("http://127.0.0.1:8000/api/usuarios/eliminar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo eliminar el usuario! ${error}`);
+        });
+    }
+
+    editarUser(name,email,rol,localidad){
+      var formData = new FormData();
+      formData.append("id_user", this.state.user_selected);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("rol_id", rol);
+      formData.append("localidad_id", localidad);
+
+      let userEditado = []
+      this.state.users.map(user => {
+        if(user.id == this.state.user_selected){
+          user.name = name;
+          user.email = email;
+          user.nombre = rol;
+          user.nombre_l = localidad;
+
+          userEditado.push(user)
+        }else{
+          userEditado.push(user)
+        }
+      })
+
+      this.setState({
+        users: userEditado
+      })
+
+      axios
+        .post("http://127.0.0.1:8000/api/usuarios/editar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo editar el usuario! ${error}`);
+        });
+
+      console.log("editarUser desde example" ,name,email,rol,localidad)
     }
 
     editarPais(nombre){
@@ -467,7 +534,7 @@ export default class Example extends Component {
                     <Route 
                         exact path="/usuarios"
                         render={(props) => isLoggedIn ? 
-                            <UsuariosList pais = {this.state.paises} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} provincias = {this.state.provincias} users = {this.state.users} traerUsuarios = {this.traerUsuarios} userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            <UsuariosList editarUser = {this.editarUser} pais = {this.state.paises} localidades = {this.state.localidades} provincias = {this.state.provincias} traerProvincias = { this.traerProvincias } traerLocalidades = {this.traerLocalidades} eliminarUser = {this.eliminarUser} selectUser = {this.selectUser} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} provincias = {this.state.provincias} users = {this.state.users} traerUsuarios = {this.traerUsuarios} userData = { this.state.user.user } logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
                 </Switch>
             </BrowserRouter>

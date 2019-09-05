@@ -19,4 +19,21 @@ class usersController extends Controller
 
         return response()->json($usuarios, 201);
     }
+
+    public function eliminarUsuario(Request $request){
+    	DB::table('users')
+    	->where('id', '=', $request->id_user)
+    	->delete();
+    }
+
+    public function editarUsuario(Request $request){
+    	DB::table('users')
+    	->where('id', '=', $request->id_user)
+    	->update([
+    		'name' => $request->name,
+    		'email' => $request->email,
+    		'rol_id' => $request->rol_id,
+    		'localidad_id' => $request->localidad_id
+    	]);
+    }
 }

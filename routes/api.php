@@ -43,6 +43,10 @@ Route::group(['middleware' => 'api-header'], function () {
 
 Route::get('/usuarios/mostrar','usersController@mostrarUsuarios');
 
+Route::post('/usuarios/eliminar','usersController@eliminarUsuario');
+
+Route::post('/usuarios/editar','usersController@editarUsuario');
+
 
 Route::get('/paises/mostrar','paisesController@mostrarPaises');
 
