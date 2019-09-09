@@ -27,7 +27,7 @@ class ProvinciasList extends Component{
 	showModalEdit( id_provincia , pais_id , e){
 		e.preventDefault();
 		this.props.selectProvincia(id_provincia)
-		console.log("desde el showModaledit", pais_id ,id_provincia)
+
 		let carrito = document.getElementById('m-edit-province');
 		carrito.classList.toggle("hide-modal");
 	}

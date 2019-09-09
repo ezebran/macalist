@@ -26,7 +26,7 @@ class LocalidadesList extends Component{
 	showModalEdit( id_localidad , id_provincia , e){
 		e.preventDefault();
 		this.props.selectLocalidad(id_localidad)
-		console.log("desde el showModaledit de localidades", id_localidad ,id_provincia)
+
 		let carrito = document.getElementById('m-edit-localidad');
 		carrito.classList.toggle("hide-modal");
 	}

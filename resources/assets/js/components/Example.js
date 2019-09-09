@@ -85,8 +85,10 @@ export default class Example extends Component {
       });
     }
 
-    _loginUser(email, password){
 
+    //FUNCIONES PARA USUARIOS
+
+    _loginUser(email, password){
     var formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
@@ -94,12 +96,10 @@ export default class Example extends Component {
     axios
       .post("http://127.0.0.1:8000/api/user/login/", formData)
       .then(response => {
-        console.log(response);
         return response;
       })
       .then(json => {
         if (json.data.success) {
-          alert("Login Successful!");
 
           let userData = {
             name: json.data.data.name,
@@ -169,7 +169,6 @@ export default class Example extends Component {
       })
       .catch(error => {
         alert("An Error Occured! registerFunct" + error);
-        console.log(`${formData} ${error}`);
       });
     }
 
@@ -181,7 +180,6 @@ export default class Example extends Component {
         // save app state with user date in local storage
         localStorage["appState"] = JSON.stringify(appState);
         this.setState(appState);
-        console.log("Ejecuta desloguear desde el example")
     };
 
     traerUsuarios(){
@@ -195,12 +193,86 @@ export default class Example extends Component {
             return response;
           })
           .catch(error => {
-            alert("An Error Occured! desde el traerUsuarios" + error);
-            console.log(error)
+            alert("Ocurrio un error al traer usuarios" + error);
           });
         
     }
     
+    eliminarUser(){
+      var formData = new FormData();
+      formData.append("id_user", this.state.user_selected);
+
+      //Eliminamos el pais del state
+      let sinElUser = []
+      this.state.users.map(user => {
+        if(user.id != this.state.user_selected){
+          sinElUser.push(user)
+        }
+      })
+      this.setState({
+        users: sinElUser
+      });
+
+      axios
+        .post("http://127.0.0.1:8000/api/usuarios/eliminar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo eliminar el usuario! ${error}`);
+        });
+    }
+
+    traerPerfil(id_user){
+        axios
+          .get(`http://127.0.0.1:8000/api/perfil/${id_user}`)
+          .then(response => {
+            let respuesta = response.data;
+            this.setState({
+              perfil: respuesta
+            })
+            return response;
+          })
+          .catch(error => {
+            alert("An Error Occured! desde el traerUsuarios" + error);
+            console.log(error)
+          });
+    }
+
+    editarUser(name,email,rol,localidad){
+      var formData = new FormData();
+      formData.append("id_user", this.state.user_selected);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("rol_id", rol);
+      formData.append("localidad_id", localidad);
+
+      let userEditado = []
+      this.state.users.map(user => {
+        if(user.id == this.state.user_selected){
+          user.name = name;
+          user.email = email;
+          user.nombre = rol;
+          user.nombre_l = localidad;
+
+          userEditado.push(user)
+        }else{
+          userEditado.push(user)
+        }
+      })
+
+      this.setState({
+        users: userEditado
+      })
+
+      axios
+        .post("http://127.0.0.1:8000/api/usuarios/editar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo editar el usuario! ${error}`);
+        });
+    }
+
+
+
+      //FUNCIONES PARA PROVINCIAS
+
 
     async traerProvincias(idpais){
  
@@ -246,27 +318,11 @@ export default class Example extends Component {
         });
     }
 
-    editarLocalidad(provincia_id, nombre){
-      var formData = new FormData();
-      formData.append("id_localidad", this.state.localidad_selected);
-      formData.append("provincia_id", provincia_id);
-      formData.append("nombre", nombre);
-
-      //Enviamos los datos por post
-      axios
-        .post("http://127.0.0.1:8000/api/localidad/editar/",formData)
-        .catch(error => {
-          alert(`Un error ocurrio, no se pudo editar la localidad! ${error}`);
-        });
-    }
-
     editarProvincia(pais_id , nombre){
       var formData = new FormData();
       formData.append("id_provincia", this.state.provincia_selected);
       formData.append("pais_id", pais_id);
       formData.append("nombre", nombre);
-
-      console.log("Valores que se ejecutan desde example" ,pais_id , nombre)
 
       //Editamos la provincia en el state
       let provinciaTemp = this.state.provincias;
@@ -289,6 +345,95 @@ export default class Example extends Component {
         });
     }
 
+    addProvincia(nombre, pais_id){
+      var formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("pais_id", pais_id);
+
+      axios
+        .post("http://127.0.0.1:8000/api/provincia/agregar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo agregar la provincia! ${error}`);
+        });
+    }
+
+
+
+
+      //FUNCIONES PARA LOCALIDADES
+
+    editarLocalidad(provincia_id, nombre){
+      var formData = new FormData();
+      formData.append("id_localidad", this.state.localidad_selected);
+      formData.append("provincia_id", provincia_id);
+      formData.append("nombre", nombre);
+
+      //Enviamos los datos por post
+      axios
+        .post("http://127.0.0.1:8000/api/localidad/editar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo editar la localidad! ${error}`);
+        });
+    }
+    addLocalidad(nombre, provincia_id){
+      var formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("provincia_id", provincia_id);
+
+      axios
+        .post("http://127.0.0.1:8000/api/localidad/agregar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo agregar la localidad! ${error}`);
+        });
+    }
+
+    eliminarLocalidad(){
+      var formData = new FormData();
+      formData.append("id_pais", this.state.localidad_selected);
+
+      //Eliminamos la localidad del state
+      let sinLaLocalidad = []
+      this.state.localidades.map(localidad => {
+        if(localidad.id != this.state.localidad_selected){
+          sinLaLocalidad.push(localidad)
+        }
+      })
+      this.setState({
+        localidades : sinLaLocalidad
+      })
+
+      axios
+        .post("http://127.0.0.1:8000/api/localidad/eliminar/",formData)
+        .catch(error => {
+          alert(`Un error ocurrio, no se pudo eliminar la localidad! ${error}`);
+        });
+    }
+
+    async traerLocalidades(idprovincia){
+
+        try{
+            let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
+
+            await fetch(url_pais)
+                .then(respuesta => {
+                    return respuesta.json()
+                })
+                .then(localidades => {
+                    this.setState({
+                        localidades: localidades
+                    })
+                })
+        }catch(error){
+            this.setState({
+                error
+            })
+        }
+    };
+
+
+
+      //FUNCIONES PARA PAISES
+
     deletePais(){
       var formData = new FormData();
       formData.append("id_pais", this.state.pais_selected);
@@ -309,63 +454,6 @@ export default class Example extends Component {
         .catch(error => {
           alert(`Un error ocurrio, no se pudo eliminar el pais! ${error}`);
         });
-    }
-
-    eliminarUser(){
-      var formData = new FormData();
-      formData.append("id_user", this.state.user_selected);
-
-      //Eliminamos el pais del state
-      let sinElUser = []
-      this.state.users.map(user => {
-        if(user.id != this.state.user_selected){
-          sinElUser.push(user)
-        }
-      })
-      this.setState({
-        users: sinElUser
-      });
-
-      axios
-        .post("http://127.0.0.1:8000/api/usuarios/eliminar/",formData)
-        .catch(error => {
-          alert(`Un error ocurrio, no se pudo eliminar el usuario! ${error}`);
-        });
-    }
-
-    editarUser(name,email,rol,localidad){
-      var formData = new FormData();
-      formData.append("id_user", this.state.user_selected);
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("rol_id", rol);
-      formData.append("localidad_id", localidad);
-
-      let userEditado = []
-      this.state.users.map(user => {
-        if(user.id == this.state.user_selected){
-          user.name = name;
-          user.email = email;
-          user.nombre = rol;
-          user.nombre_l = localidad;
-
-          userEditado.push(user)
-        }else{
-          userEditado.push(user)
-        }
-      })
-
-      this.setState({
-        users: userEditado
-      })
-
-      axios
-        .post("http://127.0.0.1:8000/api/usuarios/editar/",formData)
-        .catch(error => {
-          alert(`Un error ocurrio, no se pudo editar el usuario! ${error}`);
-        });
-
-      console.log("editarUser desde example" ,name,email,rol,localidad)
     }
 
     editarPais(nombre){
@@ -402,93 +490,6 @@ export default class Example extends Component {
           alert(`Un error ocurrio, no se pudo agregar el pais ${error}`);
         });
     }
-
-    addProvincia(nombre, pais_id){
-      var formData = new FormData();
-      formData.append("nombre", nombre);
-      formData.append("pais_id", pais_id);
-
-      axios
-        .post("http://127.0.0.1:8000/api/provincia/agregar/",formData)
-        .catch(error => {
-          alert(`Un error ocurrio, no se pudo agregar la provincia! ${error}`);
-        });
-    }
-
-    addLocalidad(nombre, provincia_id){
-      var formData = new FormData();
-      formData.append("nombre", nombre);
-      formData.append("provincia_id", provincia_id);
-
-      axios
-        .post("http://127.0.0.1:8000/api/localidad/agregar/",formData)
-        .catch(error => {
-          alert(`Un error ocurrio, no se pudo agregar la localidad! ${error}`);
-        });
-    }
-
-    eliminarLocalidad(){
-      var formData = new FormData();
-      formData.append("id_pais", this.state.localidad_selected);
-
-      //Eliminamos la localidad del state
-      let sinLaLocalidad = []
-      this.state.localidades.map(localidad => {
-        if(localidad.id != this.state.localidad_selected){
-          sinLaLocalidad.push(localidad)
-        }
-      })
-      this.setState({
-        localidades : sinLaLocalidad
-      })
-
-      axios
-        .post("http://127.0.0.1:8000/api/localidad/eliminar/",formData)
-        .catch(error => {
-          alert(`Un error ocurrio, no se pudo eliminar la localidad! ${error}`);
-        });
-    }
-
-    traerPerfil(id_user){
-      console.log("traerPerfil desde el example el id es: " + id_user)
-
-        axios
-          .get(`http://127.0.0.1:8000/api/perfil/${id_user}`)
-          .then(response => {
-            let respuesta = response.data;
-            this.setState({
-              perfil: respuesta
-            })
-            return response;
-          })
-          .catch(error => {
-            alert("An Error Occured! desde el traerUsuarios" + error);
-            console.log(error)
-          });
-    }
-
-    async traerLocalidades(idprovincia){
-
-        try{
-            let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
-
-            await fetch(url_pais)
-                .then(respuesta => {
-                    return respuesta.json()
-                })
-                .then(localidades => {
-                    this.setState({
-                        localidades: localidades
-                    })
-                })
-        }catch(error){
-            this.setState({
-                error
-            })
-        }
-    };
-
-
 
 
     async componentDidMount(){

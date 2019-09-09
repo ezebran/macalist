@@ -13513,6 +13513,9 @@ var Example = function (_Component) {
         provincia_selected: id_provincia
       });
     }
+
+    //FUNCIONES PARA USUARIOS
+
   }, {
     key: '_loginUser',
     value: function _loginUser(email, password) {
@@ -13523,11 +13526,9 @@ var Example = function (_Component) {
       formData.append("password", password);
 
       __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/user/login/", formData).then(function (response) {
-        console.log(response);
         return response;
       }).then(function (json) {
         if (json.data.success) {
-          alert("Login Successful!");
 
           var userData = {
             name: json.data.data.name,
@@ -13593,7 +13594,6 @@ var Example = function (_Component) {
         }
       }).catch(function (error) {
         alert("An Error Occured! registerFunct" + error);
-        console.log(formData + ' ' + error);
       });
     }
   }, {
@@ -13606,7 +13606,6 @@ var Example = function (_Component) {
       // save app state with user date in local storage
       localStorage["appState"] = JSON.stringify(appState);
       this.setState(appState);
-      console.log("Ejecuta desloguear desde el example");
     }
   }, {
     key: 'traerUsuarios',
@@ -13620,15 +13619,91 @@ var Example = function (_Component) {
         });
         return response;
       }).catch(function (error) {
+        alert("Ocurrio un error al traer usuarios" + error);
+      });
+    }
+  }, {
+    key: 'eliminarUser',
+    value: function eliminarUser() {
+      var _this5 = this;
+
+      var formData = new FormData();
+      formData.append("id_user", this.state.user_selected);
+
+      //Eliminamos el pais del state
+      var sinElUser = [];
+      this.state.users.map(function (user) {
+        if (user.id != _this5.state.user_selected) {
+          sinElUser.push(user);
+        }
+      });
+      this.setState({
+        users: sinElUser
+      });
+
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/usuarios/eliminar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo eliminar el usuario! ' + error);
+      });
+    }
+  }, {
+    key: 'traerPerfil',
+    value: function traerPerfil(id_user) {
+      var _this6 = this;
+
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.get('http://127.0.0.1:8000/api/perfil/' + id_user).then(function (response) {
+        var respuesta = response.data;
+        _this6.setState({
+          perfil: respuesta
+        });
+        return response;
+      }).catch(function (error) {
         alert("An Error Occured! desde el traerUsuarios" + error);
         console.log(error);
       });
     }
   }, {
+    key: 'editarUser',
+    value: function editarUser(name, email, rol, localidad) {
+      var _this7 = this;
+
+      var formData = new FormData();
+      formData.append("id_user", this.state.user_selected);
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("rol_id", rol);
+      formData.append("localidad_id", localidad);
+
+      var userEditado = [];
+      this.state.users.map(function (user) {
+        if (user.id == _this7.state.user_selected) {
+          user.name = name;
+          user.email = email;
+          user.nombre = rol;
+          user.nombre_l = localidad;
+
+          userEditado.push(user);
+        } else {
+          userEditado.push(user);
+        }
+      });
+
+      this.setState({
+        users: userEditado
+      });
+
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/usuarios/editar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo editar el usuario! ' + error);
+      });
+    }
+
+    //FUNCIONES PARA PROVINCIAS
+
+
+  }, {
     key: 'traerProvincias',
     value: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(idpais) {
-        var _this5 = this;
+        var _this8 = this;
 
         var url_pais;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -13641,7 +13716,7 @@ var Example = function (_Component) {
                 return fetch(url_pais).then(function (respuesta) {
                   return respuesta.json();
                 }).then(function (provincias) {
-                  _this5.setState({
+                  _this8.setState({
                     provincias: provincias
                   });
                 });
@@ -13675,7 +13750,7 @@ var Example = function (_Component) {
   }, {
     key: 'eliminarProvincia',
     value: function eliminarProvincia() {
-      var _this6 = this;
+      var _this9 = this;
 
       var formData = new FormData();
       formData.append("id_provincia", this.state.provincia_selected);
@@ -13683,7 +13758,7 @@ var Example = function (_Component) {
       //Eliminamos el pais del state
       var sinLaProvi = [];
       this.state.provincias.map(function (provi) {
-        if (provi.id != _this6.state.provincia_selected) {
+        if (provi.id != _this9.state.provincia_selected) {
           sinLaProvi.push(provi);
         }
       });
@@ -13696,34 +13771,19 @@ var Example = function (_Component) {
       });
     }
   }, {
-    key: 'editarLocalidad',
-    value: function editarLocalidad(provincia_id, nombre) {
-      var formData = new FormData();
-      formData.append("id_localidad", this.state.localidad_selected);
-      formData.append("provincia_id", provincia_id);
-      formData.append("nombre", nombre);
-
-      //Enviamos los datos por post
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/localidad/editar/", formData).catch(function (error) {
-        alert('Un error ocurrio, no se pudo editar la localidad! ' + error);
-      });
-    }
-  }, {
     key: 'editarProvincia',
     value: function editarProvincia(pais_id, nombre) {
-      var _this7 = this;
+      var _this10 = this;
 
       var formData = new FormData();
       formData.append("id_provincia", this.state.provincia_selected);
       formData.append("pais_id", pais_id);
       formData.append("nombre", nombre);
 
-      console.log("Valores que se ejecutan desde example", pais_id, nombre);
-
       //Editamos la provincia en el state
       var provinciaTemp = this.state.provincias;
       provinciaTemp.map(function (provi) {
-        if (provi.id == _this7.state.provincia_selected) {
+        if (provi.id == _this10.state.provincia_selected) {
           provi.nombre = nombre;
           provi.pais_id = pais_id;
         }
@@ -13739,123 +13799,6 @@ var Example = function (_Component) {
       });
     }
   }, {
-    key: 'deletePais',
-    value: function deletePais() {
-      var _this8 = this;
-
-      var formData = new FormData();
-      formData.append("id_pais", this.state.pais_selected);
-
-      //Eliminamos el pais del state
-      var sinElPais = [];
-      this.state.paises.map(function (pais) {
-        if (pais.id != _this8.state.pais_selected) {
-          sinElPais.push(pais);
-        }
-      });
-      this.setState({
-        paises: sinElPais
-      });
-
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/pais/eliminar/", formData).catch(function (error) {
-        alert('Un error ocurrio, no se pudo eliminar el pais! ' + error);
-      });
-    }
-  }, {
-    key: 'eliminarUser',
-    value: function eliminarUser() {
-      var _this9 = this;
-
-      var formData = new FormData();
-      formData.append("id_user", this.state.user_selected);
-
-      //Eliminamos el pais del state
-      var sinElUser = [];
-      this.state.users.map(function (user) {
-        if (user.id != _this9.state.user_selected) {
-          sinElUser.push(user);
-        }
-      });
-      this.setState({
-        users: sinElUser
-      });
-
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/usuarios/eliminar/", formData).catch(function (error) {
-        alert('Un error ocurrio, no se pudo eliminar el usuario! ' + error);
-      });
-    }
-  }, {
-    key: 'editarUser',
-    value: function editarUser(name, email, rol, localidad) {
-      var _this10 = this;
-
-      var formData = new FormData();
-      formData.append("id_user", this.state.user_selected);
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("rol_id", rol);
-      formData.append("localidad_id", localidad);
-
-      var userEditado = [];
-      this.state.users.map(function (user) {
-        if (user.id == _this10.state.user_selected) {
-          user.name = name;
-          user.email = email;
-          user.nombre = rol;
-          user.nombre_l = localidad;
-
-          userEditado.push(user);
-        } else {
-          userEditado.push(user);
-        }
-      });
-
-      this.setState({
-        users: userEditado
-      });
-
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/usuarios/editar/", formData).catch(function (error) {
-        alert('Un error ocurrio, no se pudo editar el usuario! ' + error);
-      });
-
-      console.log("editarUser desde example", name, email, rol, localidad);
-    }
-  }, {
-    key: 'editarPais',
-    value: function editarPais(nombre) {
-      var _this11 = this;
-
-      var formData = new FormData();
-      formData.append("id_pais", this.state.pais_selected);
-      formData.append("nombre", nombre);
-
-      //Editamos el pais en el state
-      var paisesTemp = this.state.paises;
-      paisesTemp.map(function (pais) {
-        if (pais.id == _this11.state.pais_selected) {
-          pais.nombre = nombre;
-        }
-      });
-      this.setState({
-        paises: paisesTemp
-      });
-
-      //Enviamos los datos por post
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/pais/editar/", formData).catch(function (error) {
-        alert('Un error ocurrio, no se pudo editar el pais! ' + error);
-      });
-    }
-  }, {
-    key: 'addPais',
-    value: function addPais(nombre) {
-      var formData = new FormData();
-      formData.append("nombre", nombre);
-
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/pais/agregar/", formData).catch(function (error) {
-        alert('Un error ocurrio, no se pudo agregar el pais ' + error);
-      });
-    }
-  }, {
     key: 'addProvincia',
     value: function addProvincia(nombre, pais_id) {
       var formData = new FormData();
@@ -13864,6 +13807,22 @@ var Example = function (_Component) {
 
       __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/provincia/agregar/", formData).catch(function (error) {
         alert('Un error ocurrio, no se pudo agregar la provincia! ' + error);
+      });
+    }
+
+    //FUNCIONES PARA LOCALIDADES
+
+  }, {
+    key: 'editarLocalidad',
+    value: function editarLocalidad(provincia_id, nombre) {
+      var formData = new FormData();
+      formData.append("id_localidad", this.state.localidad_selected);
+      formData.append("provincia_id", provincia_id);
+      formData.append("nombre", nombre);
+
+      //Enviamos los datos por post
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/localidad/editar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo editar la localidad! ' + error);
       });
     }
   }, {
@@ -13880,7 +13839,7 @@ var Example = function (_Component) {
   }, {
     key: 'eliminarLocalidad',
     value: function eliminarLocalidad() {
-      var _this12 = this;
+      var _this11 = this;
 
       var formData = new FormData();
       formData.append("id_pais", this.state.localidad_selected);
@@ -13888,7 +13847,7 @@ var Example = function (_Component) {
       //Eliminamos la localidad del state
       var sinLaLocalidad = [];
       this.state.localidades.map(function (localidad) {
-        if (localidad.id != _this12.state.localidad_selected) {
+        if (localidad.id != _this11.state.localidad_selected) {
           sinLaLocalidad.push(localidad);
         }
       });
@@ -13901,28 +13860,10 @@ var Example = function (_Component) {
       });
     }
   }, {
-    key: 'traerPerfil',
-    value: function traerPerfil(id_user) {
-      var _this13 = this;
-
-      console.log("traerPerfil desde el example el id es: " + id_user);
-
-      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.get('http://127.0.0.1:8000/api/perfil/' + id_user).then(function (response) {
-        var respuesta = response.data;
-        _this13.setState({
-          perfil: respuesta
-        });
-        return response;
-      }).catch(function (error) {
-        alert("An Error Occured! desde el traerUsuarios" + error);
-        console.log(error);
-      });
-    }
-  }, {
     key: 'traerLocalidades',
     value: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(idprovincia) {
-        var _this14 = this;
+        var _this12 = this;
 
         var url_pais;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
@@ -13935,7 +13876,7 @@ var Example = function (_Component) {
                 return fetch(url_pais).then(function (respuesta) {
                   return respuesta.json();
                 }).then(function (localidades) {
-                  _this14.setState({
+                  _this12.setState({
                     localidades: localidades
                   });
                 });
@@ -13966,6 +13907,68 @@ var Example = function (_Component) {
 
       return traerLocalidades;
     }()
+  }, {
+    key: 'deletePais',
+
+
+    //FUNCIONES PARA PAISES
+
+    value: function deletePais() {
+      var _this13 = this;
+
+      var formData = new FormData();
+      formData.append("id_pais", this.state.pais_selected);
+
+      //Eliminamos el pais del state
+      var sinElPais = [];
+      this.state.paises.map(function (pais) {
+        if (pais.id != _this13.state.pais_selected) {
+          sinElPais.push(pais);
+        }
+      });
+      this.setState({
+        paises: sinElPais
+      });
+
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/pais/eliminar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo eliminar el pais! ' + error);
+      });
+    }
+  }, {
+    key: 'editarPais',
+    value: function editarPais(nombre) {
+      var _this14 = this;
+
+      var formData = new FormData();
+      formData.append("id_pais", this.state.pais_selected);
+      formData.append("nombre", nombre);
+
+      //Editamos el pais en el state
+      var paisesTemp = this.state.paises;
+      paisesTemp.map(function (pais) {
+        if (pais.id == _this14.state.pais_selected) {
+          pais.nombre = nombre;
+        }
+      });
+      this.setState({
+        paises: paisesTemp
+      });
+
+      //Enviamos los datos por post
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/pais/editar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo editar el pais! ' + error);
+      });
+    }
+  }, {
+    key: 'addPais',
+    value: function addPais(nombre) {
+      var formData = new FormData();
+      formData.append("nombre", nombre);
+
+      __WEBPACK_IMPORTED_MODULE_14_axios___default.a.post("http://127.0.0.1:8000/api/pais/agregar/", formData).catch(function (error) {
+        alert('Un error ocurrio, no se pudo agregar el pais ' + error);
+      });
+    }
   }, {
     key: 'componentDidMount',
     value: function () {
@@ -39125,7 +39128,7 @@ var ProvinciasList = function (_Component) {
 		value: function showModalEdit(id_provincia, pais_id, e) {
 			e.preventDefault();
 			this.props.selectProvincia(id_provincia);
-			console.log("desde el showModaledit", pais_id, id_provincia);
+
 			var carrito = document.getElementById('m-edit-province');
 			carrito.classList.toggle("hide-modal");
 		}
@@ -39612,7 +39615,7 @@ var LocalidadesList = function (_Component) {
 		value: function showModalEdit(id_localidad, id_provincia, e) {
 			e.preventDefault();
 			this.props.selectLocalidad(id_localidad);
-			console.log("desde el showModaledit de localidades", id_localidad, id_provincia);
+
 			var carrito = document.getElementById('m-edit-localidad');
 			carrito.classList.toggle("hide-modal");
 		}
