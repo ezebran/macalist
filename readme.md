@@ -84,4 +84,4 @@ y en la otra
 npm run watch
 ```
 
-*Ahora solo resta logearse con el **usuario: root - constraseña: root** y listo.
+* Ahora solo resta logearse con el **usuario: root - constraseña: root** y listo.
