@@ -7,11 +7,11 @@ import PaisesList from './PaisesList';
 import ProvinciasList from './ProvinciasList';
 import LocalidadesList from './LocalidadesList';
 import UsuariosList from './UsuariosList';
+import UsuariosListNormal from './UsuariosListNormal';
+import Perfil from './Perfil';
 import Login from './log/Login';
 import Register from './log/Register';
 import axios from 'axios';
-
-
 
 
 export default class Example extends Component {
@@ -27,6 +27,7 @@ export default class Example extends Component {
             user: {},
             token:{},
             users: [],
+            perfil: [],
             pais_selected:'',
             provincia_selected:'',
             localidad_selected:'',
@@ -39,6 +40,7 @@ export default class Example extends Component {
         this.selectUser = this.selectUser.bind(this);
         this.eliminarUser = this.eliminarUser.bind(this);
         this.editarUser = this.editarUser.bind(this);
+        this.traerPerfil = this.traerPerfil.bind(this);
 
         this.selectPais = this.selectPais.bind(this);
         this.deletePais = this.deletePais.bind(this);
@@ -138,7 +140,6 @@ export default class Example extends Component {
       })
       .then(json => {
         if (json.data.success) {
-          alert(`Registration Successful!`);
 
           let userData = {
             name: json.data.data.name,
@@ -448,7 +449,23 @@ export default class Example extends Component {
         });
     }
 
+    traerPerfil(id_user){
+      console.log("traerPerfil desde el example el id es: " + id_user)
 
+        axios
+          .get(`http://127.0.0.1:8000/api/perfil/${id_user}`)
+          .then(response => {
+            let respuesta = response.data;
+            this.setState({
+              perfil: respuesta
+            })
+            return response;
+          })
+          .catch(error => {
+            alert("An Error Occured! desde el traerUsuarios" + error);
+            console.log(error)
+          });
+    }
 
     async traerLocalidades(idprovincia){
 
@@ -495,6 +512,7 @@ export default class Example extends Component {
     }
     render() {
         const isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
+        const isRoot = JSON.parse(localStorage["appState"]).user.email == "root" ? true : false;
 
         return (
             <BrowserRouter>
@@ -509,33 +527,47 @@ export default class Example extends Component {
 
                     <Route 
                         exact path="/"
-                        render={(props) => isLoggedIn ? 
-                            (<Redirect to="/paises" />) :
-                            <Login {...props} _loginUser = { this._loginUser } /> } />
+                        render={(props) => isLoggedIn && isRoot ? 
+                            (<Redirect to="/paises" />) 
+                            : isLoggedIn ? (<Redirect to="/usuarios/listado" />) : <Login {...props} _loginUser = { this._loginUser } /> } />
 
                     <Route 
                         exact path="/pais/provincia/:id"
-                        render={(props) => isLoggedIn ? 
+                        render={(props) => isLoggedIn && isRoot ? 
                             <LocalidadesList {...props} addLocalidad = {this.addLocalidad} editarLocalidad = {this.editarLocalidad} provincias = {this.state.provincias} selectLocalidad = {this.selectLocalidad} eliminarLocalidad = {this.eliminarLocalidad} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} isAuthed={true} logOut = { this._logoutUser } />
-                            : (<Redirect to="/" />) } />
+                            : isLoggedIn ? (<Redirect to="/usuarios/listado" />)  : (<Redirect to="/" />) } />
                     
                     <Route 
                         exact path="/pais/:id"
-                        render={(props) => isLoggedIn ?
+                        render={(props) => isLoggedIn && isRoot ?
                             <ProvinciasList {...props} addProvincia = {this.addProvincia} traerProvincias = {this.traerProvincias} editarProvincia = {this.editarProvincia} paises = {this.state.paises} provincia_selected = {this.state.provincia_selected} pais_selected = {this.state.pais_selected} eliminarProvincia = {this.eliminarProvincia} selectProvincia = {this.selectProvincia} provincias = {this.state.provincias} isAuthed={true} logOut = { this._logoutUser } />
-                            : (<Redirect to="/" />) } />
+                            : isLoggedIn ? (<Redirect to="/usuarios/listado" />)  : (<Redirect to="/" />) } />
                     
                     <Route 
                         exact path="/paises"
-                        render={(props) => isLoggedIn ? 
+                        render={(props) => isLoggedIn && isRoot ? 
                             <PaisesList pais = {this.state.paises} add_pais = {this.addPais} edit_pais = {this.editarPais} deletePais = {this.deletePais} pais_selected = {this.selectPais} traerUsuarios = { this.traerUsuarios } userData = { this.state.user.user } logOut = { this._logoutUser } />
-                            : (<Redirect to="/" />) } />
+                            : isLoggedIn ? (<Redirect to="/usuarios/listado" />)  : (<Redirect to="/" />) } />
 
                     <Route 
                         exact path="/usuarios"
-                        render={(props) => isLoggedIn ? 
+                        render={(props) => isLoggedIn && isRoot ? 
                             <UsuariosList editarUser = {this.editarUser} pais = {this.state.paises} localidades = {this.state.localidades} provincias = {this.state.provincias} traerProvincias = { this.traerProvincias } traerLocalidades = {this.traerLocalidades} eliminarUser = {this.eliminarUser} selectUser = {this.selectUser} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} provincias = {this.state.provincias} users = {this.state.users} traerUsuarios = {this.traerUsuarios} userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            : isLoggedIn ? (<Redirect to="/usuarios/listado" />)  : (<Redirect to="/" />) } />
+
+                    <Route 
+                        exact path="/usuarios/listado"
+                        render={(props) => isLoggedIn ? 
+                            <UsuariosListNormal editarUser = {this.editarUser} pais = {this.state.paises} localidades = {this.state.localidades} provincias = {this.state.provincias} traerProvincias = { this.traerProvincias } traerLocalidades = {this.traerLocalidades} eliminarUser = {this.eliminarUser} selectUser = {this.selectUser} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} provincias = {this.state.provincias} users = {this.state.users} traerUsuarios = {this.traerUsuarios} userData = { this.state.user.user } logOut = { this._logoutUser } />
                             : (<Redirect to="/" />) } />
+
+                    <Route 
+                        exact path="/perfil/:id"
+                        render={(props) => isLoggedIn ? 
+                            <Perfil editarUser = {this.editarUser} perfil = {this.state.perfil} traerPerfil = {this.traerPerfil} pais = {this.state.paises} localidades = {this.state.localidades} provincias = {this.state.provincias} traerProvincias = { this.traerProvincias } traerLocalidades = {this.traerLocalidades} selectUser = {this.selectUser} traerLocalidades = {this.traerLocalidades} localidades = {this.state.localidades} provincias = {this.state.provincias} users = {this.state.users} traerUsuarios = {this.traerUsuarios} userData = { this.state.user.user } logOut = { this._logoutUser } />
+                            : (<Redirect to="/" />) } />
+
+
                 </Switch>
             </BrowserRouter>
         );

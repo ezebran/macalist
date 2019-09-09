@@ -18,7 +18,7 @@ class CreateLocalidadesTable extends Migration
             $table->string('nombre_l');
 
             $table->integer('provincia_id')->unsigned();
-            $table->foreign('provincia_id')->references('id')->on('provincias');
+            $table->foreign('provincia_id')->references('id')->on('provincias')->onDelete('cascade');
             $table->timestamps();
         });
     }

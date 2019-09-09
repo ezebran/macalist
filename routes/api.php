@@ -47,6 +47,8 @@ Route::post('/usuarios/eliminar','usersController@eliminarUsuario');
 
 Route::post('/usuarios/editar','usersController@editarUsuario');
 
+Route::get('/perfil/{id}','usersController@perfil');
+
 
 Route::get('/paises/mostrar','paisesController@mostrarPaises');
 

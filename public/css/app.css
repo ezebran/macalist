@@ -392,6 +392,66 @@ header h5 {
   margin-bottom: 0.5em;
 }
 
+.home main h4 {
+  color: #3c3c3c;
+  font-weight: 400;
+}
+
+.home main .sub-info-perfil {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: wrap row;
+          flex-flow: wrap row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.home main .sub-info-perfil h4 {
+  margin: 0 2em;
+}
+
+.home main .sub-info-perfil h4 b {
+  background: #03A9F4;
+  padding: 0 0.5em;
+  border-radius: 7px;
+  color: white;
+  font-size: 0.85em;
+}
+
+.home main .ubicacion {
+  margin: 2em 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -moz-flex;
+  display: -o-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: wrap row;
+          flex-flow: wrap row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.home main .ubicacion li {
+  margin: 0 1em;
+}
+
+.home main .ubicacion li span {
+  color: #30cfe4;
+}
+
 .home main table {
   width: 100%;
   border-collapse: collapse;

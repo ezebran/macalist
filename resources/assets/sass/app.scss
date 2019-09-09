@@ -111,6 +111,33 @@ header{
     		color:$black2;
     		margin-bottom: 0.5em;
     	}
+    	h4{
+			color: $black2;
+		    font-weight: 400;
+    	}
+    	.sub-info-perfil{
+    		@include row-ar;
+    		h4{
+    			margin: 0 2em;
+    			b{
+					background: #03A9F4;
+				    padding: 0 0.5em;
+				    border-radius: 7px;
+				    color: white;
+				    font-size: 0.85em;
+    			}
+    		}
+    	}
+    	.ubicacion{
+    		margin: 2em 0; 
+    		@include row-ar;
+    		li{
+    			margin:0 1em;
+    			span{
+    				color:$cele;
+    			}
+    		}
+    	}
     	table{
     		width: 100%;
     		border-collapse: collapse;

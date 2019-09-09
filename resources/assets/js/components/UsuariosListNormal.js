@@ -5,7 +5,7 @@ import Aside from './Aside';
 import DeleteUser from './modals/DeleteUser';
 import EditUser from './modals/EditUser';
 
-class UsuariosList extends Component{
+class UsuariosListNormal extends Component{
 
 	constructor(props){
 		super(props)
@@ -38,8 +38,6 @@ class UsuariosList extends Component{
 	render(){
 		return(
 			<div>
-				<EditUser editarUser = {this.props.editarUser} paises = {this.props.pais} localidades = {this.props.localidades} provincias = {this.props.provincias} traerProvincias = { this.props.traerProvincias } traerLocalidades = {this.props.traerLocalidades}/>
-				<DeleteUser delete_user = {this.props.eliminarUser} />
 				<Header userData = {this.props.userData} logOut = {this.props.logOut}/>
 				<Aside />
 				<section className="home">
@@ -51,11 +49,7 @@ class UsuariosList extends Component{
 							<thead>
 								<tr>
 									<th>Email</th>
-									<th>Rol</th>
-									<th>Pais</th>
-									<th>Provincia</th>
-									<th>Localidad</th>
-									<th className="tx-right">Accion</th>
+									<th>Nombre</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -64,16 +58,9 @@ class UsuariosList extends Component{
 								this.props.users.map(user => (
 									<tr key={user.id}>
 										<td><Link to={"/perfil/" + user.id}>{user.email}</Link></td>
-										<td>{user.nombre}</td>
-										<td>{user.nombre_p}</td>
-										<td>{user.nombre_pr}</td>
-										<td>{user.nombre_l}</td>
+										<td>{user.name}</td>
 
 
-										<td className="tx-right ">
-											<a href="#" onClick={this.showModalEdit.bind(null, user.id)}><span className="icon-edit"></span></a>
-											<a href="#" className="i-delete" onClick={this.showModal.bind(null, user.id)}><span className="icon-trash-o"></span></a>
-										</td>
 									</tr>
 								))
 							}
@@ -87,4 +74,4 @@ class UsuariosList extends Component{
 	}
 }
 
-export default withRouter(UsuariosList);
+export default withRouter(UsuariosListNormal);

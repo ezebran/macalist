@@ -36,4 +36,17 @@ class usersController extends Controller
     		'localidad_id' => $request->localidad_id
     	]);
     }
+
+    public function perfil($id){
+        $perfil = DB::table('users')
+        ->join('localidades','localidades.id','=','users.localidad_id')
+        ->join('provincias','provincias.id','=','localidades.provincia_id')
+        ->join('paises','paises.id','=','provincias.pais_id')
+        ->join('roles','roles.id','=','users.rol_id')
+        ->select('users.*','localidades.nombre_l','provincias.nombre_pr','paises.nombre_p','roles.nombre')
+        ->where('users.id','=',$id)
+        ->get();
+
+        return response()->json($perfil, 201);
+    }
 }

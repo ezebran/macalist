@@ -18,7 +18,7 @@ class CreateProvinciasTable extends Migration
             $table->string('nombre_pr');
 
             $table->integer('pais_id')->unsigned();
-            $table->foreign('pais_id')->references('id')->on('paises');
+            $table->foreign('pais_id')->references('id')->on('paises')->onDelete('cascade');
             $table->timestamps();
         });
     }

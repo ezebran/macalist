@@ -15,7 +15,7 @@ class AddLocalidadesToUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('localidad_id')->unsigned();
-            $table->foreign('localidad_id')->references('id')->on('localidades');
+            $table->foreign('localidad_id')->references('id')->on('localidades')->onDelete('cascade');
         });
     }
 
