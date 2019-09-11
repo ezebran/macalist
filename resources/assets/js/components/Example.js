@@ -11,6 +11,7 @@ import UsuariosListNormal from './UsuariosListNormal';
 import Perfil from './Perfil';
 import Login from './log/Login';
 import Register from './log/Register';
+import url from '../url'
 import axios from 'axios';
 
 
@@ -94,7 +95,7 @@ export default class Example extends Component {
     formData.append("password", password);
 
     axios
-      .post("http://127.0.0.1:8000/api/user/login/", formData)
+      .post(`${url}/api/user/login/`, formData)
       .then(response => {
         return response;
       })
@@ -134,7 +135,7 @@ export default class Example extends Component {
     formData.append("localidad_id", localidad_id);
 
     axios
-      .post("http://127.0.0.1:8000/api/user/register", formData)
+      .post(`${url}/api/user/register`, formData)
       .then(response => {
         return response;
       })
@@ -184,7 +185,7 @@ export default class Example extends Component {
 
     traerUsuarios(){
         axios
-          .get("http://127.0.0.1:8000/api/usuarios/mostrar")
+          .get(`${url}/api/usuarios/mostrar`)
           .then(response => {
             let respuesta = response.data;
             this.setState({
@@ -214,7 +215,7 @@ export default class Example extends Component {
       });
 
       axios
-        .post("http://127.0.0.1:8000/api/usuarios/eliminar/",formData)
+        .post(`${url}/api/usuarios/eliminar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo eliminar el usuario! ${error}`);
         });
@@ -222,7 +223,7 @@ export default class Example extends Component {
 
     traerPerfil(id_user){
         axios
-          .get(`http://127.0.0.1:8000/api/perfil/${id_user}`)
+          .get(`${url}/api/perfil/${id_user}`)
           .then(response => {
             let respuesta = response.data;
             this.setState({
@@ -263,7 +264,7 @@ export default class Example extends Component {
       })
 
       axios
-        .post("http://127.0.0.1:8000/api/usuarios/editar/",formData)
+        .post(`${url}/api/usuarios/editar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo editar el usuario! ${error}`);
         });
@@ -277,7 +278,7 @@ export default class Example extends Component {
     async traerProvincias(idpais){
  
         try{
-            let url_pais = `http://127.0.0.1:8000/api/pais/${idpais}`;
+            let url_pais = `${url}/api/pais/${idpais}`;
 
             await fetch(url_pais)
                 .then(respuesta => {
@@ -312,7 +313,7 @@ export default class Example extends Component {
       });
 
       axios
-        .post("http://127.0.0.1:8000/api/provincia/eliminar/",formData)
+        .post(`${url}/api/provincia/eliminar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo eliminar la provincia! ${error}`);
         });
@@ -339,7 +340,7 @@ export default class Example extends Component {
 
       //Enviamos los datos por post
       axios
-        .post("http://127.0.0.1:8000/api/provincia/editar/",formData)
+        .post(`${url}/api/provincia/editar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo editar la provincia! ${error}`);
         });
@@ -351,7 +352,7 @@ export default class Example extends Component {
       formData.append("pais_id", pais_id);
 
       axios
-        .post("http://127.0.0.1:8000/api/provincia/agregar/",formData)
+        .post(`${url}/api/provincia/agregar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo agregar la provincia! ${error}`);
         });
@@ -370,7 +371,7 @@ export default class Example extends Component {
 
       //Enviamos los datos por post
       axios
-        .post("http://127.0.0.1:8000/api/localidad/editar/",formData)
+        .post(`${url}/api/localidad/editar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo editar la localidad! ${error}`);
         });
@@ -381,7 +382,7 @@ export default class Example extends Component {
       formData.append("provincia_id", provincia_id);
 
       axios
-        .post("http://127.0.0.1:8000/api/localidad/agregar/",formData)
+        .post(`${url}/api/localidad/agregar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo agregar la localidad! ${error}`);
         });
@@ -403,7 +404,7 @@ export default class Example extends Component {
       })
 
       axios
-        .post("http://127.0.0.1:8000/api/localidad/eliminar/",formData)
+        .post(`${url}/api/localidad/eliminar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo eliminar la localidad! ${error}`);
         });
@@ -412,7 +413,7 @@ export default class Example extends Component {
     async traerLocalidades(idprovincia){
 
         try{
-            let url_pais = `http://127.0.0.1:8000/api/pais/provincia/${idprovincia}`;
+            let url_pais = `${url}/api/pais/provincia/${idprovincia}`;
 
             await fetch(url_pais)
                 .then(respuesta => {
@@ -450,7 +451,7 @@ export default class Example extends Component {
       });
 
       axios
-        .post("http://127.0.0.1:8000/api/pais/eliminar/",formData)
+        .post(`${url}/api/pais/eliminar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo eliminar el pais! ${error}`);
         });
@@ -474,7 +475,7 @@ export default class Example extends Component {
       
       //Enviamos los datos por post
       axios
-        .post("http://127.0.0.1:8000/api/pais/editar/",formData)
+        .post(`${url}/api/pais/editar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo editar el pais! ${error}`);
         });
@@ -485,7 +486,7 @@ export default class Example extends Component {
       formData.append("nombre", nombre);
 
       axios
-        .post("http://127.0.0.1:8000/api/pais/agregar/",formData)
+        .post(`${url}/api/pais/agregar/`,formData)
         .catch(error => {
           alert(`Un error ocurrio, no se pudo agregar el pais ${error}`);
         });
@@ -494,7 +495,7 @@ export default class Example extends Component {
 
     async componentDidMount(){
         try{
-            let res = await fetch('http://127.0.0.1:8000/api/paises/mostrar')
+            let res = await fetch(`${url}/api/paises/mostrar`)
             let data = await res.json()
             this.setState({
                 paises: data
