@@ -513,11 +513,8 @@ export default class Example extends Component {
         }
     }
     render() {
-        // const isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
-        // const isRoot = JSON.parse(localStorage["appState"]).user.email == "root" ? true : false;
-
-        const isLoggedIn = false;
-        const isRoot = false;
+        const isLoggedIn = JSON.parse(localStorage["appState"]).isLoggedIn;
+        const isRoot = JSON.parse(localStorage["appState"]).user.email == "root" ? true : false;
 
         return (
             <BrowserRouter>
