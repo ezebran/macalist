@@ -122,7 +122,7 @@ export default class Example extends Component {
         } else alert("Login Failed!");
       })
       .catch(error => {
-        alert(`An Error Occured! ${error}`);
+        alert(`Ocurrio un error: ${error}`);
       });
   };
 
